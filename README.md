@@ -203,7 +203,7 @@ npm start
 
 📞 联系方式
 
-- 项目主页: [GitHub仓库地址]
+- 项目主页: [https://github.com/jin-never/logicworld.git]
 - 问题反馈: [Issues页面]
 - 讨论交流: [Discussions页面]
 
