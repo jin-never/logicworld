@@ -13,7 +13,7 @@
 AI智能推荐和优化流程
 一键执行复杂的自动化任务
 持多种工具和服务集成
-
+<img width="2560" height="1363" alt="项目" src="https://github.com/user-attachments/assets/7a58c9a1-71c2-42dc-87a7-f460889f3298" />
 ✨ 核心特性
 
 🧠 智能思维导图系统
