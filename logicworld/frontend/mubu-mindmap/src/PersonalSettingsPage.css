@@ -1,0 +1,400 @@
+.personal-settings-page {
+  padding: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+  background: #f8f9fa;
+  min-height: 100vh;
+}
+
+.settings-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.settings-header h1 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0 0 8px 0;
+}
+
+.settings-header p {
+  font-size: 16px;
+  color: #6c757d;
+  margin: 0;
+}
+
+.settings-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.settings-section {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.section-header h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.btn-secondary {
+  padding: 8px 16px;
+  border: 1px solid #6c757d;
+  background: white;
+  color: #6c757d;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: #6c757d;
+  color: white;
+}
+
+.btn-secondary.active {
+  background: #007bff;
+  border-color: #007bff;
+  color: white;
+}
+
+.user-info-form {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.avatar-section {
+  flex-shrink: 0;
+}
+
+.avatar-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #e9ecef;
+}
+
+.avatar-placeholder {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #e9ecef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  color: #6c757d;
+  border: 3px solid #e9ecef;
+}
+
+.avatar-upload {
+  cursor: pointer;
+}
+
+.upload-btn {
+  display: inline-block;
+  padding: 6px 12px;
+  background: #007bff;
+  color: white;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.upload-btn:hover {
+  background: #0056b3;
+}
+
+.form-fields {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-weight: 500;
+  color: #495057;
+  font-size: 14px;
+}
+
+.form-input, .form-textarea, .form-select {
+  padding: 10px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s ease;
+}
+
+.form-input:focus, .form-textarea:focus, .form-select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.form-value {
+  padding: 10px 0;
+  color: #495057;
+  font-size: 14px;
+  min-height: 20px;
+}
+
+.preferences-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.preference-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.preference-item label {
+  font-weight: 500;
+  color: #495057;
+  font-size: 14px;
+}
+
+.checkbox-item {
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
+.checkbox-item label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  margin: 0;
+}
+
+.checkbox-item input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.checkbox-label {
+  font-size: 14px;
+  color: #495057;
+  cursor: pointer;
+}
+
+.settings-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px;
+  margin-top: 24px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-top: 3px solid #007bff;
+}
+
+.btn-primary {
+  padding: 12px 24px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: #0056b3;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .personal-settings-page {
+    padding: 16px;
+  }
+  
+  .user-info-form {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .preferences-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .section-header {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+  
+  .settings-actions {
+    flex-direction: column;
+  }
+}
+
+/* 作品存放设置样式 */
+.section-description {
+  font-size: 14px;
+  color: #6c757d;
+  font-style: italic;
+}
+
+.workspace-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.setting-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.setting-label {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 14px;
+}
+
+.path-input-group {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.path-input {
+  flex: 1;
+}
+
+.select-folder-btn {
+  padding: 8px 16px;
+  white-space: nowrap;
+  min-width: 80px;
+}
+
+.organization-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 8px;
+}
+
+.checkbox-option {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-option label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #495057;
+}
+
+.checkbox-option input[type="checkbox"] {
+  margin: 0;
+}
+
+.file-types-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  padding: 8px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.file-type-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.file-type-item label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #495057;
+}
+
+.form-input.small {
+  font-size: 12px;
+  padding: 6px 8px;
+}
+
+.cloud-sync-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cloud-provider-selection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 24px;
+  border-left: 3px solid #e9ecef;
+}
+
+.cloud-provider-selection .form-select,
+.cloud-provider-selection .form-input {
+  max-width: 300px;
+}
+
+/* 作品存放设置的响应式设计 */
+@media (max-width: 768px) {
+  .file-types-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .path-input-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .select-folder-btn {
+    min-width: auto;
+  }
+}

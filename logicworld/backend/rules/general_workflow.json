@@ -1,0 +1,17 @@
+{
+  "workflow_name": "通用任务处理",
+  "description": "适用于大多数任务的基本工作流程",
+  "version": "1.0.0",
+  "required_nodes_keywords": [
+    "输入",
+    "处理"
+  ],
+  "optional_nodes_keywords": [
+    "输出",
+    "验证",
+    "保存",
+    "结果"
+  ],
+  "workflow_category": "general",
+  "priority": 999
+} 

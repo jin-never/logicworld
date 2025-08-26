@@ -1,0 +1,19 @@
+{
+  "workflow_name": "Word文档处理",
+  "description": "Word文档创建、编辑和格式化的标准流程",
+  "version": "1.0.0",
+  "required_nodes_keywords": [
+    "创建",
+    "文档",
+    "内容"
+  ],
+  "optional_nodes_keywords": [
+    "格式化",
+    "样式",
+    "保存",
+    "字体",
+    "段落"
+  ],
+  "workflow_category": "document_processing",
+  "priority": 1
+} 

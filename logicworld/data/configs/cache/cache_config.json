@@ -1,0 +1,16 @@
+{
+  "redis": {
+    "host": "localhost",
+    "port": 6379,
+    "db": 0,
+    "password": null,
+    "data_dir": "data/cache/redis_backup"
+  },
+  "file_cache": {
+    "sessions_dir": "data/cache/sessions",
+    "api_cache_dir": "data/cache/api_responses",
+    "temp_dir": "data/cache/temp_data",
+    "max_size": "500MB",
+    "ttl": 3600
+  }
+}

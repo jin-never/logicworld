@@ -1,0 +1,372 @@
+/* 增强连接点样式 */
+
+.enhanced-handle-container {
+  position: relative;
+  display: inline-block;
+}
+
+.enhanced-connection-handle {
+  position: relative;
+  pointer-events: all;
+  z-index: 1000;
+}
+
+.enhanced-connection-handle.hovered {
+  animation: handle-hover-glow 2s infinite;
+}
+
+.enhanced-connection-handle.connecting {
+  animation: connection-pulse 1s infinite;
+}
+
+.enhanced-connection-handle.disabled {
+  cursor: not-allowed !important;
+  opacity: 0.5;
+}
+
+/* 连接脉冲动画 */
+@keyframes connection-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(16, 185, 129, 0.1);
+  }
+}
+
+/* 悬停发光动画 */
+@keyframes handle-hover-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.2);
+  }
+}
+
+/* 四个特定节点类型的增强悬停动画 */
+@keyframes enhanced-handle-hover {
+  0%, 100% {
+    transform: scale(1.3);
+    box-shadow: 0 0 0 4px rgba(125, 211, 252, 0.3), 0 2px 12px rgba(125, 211, 252, 0.4);
+  }
+  50% {
+    transform: scale(1.4);
+    box-shadow: 0 0 0 6px rgba(125, 211, 252, 0.2), 0 4px 16px rgba(125, 211, 252, 0.3);
+  }
+}
+
+/* 四个特定节点类型的连接点悬停样式 */
+.material-node .enhanced-connection-handle.hovered,
+.execution-node .enhanced-connection-handle.hovered,
+.condition-node .enhanced-connection-handle.hovered,
+.result-node .enhanced-connection-handle.hovered {
+  animation: enhanced-handle-hover 1.5s infinite;
+  background: linear-gradient(135deg, #7dd3fc 0%, #38bdf8 100%) !important;
+}
+
+/* 连接强度环 */
+.connection-strength-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 999;
+}
+
+.strength-fill {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.3) 0%, rgba(16, 185, 129, 0.1) 70%, transparent 100%);
+  transition: all 0.2s ease;
+}
+
+/* 方向指示器 */
+.direction-indicator {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: rgba(59, 130, 246, 0.9);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  pointer-events: none;
+  animation: direction-fade-in 0.3s ease-out;
+  z-index: 1001;
+}
+
+.direction-indicator.direction-top {
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.direction-indicator.direction-right {
+  top: 50%;
+  right: -30px;
+  transform: translateY(-50%);
+}
+
+.direction-indicator.direction-bottom {
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.direction-indicator.direction-left {
+  top: 50%;
+  left: -30px;
+  transform: translateY(-50%);
+}
+
+@keyframes direction-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 连接提示 */
+.connection-tooltip {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 1002;
+  animation: tooltip-fade-in 0.3s ease-out;
+}
+
+.enhanced-handle-container .handle-top ~ .connection-tooltip {
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.enhanced-handle-container .handle-right ~ .connection-tooltip {
+  top: 50%;
+  right: -80px;
+  transform: translateY(-50%);
+}
+
+.enhanced-handle-container .handle-bottom ~ .connection-tooltip {
+  bottom: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.enhanced-handle-container .handle-left ~ .connection-tooltip {
+  top: 50%;
+  left: -80px;
+  transform: translateY(-50%);
+}
+
+@keyframes tooltip-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 连接点位置样式 */
+.enhanced-connection-handle.handle-top {
+  top: -6px;
+}
+
+.enhanced-connection-handle.handle-right {
+  right: -6px;
+}
+
+.enhanced-connection-handle.handle-bottom {
+  bottom: -6px;
+}
+
+.enhanced-connection-handle.handle-left {
+  left: -6px;
+}
+
+/* 连接状态样式 */
+.enhanced-connection-handle.can-connect {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  animation: can-connect-pulse 1.5s infinite;
+}
+
+@keyframes can-connect-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.2);
+  }
+}
+
+.enhanced-connection-handle.cannot-connect {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+  animation: cannot-connect-shake 0.5s ease-in-out;
+}
+
+@keyframes cannot-connect-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+}
+
+/* 连接线预览 */
+.connection-preview-line {
+  position: absolute;
+  pointer-events: none;
+  z-index: 998;
+}
+
+.connection-preview-line svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.connection-preview-line path {
+  stroke: #60a5fa;
+  stroke-width: 3;
+  stroke-dasharray: 8 4;
+  fill: none;
+  stroke-linecap: round;
+  animation: preview-flow 1s linear infinite;
+  filter: drop-shadow(0 0 6px rgba(96, 165, 250, 0.5));
+}
+
+@keyframes preview-flow {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -12;
+  }
+}
+
+/* 智能连接辅助 */
+.smart-connection-guide {
+  position: absolute;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent 0%, #60a5fa 50%, transparent 100%);
+  pointer-events: none;
+  z-index: 997;
+  animation: guide-fade-in 0.3s ease-out;
+}
+
+@keyframes guide-fade-in {
+  from {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+  to {
+    opacity: 0.6;
+    transform: scaleY(1);
+  }
+}
+
+/* 连接点组合样式 */
+.enhanced-handle-container.source-target-combo {
+  position: relative;
+}
+
+.enhanced-handle-container.source-target-combo .enhanced-connection-handle[data-handletype="target"] {
+  z-index: 1001;
+}
+
+.enhanced-handle-container.source-target-combo .enhanced-connection-handle[data-handletype="source"] {
+  z-index: 1000;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .enhanced-connection-handle {
+    width: 14px !important;
+    height: 14px !important;
+  }
+  
+  .direction-indicator {
+    width: 18px;
+    height: 18px;
+    font-size: 11px;
+  }
+  
+  .connection-tooltip {
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+  
+  .connection-strength-ring {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* 高对比度模式 */
+@media (prefers-contrast: high) {
+  .enhanced-connection-handle {
+    border-width: 3px !important;
+  }
+  
+  .direction-indicator {
+    background: #000 !important;
+    border: 2px solid #fff;
+  }
+  
+  .connection-tooltip {
+    background: #000 !important;
+    border: 1px solid #fff;
+  }
+}
+
+/* 减少动画模式 */
+@media (prefers-reduced-motion: reduce) {
+  .enhanced-connection-handle,
+  .direction-indicator,
+  .connection-tooltip,
+  .connection-strength-ring,
+  .smart-connection-guide {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .connection-preview-line path {
+    animation: none !important;
+    stroke-dasharray: none;
+  }
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+  .connection-tooltip {
+    background: rgba(255, 255, 255, 0.9);
+    color: #000;
+  }
+  
+  .direction-indicator {
+    background: rgba(255, 255, 255, 0.9);
+    color: #000;
+  }
+}

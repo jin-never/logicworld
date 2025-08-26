@@ -1,0 +1,1238 @@
+/* ChatBox包装器 - 包含工具库按钮 */
+.chatbox-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+
+
+
+
+
+
+.chatbox-container {
+  width: 380px; /* 从450px减少到380px，优化空间利用 */
+  border-left: 1px solid #e2e8f0; /* 更柔和的边框色 */
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 60px); /* 计算高度，减去导航栏高度 */
+  background-color: #fafbfc; /* 更现代的背景色 */
+  overflow: hidden; /* 防止溢出 */
+  /* 改为固定定位，覆盖在内容上方 */
+  position: fixed;
+  top: 60px; /* 导航栏下方 */
+  right: 0;
+  z-index: 1001; /* 确保在其他内容之上 */
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+  contain: layout style; /* CSS containment，防止影响外部布局 */
+}
+
+/* 思维导图页面的聊天框 - 优化宽度 */
+.chatbox-container.mindmap-chatbox {
+  width: 380px; /* 从450px减少到380px，优化空间利用 */
+}
+
+.chatbox-header {
+  padding: 10px;
+  font-weight: bold;
+  border-bottom: 1px solid #ccc;
+  background-color: #f1f1f1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 49px; /* 固定高度确保对齐 */
+  box-sizing: border-box;
+}
+
+.chatbox-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mode-toggle-btn {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.mode-toggle-btn:hover {
+  background: #f0f0f0;
+  border-color: #bbb;
+}
+
+.mode-toggle-btn.intelligent {
+  background: #e3f2fd;
+  border-color: #2196f3;
+  color: #1976d2;
+}
+
+.mode-toggle-btn.chat {
+  background: #f3e5f5;
+  border-color: #9c27b0;
+  color: #7b1fa2;
+}
+
+.chatbox-close-btn {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  font-size: 16px;
+  cursor: pointer;
+  color: #6c757d;
+  padding: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.chatbox-close-btn:hover {
+  background: #e9ecef;
+  border-color: #adb5bd;
+  color: #495057;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.chatbox-messages {
+  flex-grow: 1;
+  padding: 10px;
+  overflow-y: auto;
+  overflow-x: hidden; /* 防止水平滚动 */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* 确保滚动容器有明确的边界 */
+  height: 0; /* 关键：让flex-grow生效，确保容器有固定高度 */
+  min-height: 200px; /* 最小高度 */
+  scroll-behavior: smooth; /* 平滑滚动 */
+  /* 增强滚动条样式 */
+  scrollbar-width: thin;
+  scrollbar-color: #ccc #f9f9f9;
+}
+
+/* WebKit 浏览器滚动条样式 */
+.chatbox-messages::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chatbox-messages::-webkit-scrollbar-track {
+  background: #f9f9f9;
+  border-radius: 4px;
+}
+
+.chatbox-messages::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.chatbox-messages::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+.message {
+  padding: 8px 12px;
+  border-radius: 10px;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.message.user {
+  background-color: #dcf8c6;
+  align-self: flex-end;
+}
+
+.message.ai {
+  background-color: rgb(248, 248, 240);
+  align-self: flex-start;
+  border: 1px solid #e0e0d8;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 流式输出时的AI消息样式 */
+.message.ai[data-streaming="true"] {
+  border-left: 3px solid #3498db;
+  animation: pulse 2s infinite;
+}
+
+/* 聊天框内容区域 - 彻底防止溢出 */
+.chatbox-content {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* 聊天消息内容样式 */
+.chat-message-content {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  word-wrap: break-word;
+  word-break: break-word;
+  box-sizing: border-box;
+}
+
+/* 所有聊天框内的元素都不能溢出 */
+.chatbox-container * {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* 特别处理可能溢出的元素 */
+.chatbox-container pre,
+.chatbox-container code,
+.chatbox-container table,
+.chatbox-container img {
+  max-width: 100%;
+  overflow-x: auto;
+  word-wrap: break-word;
+}
+
+/* 聊天消息标题样式 */
+.chat-h1 {
+  color: #2c3e50;
+  font-size: 1.4em;
+  font-weight: 700;
+  margin: 16px 0 12px 0;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #e8e8e0;
+}
+
+.chat-h2 {
+  color: #34495e;
+  font-size: 1.2em;
+  font-weight: 600;
+  margin: 14px 0 10px 0;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #f0f0e8;
+}
+
+.chat-h3 {
+  color: #5d6d7e;
+  font-size: 1.1em;
+  font-weight: 600;
+  margin: 12px 0 8px 0;
+}
+
+.chat-h4 {
+  color: #6c757d;
+  font-size: 1.05em;
+  font-weight: 600;
+  margin: 10px 0 6px 0;
+}
+
+/* 聊天消息段落样式 */
+.chat-p {
+  margin: 8px 0;
+  line-height: 1.6;
+  color: #2c3e50;
+}
+
+/* 聊天消息列表样式 */
+.chat-ul, .chat-ol {
+  margin: 12px 0;
+  padding-left: 20px;
+}
+
+.chat-li {
+  margin: 6px 0;
+  line-height: 1.5;
+  color: #34495e;
+}
+
+/* 聊天消息表格样式 */
+.chat-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.chat-thead {
+  background: rgba(52, 73, 94, 0.1);
+}
+
+.chat-th {
+  padding: 12px 8px;
+  text-align: left;
+  font-weight: 600;
+  color: #2c3e50;
+  border-bottom: 2px solid #e8e8e0;
+}
+
+.chat-td {
+  padding: 10px 8px;
+  border-bottom: 1px solid #f0f0e8;
+  color: #34495e;
+}
+
+.chat-tr:nth-child(even) {
+  background: rgba(248, 248, 240, 0.5);
+}
+
+/* 聊天消息强调样式 */
+.chat-strong {
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+.chat-em {
+  font-style: italic;
+  color: #5d6d7e;
+}
+
+.chat-code {
+  background: rgba(52, 73, 94, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.9em;
+  color: #e74c3c;
+}
+
+.chat-blockquote {
+  border-left: 4px solid #3498db;
+  margin: 16px 0;
+  padding: 12px 16px;
+  background: rgba(52, 152, 219, 0.1);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: #2c3e50;
+}
+
+.chat-link {
+  color: #3498db;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.chat-link:hover {
+  color: #2980b9;
+  border-bottom-color: #2980b9;
+}
+
+.chat-hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #e8e8e0, transparent);
+  margin: 20px 0;
+}
+
+/* 流式输出光标动画 */
+.streaming-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.2em;
+  background-color: #3498db;
+  margin-left: 2px;
+  animation: blink 1s infinite;
+  vertical-align: text-bottom;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+/* 流式输出消息样式 */
+.message.ai.streaming {
+  border-left: 3px solid #3498db;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.1);
+  }
+  50% {
+    box-shadow: 0 2px 12px rgba(52, 152, 219, 0.3);
+  }
+  100% {
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.1);
+  }
+}
+
+/* 智能规划消息样式 */
+.message.intelligent_planning {
+  background: linear-gradient(135deg, #f8f9ff 0%, #e8f4fd 100%);
+  border: 1px solid #b3d9ff;
+  border-radius: 12px;
+  padding: 12px;
+  max-width: 90%;
+}
+
+.intelligent-planning-message {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.planning-content {
+  line-height: 1.6;
+  color: #333;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  word-wrap: break-word;
+  word-break: break-word;
+  box-sizing: border-box;
+}
+
+/* 展开内容的容器样式 */
+.expanded-content-container {
+  max-height: 300px; /* 增加高度：200px + 100px = 300px */
+  overflow-y: auto;
+  overflow-x: hidden; /* 防止水平溢出 */
+  padding: 12px;
+  margin: 8px 0;
+  background: #fafafa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  position: relative;
+  word-wrap: break-word; /* 强制换行 */
+  word-break: break-word; /* 强制断词 */
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* 展开内容容器内的所有元素都不能溢出 */
+.expanded-content-container * {
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+  box-sizing: border-box;
+}
+
+.expanded-content-container::-webkit-scrollbar {
+  width: 8px; /* 增加滚动条宽度，更容易看到 */
+}
+
+.expanded-content-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.expanded-content-container::-webkit-scrollbar-thumb {
+  background: #007bff; /* 使用更明显的蓝色 */
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.expanded-content-container::-webkit-scrollbar-thumb:hover {
+  background: #0056b3; /* 悬停时更深的蓝色 */
+}
+
+/* 可编辑步骤界面样式 */
+.editable-steps-container {
+  padding: 0;
+}
+
+.editable-step {
+  margin-bottom: 24px;
+  padding: 16px;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.editable-step:last-child {
+  margin-bottom: 16px;
+}
+
+.step-edit-form {
+  margin-top: 12px;
+}
+
+.form-group {
+  margin-bottom: 12px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.step-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 36px;
+}
+
+.step-input:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.step-select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: inherit;
+  background: white;
+  cursor: pointer;
+}
+
+.step-select:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+/* 缺少工具时的红色样式 */
+.step-select.tool-missing {
+  border-color: #e74c3c;
+  background-color: #fdf2f2;
+  box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.1);
+}
+
+.step-select.tool-missing:focus {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.2);
+}
+
+.workflow-actions {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #e0e0e0;
+  text-align: center;
+}
+
+.generate-workflow-btn {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.generate-workflow-btn:hover {
+  background: linear-gradient(135deg, #45a049, #3d8b40);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.generate-workflow-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 标题样式 */
+.planning-h1 {
+  color: #1976d2;
+  font-size: 1.5em;
+  font-weight: 700;
+  margin: 16px 0 12px 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e3f2fd;
+}
+
+.planning-h2 {
+  color: #1976d2;
+  font-size: 1.3em;
+  font-weight: 600;
+  margin: 14px 0 10px 0;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e8f4fd;
+}
+
+.planning-h3 {
+  color: #2196f3;
+  font-size: 1.2em;
+  font-weight: 600;
+  margin: 12px 0 8px 0;
+  display: flex;
+  align-items: center;
+}
+
+.planning-h3::before {
+  content: "📋";
+  margin-right: 8px;
+  font-size: 0.9em;
+}
+
+.planning-h4 {
+  color: #1565c0;
+  font-size: 1.1em;
+  font-weight: 600;
+  margin: 10px 0 6px 0;
+  display: flex;
+  align-items: center;
+}
+
+.planning-h4::before {
+  content: "▶️";
+  margin-right: 6px;
+  font-size: 0.8em;
+}
+
+/* 段落样式 */
+.planning-p {
+  margin: 8px 0;
+  line-height: 1.7;
+}
+
+/* 列表样式 */
+.planning-ul, .planning-ol {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+.planning-li {
+  margin: 4px 0;
+  line-height: 1.6;
+}
+
+.planning-li::marker {
+  color: #2196f3;
+}
+
+/* 表格样式 */
+.planning-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.planning-thead {
+  background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+  color: white;
+}
+
+.planning-th {
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.9em;
+}
+
+.planning-td {
+  padding: 10px 16px;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 0.9em;
+}
+
+.planning-tr:nth-child(even) .planning-td {
+  background: #f8f9fa;
+}
+
+.planning-tr:hover .planning-td {
+  background: #e3f2fd;
+}
+
+/* 强调和链接样式 */
+.planning-strong {
+  color: #1976d2;
+  font-weight: 600;
+  background: linear-gradient(135deg, #e3f2fd 0%, #f8f9ff 100%);
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+.planning-em {
+  color: #666;
+  font-style: italic;
+  background: #f5f5f5;
+  padding: 1px 3px;
+  border-radius: 2px;
+}
+
+.planning-code {
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.85em;
+  color: #d63384;
+}
+
+.planning-link {
+  color: #2196f3;
+  text-decoration: none;
+  border-bottom: 1px dotted #2196f3;
+  transition: all 0.2s ease;
+}
+
+.planning-link:hover {
+  color: #1976d2;
+  border-bottom: 1px solid #1976d2;
+  background: #e3f2fd;
+  padding: 1px 3px;
+  border-radius: 3px;
+}
+
+/* 分隔线样式 */
+.planning-hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, #2196f3 50%, transparent 100%);
+  margin: 16px 0;
+}
+
+.planning-metadata {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #e0e0e0;
+  color: #666;
+  font-size: 11px;
+}
+
+.chatbox-input {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.chatbox-input input,
+.chatbox-input textarea {
+  flex-grow: 1;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 8px;
+  margin-right: 10px;
+  font-family: inherit;
+  font-size: inherit;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.chatbox-input input:focus,
+.chatbox-input textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
+}
+
+.chatbox-input textarea {
+  resize: none;
+  overflow-y: auto;
+  overflow-x: hidden;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  /* 确保可以滚动查看所有输入内容 */
+  scrollbar-width: thin;
+  scrollbar-color: #ccc #f9f9f9;
+}
+
+/* 输入框滚动条样式 */
+.chatbox-input textarea::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chatbox-input textarea::-webkit-scrollbar-track {
+  background: #f9f9f9;
+  border-radius: 3px;
+}
+
+.chatbox-input textarea::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+  transition: background 0.2s ease;
+}
+
+.chatbox-input textarea::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+.chatbox-input button {
+  border: none;
+  background-color: #007bff;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.chatbox-input button:hover {
+  background-color: #0056b3;
+}
+
+.chatbox-input button.intelligent-send {
+  background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(33, 150, 243, 0.3);
+}
+
+.chatbox-input button.intelligent-send:hover {
+  background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+  box-shadow: 0 3px 6px rgba(33, 150, 243, 0.4);
+}
+
+.message.ai .typing-indicator span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing-bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1.0);
+  }
+}
+
+/* 流式输出样式 */
+.message.ai.intelligent_planning[data-streaming="true"] .planning-content::after {
+  content: "▋";
+  color: #2196f3;
+  animation: blink 1s infinite;
+  font-weight: bold;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* 流式输出按钮样式 */
+.chatbox-input button.streaming {
+  background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%) !important;
+  color: white;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.chatbox-input button.streaming:hover {
+  background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%) !important;
+  transform: none;
+  box-shadow: 0 2px 4px rgba(255, 152, 0, 0.3);
+}
+
+/* 流式输出动画效果 */
+.planning-content {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* 流式输出光标效果 */
+.streaming-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.2em;
+  background-color: #2196f3;
+  animation: blink 1s infinite;
+  margin-left: 1px;
+  vertical-align: text-bottom;
+}
+
+/* 思考状态样式 */
+.thinking-message {
+  color: #666;
+  font-style: italic;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 动态思考指示器 */
+.thinking-dots {
+  display: inline-flex;
+  gap: 3px;
+  align-items: center;
+}
+
+.thinking-dots span {
+  width: 6px;
+  height: 6px;
+  background-color: #666;
+  border-radius: 50%;
+  animation: thinking-pulse 1.4s infinite ease-in-out;
+}
+
+.thinking-dots span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.thinking-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.thinking-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes thinking-pulse {
+  0%, 80%, 100% {
+    transform: scale(0.6);
+    opacity: 0.3;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* 工作流卡片样式 */
+.workflow-card {
+  background: linear-gradient(135deg, #f8f9ff 0%, #e8f2ff 100%);
+  border: 2px solid #e1e8ff;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 10px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.workflow-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.workflow-header {
+  margin-bottom: 15px;
+}
+
+.workflow-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.workflow-summary {
+  margin-bottom: 20px;
+}
+
+.step-count {
+  font-size: 14px;
+  color: #5a6c7d;
+  margin: 0 0 10px 0;
+  font-weight: 500;
+}
+
+.step-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.step-item {
+  font-size: 13px;
+  color: #34495e;
+  margin: 6px 0;
+  padding-left: 8px;
+  line-height: 1.4;
+}
+
+.step-item.more {
+  color: #7f8c8d;
+  font-style: italic;
+}
+
+.workflow-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.workflow-btn {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.expand-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.expand-btn:hover {
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+  transform: translateY(-1px);
+}
+
+.mindmap-btn {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+}
+
+.mindmap-btn:hover {
+  background: linear-gradient(135deg, #e081e9 0%, #e3455a 100%);
+  transform: translateY(-1px);
+}
+
+.workflow-btn:active {
+  transform: translateY(0);
+}
+
+
+
+/* 收缩按钮样式 */
+.collapse-action {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #e1e8ff;
+}
+
+.collapse-btn {
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  color: #333;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 20px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.collapse-btn:hover {
+  background: linear-gradient(135deg, #98ddda 0%, #eeced3 100%);
+  transform: translateY(-1px);
+}
+
+.collapse-btn:active {
+  transform: translateY(0);
+}
+
+/* 输入区域按钮布局优化 */
+.chat-input-container {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.send-btn {
+  flex-shrink: 0;
+}
+
+/* 工具选择器和指令输入框样式 */
+.tool-selector-li, .command-input-li {
+  margin: 12px 0 !important;
+  padding: 10px 12px !important;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border-left: 3px solid #007bff;
+}
+
+.tool-input-container {
+  position: relative;
+  display: inline-block;
+  margin-left: 8px;
+  min-width: 220px;
+}
+
+.tool-selector {
+  width: 100%;
+  padding: 8px 32px 8px 12px;
+  border: 2px solid #e9ecef;
+  border-radius: 6px;
+  background: white;
+  font-size: 14px;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: all 0.2s ease;
+}
+
+.tool-selector:hover {
+  border-color: #007bff;
+}
+
+.tool-selector:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+}
+
+.tool-selector option[value="missing"] {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.dropdown-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #6c757d;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.command-input-container {
+  margin-left: 8px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.command-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 2px solid #e9ecef;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  resize: vertical;
+  min-height: 50px;
+  line-height: 1.4;
+  transition: all 0.2s ease;
+}
+
+.command-input:hover {
+  border-color: #007bff;
+}
+
+.command-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+}
+
+.command-input::placeholder {
+  color: #6c757d;
+  font-style: italic;
+}
+
+/* 工作流中的工具选择器样式 */
+.workflow-tool-selector {
+  margin-left: 8px;
+  min-width: 220px;
+  max-width: 300px;
+}
+
+.workflow-tool-selector .tool-selector {
+  font-size: 14px;
+  padding: 8px 32px 8px 12px;
+}
+
+.workflow-tool-selector .tool-missing-input {
+  font-size: 14px;
+  padding: 8px 32px 8px 12px;
+}
+
+/* 工具输入容器样式 */
+.tool-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-left: 8px;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* 工具名称输入框样式 */
+.tool-name-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 2px solid #e9ecef;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  background: white;
+  transition: all 0.2s ease;
+}
+
+.tool-name-input:hover {
+  border-color: #007bff;
+}
+
+.tool-name-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+}
+
+.tool-name-input::placeholder {
+  color: #6c757d;
+  font-style: italic;
+}
+
+/* 工具输入框样式 */
+.tool-input-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+/* 工具下拉菜单滚动条样式 */
+.tool-dropdown-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.tool-dropdown-scroll::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.tool-dropdown-scroll::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+  transition: background 0.2s ease;
+}
+
+.tool-dropdown-scroll::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Firefox滚动条样式 */
+.tool-dropdown-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #c1c1c1 #f1f1f1;
+}

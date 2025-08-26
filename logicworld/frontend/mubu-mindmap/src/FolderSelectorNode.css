@@ -1,0 +1,191 @@
+/* 文件夹选择节点样式 */
+.folder-selector-node {
+  position: relative !important;
+  min-width: 70px !important;
+  max-width: 70px !important;
+  width: 70px !important;
+  min-height: 28px !important;
+  max-height: 28px !important;
+  height: 28px !important;
+  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%) !important;
+  border-radius: 5px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  overflow: visible !important;
+  border: 1px solid #e5e7eb !important;
+  box-sizing: border-box !important;
+}
+
+
+
+
+
+/* 选中状态 - 更柔和 */
+.folder-selector-node.selected {
+  transform: scale(1.02);
+  box-shadow: 0 3px 12px rgba(74, 222, 128, 0.25), 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.folder-selector-node.selected::before {
+  animation-duration: 1s;
+  opacity: 1;
+}
+
+/* 悬停效果 - 更自然 */
+.folder-selector-node:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(74, 222, 128, 0.2), 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.folder-selector-node:hover::before {
+  opacity: 1;
+  animation-duration: 1.5s;
+}
+
+/* 节点内容容器 - 超紧凑 */
+.folder-node-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 3px 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+/* 主要内容区域 */
+.folder-main-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 文件夹标签 - 超小尺寸 */
+.folder-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #1f2937;
+  text-align: center;
+  line-height: 1.1;
+  word-break: break-word;
+  max-width: 50px;
+  letter-spacing: 0.1px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* 右上角文件夹图标 - 超小尺寸 */
+.folder-icon {
+  position: absolute;
+  top: 1px;
+  right: 2px;
+  width: 10px;
+  height: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 7px;
+  background: rgba(107, 114, 128, 0.1);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 4;
+}
+
+.folder-icon:hover {
+  background: rgba(107, 114, 128, 0.2);
+  transform: scale(1.1);
+}
+
+.folder-icon:active {
+  transform: scale(0.95);
+}
+
+/* 连接点样式 - 修复对称性 */
+.folder-selector-node .react-flow__handle {
+  width: 8px;
+  height: 8px;
+  background: #6b7280;
+  border: 2px solid #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  z-index: 4;
+}
+
+.folder-selector-node .react-flow__handle-top {
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.folder-selector-node .react-flow__handle-bottom {
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .folder-selector-node {
+    min-width: 80px;
+    min-height: 32px;
+  }
+
+  .folder-node-content {
+    padding: 6px;
+  }
+
+  .folder-label {
+    font-size: 10px;
+    max-width: 60px;
+  }
+
+  .folder-icon {
+    width: 12px;
+    height: 12px;
+    font-size: 8px;
+    top: 2px;
+    right: 2px;
+  }
+}
+
+/* 加载状态 */
+.folder-selector-node.loading {
+  opacity: 0.7;
+}
+
+.folder-selector-node.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid #6b7280;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 错误状态 */
+.folder-selector-node.error {
+  border-color: #ef4444;
+  background: linear-gradient(135deg, #fef2f2 0%, #ffffff 100%);
+}
+
+.folder-selector-node.error::before {
+  background: linear-gradient(45deg, 
+    #ef4444, #dc2626, #b91c1c, #991b1b,
+    #ef4444, #dc2626, #b91c1c, #991b1b
+  );
+}
+
+.folder-selector-node.error .folder-label {
+  color: #dc2626;
+}

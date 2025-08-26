@@ -1,0 +1,152 @@
+/* Word操作提示包装器 */
+.word-operation-hint-wrapper {
+  position: relative;
+  margin: 8px 0;
+}
+
+/* 精确定位边框 - 主要样式 */
+.precision-frame {
+  position: relative;
+  border: 3px solid #007bff;
+  border-radius: 8px;
+  padding: 4px;
+  background: linear-gradient(145deg, rgba(0, 123, 255, 0.05), rgba(0, 123, 255, 0.1));
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
+}
+
+.precision-frame:hover {
+  border-color: #0056b3;
+  background: linear-gradient(145deg, rgba(0, 123, 255, 0.1), rgba(0, 123, 255, 0.15));
+  box-shadow: 0 4px 16px rgba(0, 123, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.precision-frame:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.4);
+}
+
+/* 定位指示器 */
+.precision-indicator {
+  position: absolute;
+  top: -12px;
+  right: 8px;
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+  animation: pulse 2s infinite;
+}
+
+.precision-icon {
+  font-size: 14px;
+}
+
+.precision-text {
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}
+
+/* 脉冲动画 */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 4px 16px rgba(0, 123, 255, 0.5);
+  }
+  100% {
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+  }
+}
+
+/* 操作信息显示 */
+.operation-info {
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border-left: 4px solid #007bff;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.operation-type {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.target-hint {
+  color: #6c757d;
+  font-style: italic;
+}
+
+/* 已选择操作显示 */
+.selected-operation {
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: linear-gradient(135deg, #d4edda, #c3e6cb);
+  border: 1px solid #28a745;
+  border-radius: 6px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: slideIn 0.3s ease;
+}
+
+.selected-icon {
+  font-size: 16px;
+}
+
+.selected-text {
+  color: #155724;
+  font-weight: 500;
+}
+
+/* 滑入动画 */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .precision-frame {
+    border-width: 2px;
+    padding: 3px;
+  }
+  
+  .precision-indicator {
+    padding: 3px 6px;
+    font-size: 11px;
+  }
+  
+  .operation-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+} 

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
+    <!-- 🛡️ 超级强化错误抑制器 - 在所有脚本之前执行 -->
+    <script>
+      // 超级强化ResizeObserver错误抑制器
+      const originalError = console.error;
+      const originalWarn = console.warn;
+      
+      // 错误模式匹配
+      const errorPatterns = [
+        'ResizeObserver loop completed with undelivered notifications',
+        'ResizeObserver loop limit exceeded',
+        'ResizeObserver',
+        'loop completed with undelivered notifications',
+        'Non-passive event listener',
+        'Warning: Cannot update a component',
+        'Warning: Can\'t perform a React state update',
+        'Script error',
+        'ChunkLoadError'
+      ];
+      
+      function shouldSuppressMessage(message) {
+        if (!message || typeof message !== 'string') return false;
+        return errorPatterns.some(pattern => message.includes(pattern));
+      }
+      
+      // 重写console.error
+      console.error = function(...args) {
+        if (shouldSuppressMessage(args[0])) {
+          console.log('🛡️ ERROR已被抑制:', args[0]);
+          return;
+        }
+        originalError.apply(console, args);
+      };
+      
+      // 重写console.warn
+      console.warn = function(...args) {
+        if (shouldSuppressMessage(args[0])) {
+          console.log('🛡️ WARN已被抑制:', args[0]);
+          return;
+        }
+        originalWarn.apply(console, args);
+      };
+      
+      // 超级全局错误处理器
+      window.addEventListener('error', function(event) {
+        const message = event.error?.message || event.message || '';
+        if (shouldSuppressMessage(message)) {
+          console.log('🛡️ 全局错误已被抑制:', message);
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+          return false;
+        }
+      }, true);
+      
+      // 超级Promise拒绝错误处理
+      window.addEventListener('unhandledrejection', function(event) {
+        const message = event.reason?.message || event.reason?.toString() || '';
+        if (shouldSuppressMessage(message)) {
+          console.log('🛡️ Promise错误已被抑制:', message);
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+          return false;
+        }
+      }, true);
+      
+      // 拦截原生错误抛出
+      const originalThrow = Error.prototype.constructor;
+      Error.prototype.constructor = function(message) {
+        if (shouldSuppressMessage(message)) {
+          console.log('🛡️ 原生错误已被抑制:', message);
+          return new originalThrow('Suppressed error');
+        }
+        return new originalThrow(message);
+      };
+      
+      console.log('🛡️ 超级强化错误抑制器已激活');
+    </script>
+    
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+  </body>
+</html>

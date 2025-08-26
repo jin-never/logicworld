@@ -1,0 +1,613 @@
+/* 增强边样式 */
+.enhanced-edge {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  /* 默认不启用流动动画，仅运行态开启 */
+  /* 确保流动的连续性和平滑度 */
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  /* 确保箭头显示在节点之上 */
+  z-index: 1000;
+}
+
+/* 强制所有连线和箭头显示在最上层 */
+.react-flow__edges {
+  z-index: 1100 !important;
+}
+
+.react-flow__edge {
+  z-index: 1100 !important;
+}
+
+.react-flow__edge-path {
+  z-index: 1100 !important;
+}
+
+/* SVG 标记元素强制显示 */
+svg defs marker {
+  z-index: 1101 !important;
+}
+
+/* 确保箭头标记始终可见 */
+marker {
+  overflow: visible !important;
+}
+
+marker path {
+  z-index: 1101 !important;
+}
+
+.enhanced-edge:hover {
+  filter: drop-shadow(0 0 6px rgba(124, 58, 237, 0.5)) !important;
+}
+
+.enhanced-edge.selected {
+  filter: drop-shadow(0 0 8px rgba(124, 58, 237, 0.7)) !important;
+  /* 选中时停止流动 */
+  animation: none !important;
+}
+
+/* 虚线流动动画 - 调整距离以匹配新的虚线间隔 */
+@keyframes dash-flow {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -48; /* 调整为匹配32+16=48的虚线周期 */
+  }
+}
+
+/* 为了更丝滑的效果，添加一个连续循环的动画变体 */
+.enhanced-edge.ultra-smooth {
+  animation: dash-flow-smooth 0.6s linear infinite;
+}
+
+@keyframes dash-flow-smooth {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -48; /* 匹配新的虚线周期 32+16=48 */
+  }
+}
+
+/* 脉冲发光动画 */
+@keyframes pulse-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.6));
+    opacity: 1;
+  }
+  50% {
+    filter: drop-shadow(0 0 12px rgba(96, 165, 250, 0.9));
+    opacity: 0.8;
+  }
+}
+
+/* 成功标记样式 */
+.edge-success-mark {
+  background: #10b981;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 12px;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+  animation: success-pop 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes success-pop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* 错误标记样式 */
+.edge-error-marks {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 4px 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e5e7eb;
+}
+
+.edge-error-mark {
+  background: #ef4444;
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 11px;
+  animation: error-shake 0.5s ease-in-out;
+}
+
+@keyframes error-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+}
+
+.edge-error-info {
+  background: #6b7280;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.edge-error-info:hover {
+  background: #374151;
+  transform: scale(1.1);
+}
+
+/* 错误信息提示框 */
+.edge-error-tooltip {
+  z-index: 1000;
+  animation: tooltip-fade-in 0.2s ease-out;
+}
+
+@keyframes tooltip-fade-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -100%) translate(var(--x), var(--y)) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -100%) translate(var(--x), var(--y)) translateY(0);
+  }
+}
+
+.tooltip-content {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  max-width: 300px;
+  min-width: 200px;
+}
+
+.tooltip-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: #fef2f2;
+  border-bottom: 1px solid #fecaca;
+  border-radius: 8px 8px 0 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #dc2626;
+}
+
+.tooltip-close {
+  background: none;
+  border: none;
+  color: #dc2626;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 0;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  transition: background-color 0.2s;
+}
+
+.tooltip-close:hover {
+  background: rgba(220, 38, 38, 0.1);
+}
+
+.tooltip-body {
+  padding: 12px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #374151;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+/* 反转按钮样式 */
+.edge-reverse-button {
+  animation: reverse-button-fade-in 0.2s ease-out;
+  z-index: 2000 !important; /* 确保按钮显示在线条之上 */
+}
+
+@keyframes reverse-button-fade-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) translate(var(--x), var(--y)) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) translate(var(--x), var(--y)) scale(1);
+  }
+}
+
+.reverse-btn {
+  background: rgba(59, 130, 246, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 12px;
+  color: white;
+  transition: all 0.2s;
+  box-shadow: 0 3px 12px rgba(59, 130, 246, 0.4);
+  z-index: 2001 !important; /* 确保按钮本身在最上层 */
+  position: relative;
+}
+
+.reverse-btn:hover {
+  background: #2563eb;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.reverse-btn:active {
+  transform: scale(0.95);
+}
+
+/* 反转按钮样式 */
+.edge-reverse-button {
+  animation: reverse-button-fade-in 0.2s ease-out;
+}
+
+@keyframes reverse-button-fade-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) translate(var(--x), var(--y)) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) translate(var(--x), var(--y)) scale(1);
+  }
+}
+
+.reverse-btn {
+  background: rgba(59, 130, 246, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 12px;
+  color: white;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+.reverse-btn:hover {
+  background: #2563eb;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.reverse-btn:active {
+  transform: scale(0.95);
+}
+
+/* 删除按钮样式 */
+.edge-delete-button {
+  animation: delete-button-fade-in 0.2s ease-out;
+  z-index: 2000 !important; /* 确保按钮显示在线条之上 */
+}
+
+@keyframes delete-button-fade-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) translate(var(--x), var(--y)) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) translate(var(--x), var(--y)) scale(1);
+  }
+}
+
+.delete-btn {
+  background: rgba(239, 68, 68, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 12px;
+  color: white;
+  transition: all 0.2s;
+  box-shadow: 0 3px 12px rgba(239, 68, 68, 0.4);
+  z-index: 2001 !important; /* 确保按钮本身在最上层 */
+  position: relative;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+}
+
+.delete-btn:active {
+  transform: scale(0.95);
+}
+
+/* 非运行态一律虚线（默认状态）- 扩大间隔并添加流动动画 */
+.enhanced-edge:not(.running) {
+  stroke-dasharray: 32 16 !important;
+  animation: dash-flow-smooth 0.8s linear infinite;
+  stroke-width: 4px !important;
+}
+
+/* 丝滑停止和暂停态：逐步减速后停住 */
+.enhanced-edge.stopping {
+  animation: dash-slowdown 1.25s cubic-bezier(0.05, 0.7, 0.1, 1) 1 forwards;
+  stroke-width: 4px !important;
+  filter: drop-shadow(0 0 8px rgba(124, 58, 237, 0.6));
+}
+.enhanced-edge.paused {
+  animation: none !important;
+  stroke-width: 4px !important;
+  filter: drop-shadow(0 0 4px rgba(124, 58, 237, 0.3));
+}
+
+@keyframes pause-freeze {
+  from { stroke-dashoffset: 0; }
+  to   { stroke-dashoffset: -48; }
+}
+
+/* 逐步降低 dash 流动速度并冻结到终点 */
+@keyframes dash-slowdown {
+  0%   { stroke-dashoffset: 0; animation-timing-function: linear; }
+  20%  { stroke-dashoffset: -12; animation-timing-function: ease-out; }
+  40%  { stroke-dashoffset: -20; animation-timing-function: ease-out; }
+  60%  { stroke-dashoffset: -28; animation-timing-function: ease-out; }
+  80%  { stroke-dashoffset: -38; animation-timing-function: ease-out; }
+  90%  { stroke-dashoffset: -44; animation-timing-function: ease-out; }
+  100% { stroke-dashoffset: -48; animation-timing-function: ease-out; }
+}
+
+/* 删除按钮样式 */
+.edge-delete-button {
+  background: #ef4444;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  cursor: pointer;
+  transform: scale(0.9);
+}
+.enhanced-edge.paused ~ .edge-delete-button,
+.enhanced-edge.stopping ~ .edge-delete-button {
+  transform: scale(1);
+}
+.edge-delete-button::before {
+  content: '🗑️';
+  font-size: 16px;
+  line-height: 1;
+}
+.edge-delete-button:hover {
+  background: #dc2626;
+}
+
+
+/* 运行中改为实线并快速流动 */
+.enhanced-edge.running {
+  stroke-dasharray: 32 16 !important;
+  animation: dash-flow-ultra-fast 0.15s linear infinite, pulse-glow 2s infinite;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 5px !important;
+}
+
+@keyframes dash-flow-ultra-fast {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -48; /* 匹配新的虚线周期 32+16=48 */
+  }
+}
+
+/* 保留占位，运行时使用更快的虚线动画 dash-flow-ultra-fast */
+
+
+.enhanced-edge.success {
+  stroke: #60a5fa !important;
+}
+
+.enhanced-edge.error {
+  stroke: #ef4444 !important;
+}
+
+.enhanced-edge.running .react-flow__edge-path {
+  filter: drop-shadow(0 0 8px rgba(96,165,250,0.6));
+}
+
+.enhanced-edge.success .react-flow__edge-path {
+  filter: drop-shadow(0 0 6px rgba(16,185,129,0.45));
+}
+
+.enhanced-edge.error .react-flow__edge-path {
+  filter: drop-shadow(0 0 6px rgba(239,68,68,0.5));
+}
+
+.enhanced-edge-glow {
+  pointer-events: none;
+}
+
+.edge-success-mark {
+  color: #10b981;
+  font-weight: 700;
+  text-shadow: 0 0 6px rgba(16,185,129,0.5);
+}
+
+/* 更显著的圆形打勾徽章 */
+.edge-success-badge {
+  background: #10b981;
+  color: #fff;
+  border-radius: 999px;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  box-shadow: 0 0 12px rgba(16,185,129,0.5);
+  border: 2px solid #ecfdf5;
+  z-index: 1000;
+  line-height: 1;
+}
+
+/* 🔴 圆圈内打叉的错误标记 */
+.edge-error-marks .edge-error-mark {
+  background: #ef4444;
+  color: #fff;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 12px;
+  box-shadow: 0 0 8px rgba(239,68,68,0.6);
+  border: 2px solid #fff;
+  z-index: 1000;
+  line-height: 1;
+  text-shadow: none;
+}
+
+/* 🔵 圆形问号按钮 */
+.edge-error-info {
+  background: rgba(239,68,68,0.9);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  font-size: 12px;
+  font-weight: 600;
+  margin-left: 4px;
+}
+
+.edge-error-info:hover {
+  background: rgba(239,68,68,1);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .edge-success-mark,
+  .edge-error-mark {
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+  }
+  
+  .edge-error-info {
+    width: 14px;
+    height: 14px;
+    font-size: 9px;
+  }
+  
+  .reverse-btn,
+  .delete-btn {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+  }
+  
+  .tooltip-content {
+    max-width: 250px;
+    min-width: 180px;
+  }
+  
+  .tooltip-header,
+  .tooltip-body {
+    font-size: 11px;
+  }
+}
+
+/* 高对比度模式支持 */
+@media (prefers-contrast: high) {
+  .enhanced-edge {
+    stroke-width: 3px !important;
+  }
+  
+  .edge-success-mark {
+    border: 2px solid #065f46;
+  }
+  
+  .edge-error-mark {
+    border: 2px solid #7f1d1d;
+  }
+
+  .reverse-btn,
+  .delete-btn {
+    border: 2px solid currentColor;
+  }
+  
+  .tooltip-content {
+    border-width: 2px;
+  }
+}
+
+/* 减少动画模式支持 */
+@media (prefers-reduced-motion: reduce) {
+  .enhanced-edge,
+  .edge-success-mark,
+  .edge-error-mark,
+  .edge-error-info,
+  .edge-reverse-button,
+  .edge-delete-button,
+  .reverse-btn,
+  .delete-btn {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .enhanced-edge.running {
+    animation: none !important;
+  }
+}

@@ -1,0 +1,354 @@
+/* 工具选择器组件样式 */
+.tool-selector-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 300px;
+}
+
+.tool-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.tool-selector {
+  width: 100%;
+  padding: 10px 32px 10px 12px;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  background: white;
+  font-size: 14px;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  line-height: 1.4;
+}
+
+.tool-selector:hover {
+  border-color: #007bff;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.1);
+}
+
+.tool-selector:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+}
+
+/* 缺失工具显示样式 */
+.tool-missing-display {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.tool-missing-input {
+  width: 100%;
+  padding: 10px 32px 10px 12px;
+  border: 2px solid #dc3545;
+  border-radius: 8px;
+  background-color: #fdf2f2;
+  color: #dc3545;
+  font-size: 14px;
+  font-family: inherit;
+  line-height: 1.4;
+  cursor: not-allowed;
+  user-select: none;
+}
+
+.tool-missing-input:focus {
+  outline: none;
+  border-color: #dc3545;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.15);
+}
+
+.missing-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #dc3545;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* 匹配中状态显示样式 */
+.tool-matching-display {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.tool-matching-input {
+  width: 100%;
+  padding: 10px 32px 10px 12px;
+  border: 2px solid #1890ff;
+  border-radius: 8px;
+  background-color: #f0f8ff;
+  color: #1890ff;
+  font-size: 14px;
+  font-family: inherit;
+  line-height: 1.4;
+  cursor: wait;
+  user-select: none;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.tool-matching-input:focus {
+  outline: none;
+  border-color: #1890ff;
+  box-shadow: 0 0 0 3px rgba(24, 144, 255, 0.15);
+}
+
+.matching-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #1890ff;
+  font-size: 14px;
+  font-weight: bold;
+  animation: spin 1s linear infinite;
+}
+
+/* 匹配中动画效果 */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: translateY(-50%) rotate(0deg);
+  }
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+
+/* 下拉图标 */
+.dropdown-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #6c757d;
+  font-size: 12px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.tool-selector:focus + .dropdown-icon {
+  color: #007bff;
+  transform: translateY(-50%) rotate(180deg);
+}
+
+/* 工具选择器分组样式 */
+.tool-selector optgroup {
+  font-weight: bold;
+  font-size: 13px;
+  color: #495057;
+  background: #f8f9fa;
+  padding: 6px 0;
+  margin: 2px 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.tool-selector optgroup option {
+  font-weight: normal;
+  padding: 8px 16px;
+  color: #212529;
+  background: white;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.tool-selector optgroup option:hover {
+  background: #e9ecef;
+}
+
+.tool-selector optgroup option:disabled {
+  color: #6c757d;
+  background: #f8f9fa;
+  font-style: italic;
+}
+
+.tool-selector optgroup option.tool-unavailable {
+  color: #dc3545;
+  background: #fdf2f2;
+}
+
+/* 工具描述面板 */
+.tool-description-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 2px solid #007bff;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.15);
+  z-index: 1000;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tool-info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.tool-name {
+  font-weight: 600;
+  font-size: 16px;
+  color: #212529;
+}
+
+.tool-group {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 12px;
+  background: rgba(0, 123, 255, 0.1);
+}
+
+.tool-description {
+  color: #6c757d;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.tool-capabilities {
+  margin-bottom: 12px;
+}
+
+.tool-capabilities strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: #495057;
+}
+
+.capabilities-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.capability-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  background: #e9ecef;
+  color: #495057;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.tool-status {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.status-indicator {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.status-indicator.available {
+  color: #198754;
+  background: rgba(25, 135, 84, 0.1);
+}
+
+.status-indicator.unavailable {
+  color: #dc3545;
+  background: rgba(220, 53, 69, 0.1);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .tool-selector-container {
+    max-width: 100%;
+  }
+  
+  .tool-description-panel {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 16px 16px 0 0;
+    max-height: 50vh;
+    overflow-y: auto;
+  }
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+  .tool-selector {
+    background: #2d3748;
+    border-color: #4a5568;
+    color: #e2e8f0;
+  }
+  
+  .tool-selector:hover {
+    border-color: #63b3ed;
+  }
+  
+  .tool-selector:focus {
+    border-color: #63b3ed;
+    box-shadow: 0 0 0 3px rgba(99, 179, 237, 0.15);
+  }
+  
+  .tool-description-panel {
+    background: #2d3748;
+    border-color: #63b3ed;
+    color: #e2e8f0;
+  }
+  
+  .tool-name {
+    color: #e2e8f0;
+  }
+  
+  .tool-description {
+    color: #a0aec0;
+  }
+  
+  .capability-tag {
+    background: #4a5568;
+    color: #e2e8f0;
+  }
+}

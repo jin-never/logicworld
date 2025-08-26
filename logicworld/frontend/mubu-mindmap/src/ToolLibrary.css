@@ -1,0 +1,309 @@
+/* 工具库图标动画样式 */
+
+/* 基础图标容器样式 */
+.tool-icon {
+  width: 32px;
+  height: 32px;
+  background: rgb(240, 242, 245);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 悬停时的基础效果 */
+.tool-icon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 搜索工具图标动画 - 旋转放大镜 */
+.tool-icon.search-tool {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.tool-icon.search-tool:hover {
+  animation: searchPulse 1.5s infinite;
+}
+
+@keyframes searchPulse {
+  0%, 100% { transform: scale(1.1); }
+  50% { transform: scale(1.2) rotate(10deg); }
+}
+
+/* 文件操作工具图标动画 - 弹跳效果 */
+.tool-icon.file-tool {
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  color: #d2691e;
+}
+
+.tool-icon.file-tool:hover {
+  animation: fileBounce 0.6s ease-in-out;
+}
+
+@keyframes fileBounce {
+  0%, 20%, 60%, 100% { transform: scale(1.1) translateY(0); }
+  40% { transform: scale(1.15) translateY(-4px); }
+  80% { transform: scale(1.12) translateY(-2px); }
+}
+
+/* 网络工具图标动画 - 波纹效果 */
+.tool-icon.network-tool {
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  color: #20b2aa;
+}
+
+.tool-icon.network-tool:hover {
+  animation: networkRipple 1s ease-out;
+}
+
+.tool-icon.network-tool:hover::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(32, 178, 170, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: rippleExpand 1s ease-out;
+}
+
+@keyframes networkRipple {
+  0% { transform: scale(1.1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1.1); }
+}
+
+@keyframes rippleExpand {
+  0% { width: 0; height: 0; opacity: 1; }
+  100% { width: 60px; height: 60px; opacity: 0; }
+}
+
+/* AI工具图标动画 - 闪烁思考效果 */
+.tool-icon.ai-tool {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.tool-icon.ai-tool:hover {
+  animation: aiThinking 2s infinite;
+}
+
+@keyframes aiThinking {
+  0%, 100% { 
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  }
+  25% { 
+    transform: scale(1.15);
+    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.5);
+  }
+  50% { 
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  }
+  75% { 
+    transform: scale(1.12);
+    box-shadow: 0 5px 14px rgba(102, 126, 234, 0.4);
+  }
+}
+
+/* 数据处理工具图标动画 - 旋转齿轮效果 */
+.tool-icon.data-tool {
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  color: #ff6b35;
+}
+
+.tool-icon.data-tool:hover {
+  animation: dataProcess 1.5s linear infinite;
+}
+
+@keyframes dataProcess {
+  0% { transform: scale(1.1) rotate(0deg); }
+  100% { transform: scale(1.1) rotate(360deg); }
+}
+
+/* MCP工具图标动画 - 连接脉冲效果 */
+.tool-icon.mcp-tool {
+  background: rgba(240,242,245);
+  color: #ff6b9d;
+}
+
+.tool-icon.mcp-tool:hover {
+  animation: mcpConnect 1.2s ease-in-out infinite;
+}
+
+@keyframes mcpConnect {
+  0%, 100% { 
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(255, 107, 157, 0.3);
+  }
+  50% { 
+    transform: scale(1.18);
+    box-shadow: 0 8px 20px rgba(255, 107, 157, 0.5);
+  }
+}
+
+/* 通用工具图标动画 - 摇摆效果 */
+.tool-icon.utility-tool {
+  background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);
+  color: #8e44ad;
+}
+
+.tool-icon.utility-tool:hover {
+  animation: utilityWiggle 0.8s ease-in-out;
+}
+
+@keyframes utilityWiggle {
+  0%, 100% { transform: scale(1.1) rotate(0deg); }
+  25% { transform: scale(1.15) rotate(-5deg); }
+  75% { transform: scale(1.15) rotate(5deg); }
+}
+
+/* 工具卡片整体悬停效果 */
+.tool-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tool-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border-color: #3b82f6 !important;
+}
+
+.tool-card:hover .tool-icon {
+  transform: scale(1.1);
+}
+
+/* 加载状态动画 */
+.tool-icon.loading {
+  animation: loadingSpin 1s linear infinite;
+}
+
+@keyframes loadingSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 错误状态动画 */
+.tool-icon.error {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+  color: white;
+  animation: errorShake 0.5s ease-in-out;
+}
+
+@keyframes errorShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+/* 成功状态动画 */
+.tool-icon.success {
+  background: linear-gradient(135deg, #51cf66 0%, #40c057 100%);
+  color: white;
+  animation: successBounce 0.6s ease-out;
+}
+
+@keyframes successBounce {
+  0% { transform: scale(0.8); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1.1); }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .tool-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+  }
+  
+  /* 移动端减少动画强度 */
+  .tool-icon:hover {
+    transform: scale(1.05);
+  }
+  
+  .tool-card:hover {
+    transform: translateY(-1px);
+  }
+}
+
+/* 减少动画偏好设置 */
+@media (prefers-reduced-motion: reduce) {
+  .tool-icon,
+  .tool-card {
+    transition: none;
+  }
+
+  .tool-icon:hover,
+  .tool-card:hover {
+    animation: none;
+  }
+}
+
+/* 分类滚动容器样式 */
+.category-scroll-container {
+  /* WebKit 浏览器滚动条样式 */
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f1f5f9;
+}
+
+.category-scroll-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.category-scroll-container::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 3px;
+}
+
+.category-scroll-container::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+  transition: background 0.2s ease;
+}
+
+.category-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* 滚动容器悬停时显示滚动条 */
+.category-scroll-container:hover::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+}
+
+/* 滚动平滑效果 */
+.category-scroll-container {
+  scroll-behavior: smooth;
+}
+
+/* 分类按钮滚动时的阴影效果 */
+.category-scroll-container::before,
+.category-scroll-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 8px; /* 考虑到paddingBottom */
+  width: 20px;
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+.category-scroll-container::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(240, 242, 245, 1), rgba(240, 242, 245, 0));
+}
+
+.category-scroll-container::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(240, 242, 245, 1), rgba(240, 242, 245, 0));
+}

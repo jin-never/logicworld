@@ -1,0 +1,1744 @@
+/* MindMap.css - 思维导图样式 */
+
+.mindmap-container {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  background: white;
+}
+
+.react-flow {
+  background: white;
+}
+
+.react-flow__node {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.react-flow__node:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.react-flow__node-default {
+  background: white;
+  border: 2px solid #e1e5e9;
+  padding: 10px;
+  min-width: 120px;
+  text-align: center;
+}
+
+.react-flow__node-input {
+  background: #e3f2fd;
+  border: 2px solid #2196f3;
+}
+
+.react-flow__node-output {
+  background: #f3e5f5;
+  border: 2px solid #9c27b0;
+}
+
+.react-flow__edge {
+  stroke: #b1b1b7;
+  stroke-width: 2;
+}
+
+.react-flow__edge.animated {
+  stroke-dasharray: 5;
+  animation: dashdraw 0.5s linear infinite;
+}
+
+.react-flow__edge-path {
+  stroke: #b1b1b7;
+  stroke-width: 2;
+  fill: none;
+}
+
+.react-flow__arrowhead {
+  fill: #7c3aed;
+}
+
+/* 箭头标记样式 */
+.react-flow__edge-marker {
+  fill: #7c3aed;
+}
+
+/* 确保箭头在所有边上都显示 */
+.react-flow__edge path {
+  marker-end: url(#react-flow__arrowclosed);
+}
+
+.react-flow__controls {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.react-flow__minimap {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes dashdraw {
+  to {
+    stroke-dashoffset: -10;
+  }
+}
+
+/* 增强的自定义节点样式 */
+.custom-node.enhanced-node {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0;
+  min-width: 90px;
+  max-width: 140px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.custom-node.enhanced-node:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border-color: #cbd5e1;
+}
+
+.custom-node.enhanced-node.selected {
+  /* 移除选中状态的边框和阴影效果 */
+}
+
+.custom-node.enhanced-node.expanded {
+  min-width: 500px;
+  max-width: 700px;
+  min-height: 400px;
+  border-radius: 20px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  margin: 25px; /* Add margin to prevent overlap */
+}
+
+/* Config-open nodes (execution, condition, result) */
+.custom-node.enhanced-node.config-open {
+  min-width: 400px;
+  max-width: 600px;
+  min-height: 300px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 1000; /* Ensure config-open nodes are above others */
+  margin: 20px; /* Add margin to prevent overlap */
+}
+
+/* 节点状态栏 */
+.node-status-bar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 6px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.8) 0%, rgba(248,250,252,0.8) 100%);
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--status-color, #6b7280);
+  animation: pulse 2s infinite;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 4px;
+  background: #f1f5f9;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--status-color, #3b82f6) 0%, #60a5fa 100%);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+/* 节点内容区域 */
+.node-content {
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+}
+
+.node-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.node-icon-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.node-icon {
+  font-size: 14px;
+  z-index: 1;
+}
+
+.loading-spinner {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border: 2px solid #f3f4f6;
+  border-top: 2px solid var(--status-color, #3b82f6);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.node-text-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.node-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #1e293b;
+  line-height: 1.2;
+}
+
+.node-status-text {
+  font-size: 11px;
+  color: var(--status-color, #6b7280);
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+/* 节点详细信息 */
+.node-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.node-inputs, .node-outputs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+}
+
+.detail-label {
+  color: #64748b;
+  font-weight: 500;
+  min-width: 32px;
+}
+
+.detail-value {
+  color: #334155;
+  background: #f8fafc;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 10px;
+}
+
+/* 节点操作按钮 */
+.node-actions {
+  display: flex;
+  gap: 4px;
+  margin-top: 8px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.custom-node.enhanced-node:hover .node-actions {
+  opacity: 1;
+}
+
+.action-btn {
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  color: #64748b;
+  font-size: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-btn:hover {
+  background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+  color: #334155;
+  transform: scale(1.1);
+}
+
+/* 节点编辑状态 */
+.node-edit-container {
+  padding: 4px;
+}
+
+.node-edit-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 2px solid #3b82f6;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  background: white;
+  color: #1e293b;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* 展开状态样式 */
+.expanded-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.expanded-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.expanded-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.expanded-icon {
+  font-size: 20px;
+}
+
+.expanded-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.node-type-badge {
+  padding: 4px 8px;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: white;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.expanded-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.control-btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  color: #64748b;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.control-btn:hover {
+  background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+  color: #334155;
+  transform: scale(1.05);
+}
+
+/* 工具面板样式 */
+.tool-panel {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  min-width: 200px;
+  z-index: 1000;
+}
+
+/* 展开状态的标签页 */
+.expanded-tabs {
+  display: flex;
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 0 20px;
+}
+
+.tab-btn {
+  padding: 12px 16px;
+  border: none;
+  background: none;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+  color: #334155;
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.tab-btn.active {
+  color: #3b82f6;
+  border-bottom-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.1);
+}
+
+/* 展开内容区域 */
+.expanded-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.expanded-content-area {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* 展开状态的状态栏 */
+.expanded-status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  border-top: 1px solid #e2e8f0;
+}
+
+.status-info {
+  display: flex;
+  gap: 16px;
+}
+
+.status-item {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.status-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.status-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: white;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.status-btn:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+}
+
+/* 动画效果 */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.node-click-animation {
+  animation: nodeClick 0.3s ease;
+}
+
+.node-expand-animation {
+  animation: nodeExpand 0.3s ease;
+}
+
+.node-select-animation {
+  animation: nodeSelect 0.2s ease;
+}
+
+.node-hover-animation {
+  animation: nodeHover 0.2s ease;
+}
+
+@keyframes nodeClick {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+@keyframes nodeExpand {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes nodeSelect {
+  0% { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); }
+  100% { box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3), 0 8px 24px rgba(59, 130, 246, 0.15); }
+}
+
+@keyframes nodeHover {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-2px); }
+}
+
+/* 连接点增强样式 - 适用于所有节点类型 */
+.connection-handle,
+.react-flow__handle.connection-handle,
+.custom-node .react-flow__handle,
+.execution-node .react-flow__handle,
+.condition-node .react-flow__handle,
+.result-node .react-flow__handle,
+.tool-node .react-flow__handle,
+.react-flow__handle {
+  width: 10px !important;
+  height: 10px !important;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
+  border: 2px solid white !important;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  opacity: 0.6 !important;
+  visibility: visible !important;
+  border-radius: 50% !important;
+  z-index: 1000 !important;
+  pointer-events: all !important;
+  transform: scale(0.8) !important;
+}
+
+/* 四个特定节点类型的连接点默认状态 */
+.custom-node.material-node .react-flow__handle,
+.custom-node.execution-node .react-flow__handle,
+.custom-node.condition-node .react-flow__handle,
+.custom-node.result-node .react-flow__handle,
+.material-node .connection-handle,
+.execution-node .connection-handle,
+.condition-node .connection-handle,
+.result-node .connection-handle {
+  opacity: 0.5 !important;
+  transform: scale(0.8) !important;
+}
+
+/* 四个特定节点类型的连接点悬停效果增强 */
+.custom-node.material-node .react-flow__handle:hover,
+.custom-node.execution-node .react-flow__handle:hover,
+.custom-node.condition-node .react-flow__handle:hover,
+.custom-node.result-node .react-flow__handle:hover,
+.material-node .connection-handle:hover,
+.execution-node .connection-handle:hover,
+.condition-node .connection-handle:hover,
+.result-node .connection-handle:hover {
+  transform: scale(1.8) !important;
+  width: 14px !important;
+  height: 14px !important;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.3), 0 4px 16px rgba(16, 185, 129, 0.4) !important;
+  border: 3px solid white !important;
+  opacity: 1 !important;
+  z-index: 1001 !important;
+}
+
+/* 条件节点分支连接点特殊样式 */
+.custom-node.condition-node .condition-true-handle {
+  opacity: 0.8 !important;
+  transform: scale(1.0) !important;
+}
+
+.custom-node.condition-node .condition-false-handle {
+  opacity: 0.8 !important;
+  transform: scale(1.0) !important;
+}
+
+/* 条件节点悬停时分支连接点保持原有颜色 */
+.custom-node.condition-node:hover .condition-true-handle {
+  background: linear-gradient(135deg, #0ba875 0%, #059669 100%) !important;
+  box-shadow: 0 0 0 4px rgba(11, 168, 117, 0.4), 0 2px 12px rgba(11, 168, 117, 0.5) !important;
+  transform: scale(1.4) !important;
+}
+
+.custom-node.condition-node:hover .condition-false-handle {
+  background: linear-gradient(135deg, #5b6472 0%, #4b5563 100%) !important;
+  box-shadow: 0 0 0 4px rgba(91, 100, 114, 0.4), 0 2px 12px rgba(91, 100, 114, 0.5) !important;
+  transform: scale(1.4) !important;
+}
+
+/* 条件分支标识样式 */
+.branch-label {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.7;
+}
+
+.custom-node.condition-node:hover .branch-label {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+.branch-label.true-label {
+  text-shadow: 0 1px 2px rgba(16, 185, 129, 0.3);
+}
+
+.branch-label.false-label {
+  text-shadow: 0 1px 2px rgba(156, 163, 175, 0.3);
+}
+
+/* 通用连接点悬停效果 */
+.connection-handle:hover,
+.react-flow__handle.connection-handle:hover,
+.tool-node .react-flow__handle:hover {
+  transform: scale(1.2) !important;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.5) !important;
+}
+
+/* 节点悬停时连接点放大 - 四个特定节点类型 */
+.custom-node.material-node:hover .react-flow__handle,
+.custom-node.execution-node:hover .react-flow__handle,
+.custom-node.condition-node:hover .react-flow__handle,
+.custom-node.result-node:hover .react-flow__handle,
+.material-node:hover .connection-handle,
+.execution-node:hover .connection-handle,
+.condition-node:hover .connection-handle,
+.result-node:hover .connection-handle {
+  transform: scale(1.3) !important;
+  width: 12px !important;
+  height: 12px !important;
+  background: linear-gradient(135deg, #7dd3fc 0%, #38bdf8 100%) !important;
+  box-shadow: 0 0 0 4px rgba(125, 211, 252, 0.3), 0 2px 12px rgba(125, 211, 252, 0.4) !important;
+  border: 2px solid white !important;
+  opacity: 1 !important;
+  z-index: 1001 !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* 大圆点Handle样式 - 可见的连接点 */
+.big-dot-handle {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  opacity: 1 !important;
+}
+
+/* 大圆点Handle悬停效果 */
+.big-dot-handle:hover {
+  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%) !important;
+  transform: scale(1.2) !important;
+  boxShadow: 0 0 0 4px rgba(59, 130, 246, 0.4), 0 4px 12px rgba(59, 130, 246, 0.5) !important;
+}
+
+/* 四个特定节点类型的连接点直接悬停时的超强效果 */
+.custom-node.material-node .react-flow__handle:hover,
+.custom-node.execution-node .react-flow__handle:hover,
+.custom-node.condition-node .react-flow__handle:hover,
+.custom-node.result-node .react-flow__handle:hover {
+  transform: scale(1.6) !important;
+  width: 14px !important;
+  height: 14px !important;
+  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%) !important;
+  box-shadow: 0 0 0 5px rgba(96, 165, 250, 0.4), 0 4px 16px rgba(96, 165, 250, 0.5) !important;
+  border: 3px solid white !important;
+  opacity: 1 !important;
+  z-index: 1002 !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+
+
+.connection-handle-top,
+.custom-node .react-flow__handle[data-handlepos="top"],
+.execution-node .react-flow__handle[data-handlepos="top"],
+.condition-node .react-flow__handle[data-handlepos="top"],
+.result-node .react-flow__handle[data-handlepos="top"],
+.tool-node .react-flow__handle[data-handlepos="top"] {
+  top: -6px !important;
+}
+
+.connection-handle-bottom,
+.custom-node .react-flow__handle[data-handlepos="bottom"],
+.execution-node .react-flow__handle[data-handlepos="bottom"],
+.condition-node .react-flow__handle[data-handlepos="bottom"],
+.result-node .react-flow__handle[data-handlepos="bottom"],
+.tool-node .react-flow__handle[data-handlepos="bottom"] {
+  bottom: -6px !important;
+}
+
+.connection-handle-left,
+.custom-node .react-flow__handle[data-handlepos="left"],
+.execution-node .react-flow__handle[data-handlepos="left"],
+.condition-node .react-flow__handle[data-handlepos="left"],
+.result-node .react-flow__handle[data-handlepos="left"],
+.tool-node .react-flow__handle[data-handlepos="left"] {
+  left: -6px !important;
+}
+
+.connection-handle-right,
+.custom-node .react-flow__handle[data-handlepos="right"],
+.execution-node .react-flow__handle[data-handlepos="right"],
+.condition-node .react-flow__handle[data-handlepos="right"],
+.result-node .react-flow__handle[data-handlepos="right"],
+.tool-node .react-flow__handle[data-handlepos="right"] {
+  right: -6px !important;
+}
+
+/* 贝塞尔曲线连接线样式增强 */
+.react-flow__edge-path {
+  stroke-width: 2px;
+  stroke: #7c3aed;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 0; /* 默认实线 */
+}
+
+/* 确保所有边都有丝滑箭头 */
+.react-flow__edge {
+  marker-end: url(#smooth-arrow);
+}
+
+.react-flow__edge .react-flow__edge-path {
+  marker-end: url(#smooth-arrow);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* 丝滑箭头过渡效果 */
+.react-flow__edge-path {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 丝滑箭头标记样式 */
+.react-flow__arrowclosed {
+  fill: #7c3aed !important;
+  stroke: none !important;
+  stroke-width: 0 !important;
+}
+
+/* 选中状态的边箭头 */
+.react-flow__edge.selected .react-flow__arrowclosed {
+  fill: #3b82f6 !important;
+  stroke: none !important;
+}
+
+/* 确保双向连接点重叠在同一位置 */
+.react-flow__handle[id$="-source"],
+.react-flow__handle[id$="-target"] {
+  position: absolute !important;
+}
+
+/* 让target handle完全重叠在source handle上，但保持可交互 */
+.react-flow__handle[id$="-target"] {
+  z-index: 999 !important;
+}
+
+/* 自定义丝滑箭头路径 */
+.react-flow__arrowclosed path {
+  d: path('M 0,-3 L 8,0 L 0,3 L 2,0 z') !important;
+}
+
+.react-flow__edge.animated .react-flow__edge-path {
+  stroke-dasharray: 5;
+  animation: dashdraw 0.5s linear infinite;
+}
+
+.react-flow__edge.animated {
+  marker-end: url(#smooth-arrow-animated);
+}
+
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke: #3b82f6;
+  stroke-width: 3px;
+}
+
+.react-flow__edge.selected {
+  marker-end: url(#smooth-arrow-selected);
+}
+
+/* 贝塞尔曲线特定样式 */
+.react-flow__edge-bezier .react-flow__edge-path {
+  stroke-width: 2px;
+  stroke: #7c3aed;
+  fill: none;
+  stroke-linecap: round;
+}
+
+/* 连接线动画 */
+@keyframes dashdraw {
+  to {
+    stroke-dashoffset: -10;
+  }
+}
+
+/* 临时贝塞尔连接线样式 */
+.react-flow__connectionline {
+  stroke: #7c3aed;
+  stroke-width: 2px;
+  fill: none;
+  stroke-dasharray: 5;
+  stroke-linecap: round;
+  animation: dashdraw 0.5s linear infinite;
+  marker-end: url(#smooth-arrow);
+}
+
+/* 工具连接线样式 */
+.react-flow__edge.tool-connection .react-flow__edge-path {
+  stroke: #fbbf24 !important;
+  stroke-width: 2px;
+  marker-end: url(#tool-arrow);
+}
+
+.react-flow__edge.tool-connection.selected .react-flow__edge-path {
+  stroke: #f59e0b !important;
+  stroke-width: 3px;
+  marker-end: url(#tool-arrow-selected);
+}
+
+/* 增强的执行节点样式 */
+.custom-node.execution-node.enhanced-node {
+  border-color: #10b981;
+  background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+}
+
+.custom-node.execution-node.enhanced-node.executing {
+  border-color: #f59e0b;
+  background: linear-gradient(135deg, #ffffff 0%, #fffbeb 100%);
+  animation: executionPulse 2s infinite;
+}
+
+.custom-node.execution-node.enhanced-node.selected {
+  /* 移除执行节点选中状态的边框和阴影效果 */
+}
+
+/* 执行进度条 */
+.execution-progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #f1f5f9;
+  border-radius: 16px 16px 0 0;
+  overflow: hidden;
+}
+
+.execution-progress-bar .progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981 0%, #34d399 100%);
+  transition: width 0.3s ease;
+}
+
+/* 执行节点图标容器 */
+.execution-node .node-icon-container {
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  border-color: #10b981;
+  position: relative;
+}
+
+.execution-spinner {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border: 2px solid #f3f4f6;
+  border-top: 2px solid #10b981;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* 节点状态文本 */
+.execution-node .node-status {
+  font-size: 10px;
+  color: #10b981;
+  font-weight: 500;
+}
+
+.execution-node.executing .node-status {
+  color: #f59e0b;
+}
+
+/* 快速信息显示 */
+.node-quick-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+  padding: 8px;
+  background: #f8fafc;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+}
+
+.info-label {
+  color: #64748b;
+  font-weight: 500;
+  min-width: 24px;
+}
+
+.info-value {
+  color: #334155;
+  background: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 9px;
+}
+
+/* 快速操作按钮 */
+.node-quick-actions {
+  display: flex;
+  gap: 4px;
+  margin-top: 8px;
+  justify-content: center;
+}
+
+.quick-action-btn {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.execute-quick-btn {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+}
+
+.execute-quick-btn:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  transform: scale(1.1);
+}
+
+.stop-quick-btn {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+}
+
+.stop-quick-btn:hover {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  transform: scale(1.1);
+}
+
+.config-quick-btn {
+  background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+  color: white;
+}
+
+.config-quick-btn:hover {
+  background: linear-gradient(135deg, #4b5563 0%, #374151 100%);
+  transform: scale(1.1);
+}
+
+.fetch-data-btn {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+}
+
+.fetch-data-btn:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  transform: scale(1.1);
+}
+
+/* 执行日志样式 */
+.execution-logs {
+  max-height: 200px;
+  overflow-y: auto;
+  background: #1e293b;
+  border-radius: 8px;
+  padding: 12px;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+}
+
+.log-entry {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 4px;
+  padding: 2px 0;
+}
+
+.log-timestamp {
+  color: #64748b;
+  min-width: 60px;
+  font-size: 10px;
+}
+
+.log-message {
+  flex: 1;
+}
+
+.log-info .log-message {
+  color: #e2e8f0;
+}
+
+.log-success .log-message {
+  color: #22c55e;
+}
+
+.log-warning .log-message {
+  color: #f59e0b;
+}
+
+.log-error .log-message {
+  color: #ef4444;
+}
+
+/* 增强的执行控制 */
+.execution-controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.enhanced-execute-btn {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.enhanced-execute-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.enhanced-execute-btn:disabled {
+  background: #d1d5db;
+  color: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.stop-btn {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.stop-btn:hover {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.logs-btn {
+  background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.logs-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #4b5563 0%, #374151 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(107, 114, 128, 0.3);
+}
+
+.logs-btn:disabled {
+  background: #d1d5db;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* 执行进度部分 */
+.execution-progress-section {
+  margin-top: 16px;
+  padding: 12px;
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border-radius: 8px;
+  border: 1px solid #bbf7d0;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: #166534;
+  font-weight: 500;
+}
+
+.progress-bar-container {
+  width: 100%;
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 8px;
+  background: #f0fdf4;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid #bbf7d0;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981 0%, #34d399 100%);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  position: relative;
+}
+
+.progress-bar-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+  animation: progressShine 2s infinite;
+}
+
+/* 执行动画 */
+@keyframes executionPulse {
+  0%, 100% {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+  50% {
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3), 0 0 0 3px rgba(245, 158, 11, 0.1);
+  }
+}
+
+@keyframes progressShine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* 增强的条件节点样式 */
+.custom-node.condition-node.enhanced-node {
+  border-color: #f59e0b;
+  background: linear-gradient(135deg, #ffffff 0%, #fffbeb 100%);
+}
+
+.custom-node.condition-node.enhanced-node.evaluating {
+  border-color: #3b82f6;
+  background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%);
+  animation: evaluationPulse 1.5s infinite;
+}
+
+.custom-node.condition-node.enhanced-node.selected {
+  /* 移除条件节点选中状态的边框和阴影效果 */
+}
+
+/* 条件节点图标容器 */
+.condition-node .node-icon-container {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border-color: #f59e0b;
+  position: relative;
+}
+
+.evaluation-spinner {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border: 2px solid #f3f4f6;
+  border-top: 2px solid #f59e0b;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* 条件摘要显示 */
+.condition-summary {
+  margin-top: 8px;
+  padding: 8px;
+  background: #fef3c7;
+  border-radius: 6px;
+  border: 1px solid #fde68a;
+  font-size: 11px;
+  color: #92400e;
+  font-family: monospace;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* 最近测试结果 */
+.recent-test-result {
+  margin-top: 8px;
+  padding: 6px 8px;
+  background: #f8fafc;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.test-result-indicator {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.test-result-indicator.success {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.test-result-indicator.error {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.test-timestamp {
+  font-size: 9px;
+  color: #64748b;
+  font-family: monospace;
+}
+
+/* 条件节点快速操作按钮 */
+.condition-node .test-quick-btn {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+}
+
+.condition-node .test-quick-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  transform: scale(1.1);
+}
+
+.condition-node .test-quick-btn:disabled {
+  background: #d1d5db;
+  color: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* 测试结果历史样式 */
+.test-results-section {
+  margin-top: 16px;
+}
+
+.test-results-list {
+  max-height: 200px;
+  overflow-y: auto;
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.test-result-item {
+  margin-bottom: 8px;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid;
+  font-size: 11px;
+}
+
+.test-result-item.success {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+.test-result-item.error {
+  background: #fef2f2;
+  border-color: #fecaca;
+}
+
+.test-result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.test-result-time {
+  font-family: monospace;
+  color: #64748b;
+  font-size: 10px;
+}
+
+.test-result-status {
+  font-weight: 600;
+  font-size: 10px;
+}
+
+.test-result-status.success {
+  color: #166534;
+}
+
+.test-result-status.error {
+  color: #991b1b;
+}
+
+.test-result-condition {
+  font-family: monospace;
+  color: #374151;
+  background: white;
+  padding: 4px 6px;
+  border-radius: 4px;
+  margin-bottom: 4px;
+  font-size: 10px;
+}
+
+.test-result-error {
+  color: #dc2626;
+  font-size: 10px;
+  font-style: italic;
+}
+
+/* 批量测试按钮 */
+.batch-test-btn {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: white;
+}
+
+.batch-test-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.batch-test-btn:disabled {
+  background: #d1d5db;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* 评估动画 */
+@keyframes evaluationPulse {
+  0%, 100% {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+  50% {
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3), 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+}
+
+/* 增强的结果节点样式 */
+.custom-node.result-node.enhanced-node {
+  border-color: #8b5cf6;
+  background: linear-gradient(135deg, #ffffff 0%, #faf5ff 100%);
+}
+
+.custom-node.result-node.enhanced-node.generating {
+  border-color: #06b6d4;
+  background: linear-gradient(135deg, #ffffff 0%, #f0fdfa 100%);
+  animation: generationPulse 2s infinite;
+}
+
+.custom-node.result-node.enhanced-node.selected {
+  /* 移除结果节点选中状态的边框和阴影效果 */
+}
+
+/* 生成进度条 */
+.generation-progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #f1f5f9;
+  border-radius: 16px 16px 0 0;
+  overflow: hidden;
+}
+
+.generation-progress-bar .progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #8b5cf6 0%, #a78bfa 100%);
+  transition: width 0.3s ease;
+}
+
+/* 结果节点图标容器 */
+.result-node .node-icon-container {
+  background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+  border-color: #8b5cf6;
+  position: relative;
+}
+
+.generation-spinner {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border: 2px solid #f3f4f6;
+  border-top: 2px solid #8b5cf6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* 格式信息显示 */
+.format-info {
+  margin-top: 8px;
+  padding: 8px;
+  background: #f3e8ff;
+  border-radius: 6px;
+  border: 1px solid #d8b4fe;
+  font-size: 11px;
+  color: #7c3aed;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* 最近导出记录 */
+.recent-export {
+  margin-top: 8px;
+  padding: 8px;
+  background: #f8fafc;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.export-indicator {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.export-indicator.success {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.export-indicator.error {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.export-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.export-filename {
+  font-size: 10px;
+  color: #374151;
+  font-family: monospace;
+  font-weight: 500;
+}
+
+.export-timestamp {
+  font-size: 9px;
+  color: #64748b;
+  font-family: monospace;
+}
+
+/* 结果节点快速操作按钮 */
+.result-node .preview-quick-btn {
+  background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+  color: white;
+}
+
+.result-node .preview-quick-btn:hover {
+  background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+  transform: scale(1.1);
+}
+
+.result-node .export-quick-btn {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  color: white;
+}
+
+.result-node .export-quick-btn:hover {
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+  transform: scale(1.1);
+}
+
+.result-node .generating-btn {
+  background: #d1d5db;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* 导出历史样式 */
+.export-history-section {
+  margin-top: 16px;
+}
+
+.export-history-list {
+  max-height: 200px;
+  overflow-y: auto;
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.export-record {
+  margin-bottom: 8px;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid;
+  font-size: 11px;
+}
+
+.export-record.success {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+.export-record.error {
+  background: #fef2f2;
+  border-color: #fecaca;
+}
+
+.export-record-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.export-record-time {
+  font-family: monospace;
+  color: #64748b;
+  font-size: 10px;
+}
+
+.export-record-status {
+  font-weight: 600;
+  font-size: 10px;
+}
+
+.export-record-status.success {
+  color: #166534;
+}
+
+.export-record-status.error {
+  color: #991b1b;
+}
+
+.export-record-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.export-record-details .export-filename {
+  font-family: monospace;
+  color: #374151;
+  background: white;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-size: 10px;
+}
+
+.export-record-details .export-filename.clickable {
+  cursor: pointer;
+  color: #007cba;
+  text-decoration: underline;
+  transition: all 0.2s ease;
+}
+
+.export-record-details .export-filename.clickable:hover {
+  color: #005a8a;
+  background: #f0f9ff;
+  transform: scale(1.02);
+}
+
+.export-format, .export-size {
+  font-size: 9px;
+  color: #64748b;
+}
+
+.export-error {
+  color: #dc2626;
+  font-size: 9px;
+  font-style: italic;
+}
+
+/* 预览按钮 */
+.preview-btn {
+  background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+  color: white;
+}
+
+.preview-btn:hover {
+  background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
+}
+
+/* 导出按钮 */
+.export-btn {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  color: white;
+}
+
+.export-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+.export-btn:disabled {
+  background: #d1d5db;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* 生成进度部分 */
+.generation-progress-section {
+  margin-top: 16px;
+  padding: 12px;
+  background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+  border-radius: 8px;
+  border: 1px solid #d8b4fe;
+}
+
+.generation-progress-section .progress-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: #7c3aed;
+  font-weight: 500;
+}
+
+.generation-progress-section .progress-bar-bg {
+  width: 100%;
+  height: 8px;
+  background: #faf5ff;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid #d8b4fe;
+}
+
+.generation-progress-section .progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #8b5cf6 0%, #a78bfa 100%);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  position: relative;
+}
+
+.generation-progress-section .progress-bar-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+  animation: progressShine 2s infinite;
+}
+
+/* 生成动画 */
+@keyframes generationPulse {
+  0%, 100% {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+  50% {
+    box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3), 0 0 0 3px rgba(6, 182, 212, 0.1);
+  }
+}
+
+.tool-item {
+  padding: 8px 12px;
+  margin: 4px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tool-item:hover {
+  background: #f5f5f5;
+  border-color: #2196f3;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .tool-panel {
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .mindmap-container {
+    height: calc(100vh - 60px);
+  }
+}

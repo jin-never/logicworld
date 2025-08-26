@@ -1,0 +1,1547 @@
+.document-preview-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* 右上角定位 */
+.document-preview-overlay.top-right {
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
+.document-preview-overlay.top-right .document-preview-dialog {
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+}
+
+.document-preview-dialog {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.dialog-header {
+  background: white !important;
+  background-image: none !important;
+  color: #333 !important;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #000;
+}
+
+.dialog-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* 头部关闭按钮 - 适配白色背景 */
+.dialog-header .close-btn {
+  background: #ffffff !important;
+  border: 1px solid #ccc !important;
+  color: rgb(80, 95, 125) !important;
+  font-size: 18px;
+  font-weight: 700;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.dialog-header .close-btn:hover {
+  background: #f0f0f0 !important;
+  border-color: #999 !important;
+  color: rgb(60, 75, 105) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.change-document-btn {
+  background: #f8f9fa !important;
+  border: 1px solid #dee2e6 !important;
+  color: #495057 !important;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.change-document-btn:hover {
+  background: #e9ecef !important;
+  border-color: #adb5bd !important;
+  color: #212529 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* 材料节点文件夹小窗口样式 */
+.material-folder-container {
+  position: relative;
+}
+
+.material-window {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  width: 350px;
+  max-height: 400px;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* 内置在绿色方框内的材料窗口样式 */
+.material-window-embedded {
+  background: #f8f9fa;
+  border: none;
+  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.material-window-header {
+  background: linear-gradient(135deg, #e8f5e8, #f1f8e9);
+  color: #2e7d32;
+  padding: 12px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  border-bottom: 2px solid #c8e6c9;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.material-window-title {
+  flex: 1;
+}
+
+.material-window-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.material-window .refresh-btn,
+.material-window-embedded .refresh-btn {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  border: 1px solid #388e3c;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.1);
+  min-width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.material-window .refresh-btn:hover:not(:disabled),
+.material-window-embedded .refresh-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #66BB6A, #4CAF50);
+  border-color: #2e7d32;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.material-window .refresh-btn:disabled,
+.material-window-embedded .refresh-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.material-window .close-btn,
+.material-window-embedded .close-btn,
+.material-window-actions .close-btn {
+  background: #ffffff !important;
+  border: 1px solid #ccc !important;
+  color: rgb(80, 95, 125) !important;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.1);
+  min-width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.material-window .close-btn:hover,
+.material-window-embedded .close-btn:hover,
+.material-window-actions .close-btn:hover {
+  background: #f0f0f0 !important;
+  border-color: #999 !important;
+  color: rgb(60, 75, 105) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.material-window-body {
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+/* 内置窗口的body样式 */
+.material-window-embedded .material-window-body {
+  flex: 1;
+  overflow-y: auto;
+  max-height: none;
+  background: white;
+  margin: 8px;
+  border-radius: 6px;
+  padding: 0;
+}
+
+/* 确保文档内容区域在材料窗口中可以正确滚动 */
+.material-window-embedded .document-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.material-window-embedded .content-display {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto !important;
+  overflow-x: hidden;
+  background: #f8f9fa;
+  font-family: 'Microsoft YaHei', sans-serif;
+  line-height: 1.6;
+  min-height: 0;
+  max-height: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: #c1c1c1 #f8f9fa;
+  /* 确保可以接收鼠标事件 */
+  pointer-events: auto;
+  /* 确保滚动条始终可见 */
+  overflow-y: scroll !important;
+}
+
+/* 文档段落样式 */
+.material-window-embedded .document-paragraph {
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  background: white;
+  border-radius: 6px;
+  border-left: 3px solid #e3f2fd;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.material-window-embedded .paragraph-header {
+  font-weight: bold;
+  color: #1976d2;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.material-window-embedded .paragraph-content {
+  color: #333;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* 自定义滚动条样式 */
+.material-window-embedded .content-display::-webkit-scrollbar {
+  width: 8px;
+}
+
+.material-window-embedded .content-display::-webkit-scrollbar-track {
+  background: #f8f9fa;
+  border-radius: 4px;
+}
+
+.material-window-embedded .content-display::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.material-window-embedded .content-display::-webkit-scrollbar-thumb:hover {
+  background: #a0a0a0;
+}
+
+.material-file-list {
+  padding: 8px;
+}
+
+.material-file-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  margin-bottom: 4px;
+}
+
+.material-file-item:hover {
+  background: #f5f7ff;
+  border-color: #e8edff;
+  transform: translateY(-1px);
+}
+
+.material-file-item:active {
+  transform: translateY(0);
+}
+
+.material-file-item .file-icon {
+  font-size: 20px;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.material-file-item .file-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.material-file-item .file-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.material-file-item .file-details {
+  font-size: 12px;
+  color: #666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.no-files-message {
+  padding: 20px;
+  text-align: center;
+  color: #666;
+}
+
+.no-files-message p {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+.loading-state {
+  padding: 20px;
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+}
+
+/* 内容加载失败样式 */
+.content-loading-failed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+  color: #666;
+  min-height: 200px;
+}
+
+.content-loading-failed .failed-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.content-loading-failed .failed-message {
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.content-loading-failed .failed-details {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.4;
+}
+
+/* 内容加载中样式 */
+.content-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+  min-height: 200px;
+}
+
+.content-loading .loading-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.content-loading .loading-message {
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.content-loading .loading-details {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.4;
+}
+
+/* 空文档时的中央布局 */
+.empty-document-layout {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.close-btn-top-right {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 10;
+  background: #ffffff !important;
+  border: 1px solid #ccc !important;
+  color: rgb(80, 95, 125) !important;
+  font-size: 18px;
+  font-weight: 700;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.close-btn-top-right:hover {
+  background: #f0f0f0 !important;
+  border-color: #999 !important;
+  color: rgb(60, 75, 105) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.empty-content-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.node-operation-info {
+  margin-bottom: 30px;
+}
+
+.node-operation-info h3 {
+  margin: 0 0 15px 0;
+  color: #374151;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.current-operation-text {
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 14px;
+  color: #0369a1;
+  margin-top: 10px;
+}
+
+.current-operation-text strong {
+  color: #1e40af;
+  font-weight: 600;
+}
+
+.center-action-btn {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+  min-width: 200px;
+}
+
+.center-action-btn:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.dialog-body {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.current-operation-info {
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: #0369a1;
+}
+
+.current-operation-info strong {
+  color: #1e40af;
+  font-weight: 600;
+}
+
+.loading, .error {
+  padding: 40px;
+  text-align: center;
+  color: #666;
+  font-size: 16px;
+}
+
+/* 文档信息栏 - 固定在滚动区域顶部 */
+.document-info {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: 12px 20px;
+  background: white;
+  border-bottom: 2px solid #000;
+  font-weight: 600;
+  color: #333;
+  font-size: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 文档内容容器 */
+.document-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative; /* 确保滚动区域正确定位 */
+}
+
+/* 文档内容显示区域 - 确保滚动正常工作 */
+.content-display {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto !important;
+  overflow-x: hidden;
+  background: #f8f9fa;
+  font-family: 'Microsoft YaHei', sans-serif;
+  line-height: 1.6;
+  min-height: 0;
+  max-height: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: #c1c1c1 #f8f9fa;
+  /* 确保可以接收鼠标事件 */
+  pointer-events: auto;
+  /* 确保滚动条始终可见 */
+  overflow-y: scroll !important;
+  border-top: 2px solid #000;
+}
+
+.paragraph {
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.text-run {
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.text-run:hover {
+  background: #e3f2fd;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.text-run.selected {
+  background: #2196f3;
+  color: white;
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.4);
+}
+
+.action-panel {
+  width: 300px;
+  padding: 20px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-left: 1px solid #e9ecef;
+}
+
+.selection-info h4 {
+  margin: 0 0 8px 0;
+  color: #333;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.selected-text {
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px;
+  min-height: 40px;
+  font-size: 14px;
+  color: #333;
+  font-style: italic;
+}
+
+.action-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.control-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+}
+
+.control-group select,
+.control-group input {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.control-group select:focus,
+.control-group input:focus {
+  outline: none;
+  border-color: #2196f3;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
+
+.action-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.confirm-btn,
+.cancel-btn {
+  flex: 1;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.confirm-btn {
+  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+  color: white;
+}
+
+.confirm-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+}
+
+.confirm-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.cancel-btn {
+  background: #f5f5f5;
+  color: #666;
+  border: 1px solid #ddd;
+}
+
+.cancel-btn:hover {
+  background: #e9ecef;
+  border-color: #adb5bd;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .document-preview-dialog {
+    width: 95%;
+    height: 90vh;
+  }
+  
+  .document-content {
+    flex-direction: column;
+  }
+  
+  .content-display {
+    border-right: none;
+    border-bottom: 1px solid #e9ecef;
+  }
+  
+  .action-panel {
+    width: 100%;
+  }
+}
+
+/* 在预览面板内的文档预览样式 */
+.document-preview-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.document-preview-dialog-in-panel {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: white;
+}
+
+/* Word风格视图在面板中的适配 */
+.document-preview-dialog-in-panel .word-document-container {
+  background: #f8f9fa;
+  padding: 10px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.document-preview-dialog-in-panel .word-page {
+  width: 100%;
+  max-width: none;
+  min-height: auto;
+  padding: 15px;
+  margin-bottom: 10px;
+}
+
+.document-preview-dialog-in-panel .word-toolbar {
+  position: static;
+  margin-bottom: 10px;
+  padding: 6px 12px;
+}
+
+.document-preview-dialog-in-panel .word-status-bar {
+  position: static;
+  margin-top: 10px;
+}
+
+.document-preview-dialog-in-panel .dialog-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.document-preview-dialog-in-panel .dialog-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.document-preview-dialog-in-panel .close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.document-preview-dialog-in-panel .close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.document-preview-dialog-in-panel .dialog-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* 重要：让flex子元素可以正确收缩 */
+}
+
+.document-preview-dialog-in-panel .document-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.document-preview-dialog-in-panel .content-display {
+  flex: 1;
+  border: 1px solid #e1e5e9;
+  border-radius: 6px;
+  padding: 12px;
+  background: #f8f9fa;
+  overflow-y: auto;
+  min-height: 200px;
+}
+
+.document-preview-dialog-in-panel .action-panel {
+  flex-shrink: 0;
+  background: #f8f9fa;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #e1e5e9;
+}
+
+/* 文档选择器样式 */
+.document-selector-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.document-selector {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 500px;
+  max-height: 80%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.selector-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.selector-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.selector-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.loading-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.document-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.document-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: #fafbfc;
+}
+
+.document-item:hover {
+  border-color: #3b82f6;
+  background: #f0f9ff;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
+}
+
+.doc-icon {
+  font-size: 24px;
+  margin-right: 12px;
+  color: #3b82f6;
+}
+
+.doc-info {
+  flex: 1;
+}
+
+.doc-name {
+  font-weight: 600;
+  color: #374151;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.doc-details {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.no-documents {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6b7280;
+}
+
+.no-documents p {
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+.no-documents p:first-child {
+  font-weight: 600;
+  color: #374151;
+}
+
+/* 修复central-action-btn样式 */
+.central-action-btn {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+  min-width: 200px;
+}
+
+.central-action-btn:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.central-action-btn:active {
+  transform: translateY(1px);
+}
+
+.central-action-btn:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+} 
+
+/* 最高优先级的文档内容滚动修复 */
+.document-preview-dialog-in-panel .dialog-body .document-content {
+  height: 100% !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.document-preview-dialog-in-panel .dialog-body .document-content .content-display {
+  flex: 1 !important;
+  overflow-y: scroll !important;
+  overflow-x: hidden !important;
+  padding: 12px !important;
+  background: #f8f9fa !important;
+  font-family: 'Microsoft YaHei', sans-serif !important;
+  line-height: 1.6 !important;
+  min-height: 0 !important;
+  max-height: 100% !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: #c1c1c1 #f8f9fa !important;
+  pointer-events: auto !important;
+}
+
+/* 为材料窗口模式也添加滚动支持 */
+.document-preview-dialog-in-panel .material-window-embedded .document-content {
+  height: 100% !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.document-preview-dialog-in-panel .material-window-embedded .document-content .content-display {
+  flex: 1 !important;
+  overflow-y: scroll !important;
+  overflow-x: hidden !important;
+  padding: 12px !important;
+  background: #f8f9fa !important;
+  font-family: 'Microsoft YaHei', sans-serif !important;
+  line-height: 1.6 !important;
+  min-height: 0 !important;
+  max-height: 100% !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: #c1c1c1 #f8f9fa !important;
+  pointer-events: auto !important;
+} 
+
+/* 最终修复：确保文档内容可以滚动 - 使用最高优先级 */
+.document-preview-dialog-in-panel .dialog-body .document-content,
+.document-content {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* 强制滚动条始终可见且美观 */
+.document-preview-dialog-in-panel .dialog-body .document-content::-webkit-scrollbar,
+.document-content::-webkit-scrollbar {
+  width: 8px !important;
+}
+
+.document-preview-dialog-in-panel .dialog-body .document-content::-webkit-scrollbar-track,
+.document-content::-webkit-scrollbar-track {
+  background: #f1f1f1 !important;
+  border-radius: 4px !important;
+}
+
+.document-preview-dialog-in-panel .dialog-body .document-content::-webkit-scrollbar-thumb,
+.document-content::-webkit-scrollbar-thumb {
+  background: #c1c1c1 !important;
+  border-radius: 4px !important;
+}
+
+.document-preview-dialog-in-panel .dialog-body .document-content::-webkit-scrollbar-thumb:hover,
+.document-content::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8 !important;
+} 
+
+/* =============================================
+   Word风格页面显示样式
+   ============================================= */
+
+/* Word页面容器 */
+.word-document-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background: #f0f2f5; /* 类似Word的背景色 */
+  min-height: 100%;
+  overflow-y: auto;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* Word页面样式 */
+.word-page {
+  width: 210mm; /* A4纸张宽度 */
+  min-height: 297mm; /* A4纸张高度 */
+  max-width: 90vw; /* 响应式：在小屏幕上适配 */
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 25.4mm 31.8mm; /* Word默认页边距：上下25.4mm，左右31.8mm */
+  font-family: 'Times New Roman', '宋体', serif; /* Word默认字体 */
+  font-size: 12pt; /* Word默认字号 */
+  line-height: 1.5; /* Word默认行距 */
+  color: #000; /* 纯黑色文字 */
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Word页面内容 */
+.word-page-content {
+  width: 100%;
+  min-height: 100%;
+}
+
+/* Word段落样式 */
+.word-paragraph {
+  margin: 0 0 12pt 0; /* Word段落间距 */
+  text-align: justify; /* 两端对齐 */
+  text-justify: inter-word;
+  text-indent: 0; /* 首行缩进可根据需要调整 */
+  line-height: 1.5;
+  color: #000;
+  cursor: text;
+  position: relative;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* 首行缩进（中文段落常用） */
+.word-paragraph.indent-first-line {
+  text-indent: 2em;
+}
+
+/* Word文本选择样式 */
+.word-text-run {
+  cursor: text;
+  user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  position: relative;
+}
+
+/* Word页面编号 */
+.word-page-number {
+  position: absolute;
+  bottom: 15mm;
+  right: 31.8mm;
+  font-size: 10pt;
+  color: #666;
+  font-family: 'Times New Roman', serif;
+}
+
+/* Word标题样式 */
+.word-heading-1 {
+  font-size: 16pt;
+  font-weight: bold;
+  margin: 24pt 0 12pt 0;
+  color: #000;
+  line-height: 1.3;
+}
+
+.word-heading-2 {
+  font-size: 14pt;
+  font-weight: bold;
+  margin: 18pt 0 6pt 0;
+  color: #000;
+  line-height: 1.3;
+}
+
+.word-heading-3 {
+  font-size: 12pt;
+  font-weight: bold;
+  margin: 12pt 0 6pt 0;
+  color: #000;
+  line-height: 1.3;
+}
+
+/* Word列表样式 */
+.word-list {
+  margin: 6pt 0;
+  padding-left: 36pt;
+}
+
+.word-list-item {
+  margin: 3pt 0;
+  position: relative;
+}
+
+.word-list-item::before {
+  content: "•";
+  position: absolute;
+  left: -18pt;
+  color: #000;
+}
+
+/* Word表格样式 */
+.word-table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 12pt 0;
+  font-size: 10pt;
+}
+
+.word-table th,
+.word-table td {
+  border: 1px solid #000;
+  padding: 6pt;
+  text-align: left;
+  vertical-align: top;
+}
+
+.word-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+/* Word页面工具栏 */
+.word-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.word-toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 8px;
+  border-right: 1px solid #dee2e6;
+}
+
+.word-toolbar-group:last-child {
+  border-right: none;
+}
+
+.word-toolbar-button {
+  background: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #495057;
+}
+
+.word-toolbar-button:hover {
+  background: #e9ecef;
+  border-color: #adb5bd;
+}
+
+.word-toolbar-button.active {
+  background: #007bff;
+  border-color: #007bff;
+  color: white;
+}
+
+/* Word缩放控制 */
+.word-zoom-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.word-zoom-slider {
+  width: 100px;
+}
+
+.word-zoom-percentage {
+  font-size: 12px;
+  color: #6c757d;
+  min-width: 40px;
+}
+
+/* 响应式适配 */
+@media (max-width: 1200px) {
+  .word-page {
+    width: 95vw;
+    max-width: none;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .word-page {
+    width: 100vw;
+    margin: 0;
+    padding: 15px;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  
+  .word-document-container {
+    padding: 0;
+    background: white;
+  }
+  
+  .word-toolbar {
+    padding: 6px 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .word-toolbar-group {
+    padding: 0 6px;
+  }
+  
+  .word-toolbar-button {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+}
+
+/* 文本选择样式（全局） */
+.word-document-container ::selection {
+  background: #316AC5;
+  color: white;
+}
+
+.word-document-container ::-moz-selection {
+  background: #316AC5;
+  color: white;
+}
+
+/* 打印样式 */
+@media print {
+  .word-document-container {
+    background: white;
+    padding: 0;
+  }
+  
+  .word-page {
+    box-shadow: none;
+    margin: 0;
+    page-break-after: always;
+  }
+  
+  .word-toolbar {
+    display: none;
+  }
+  
+  .word-page-number {
+    display: block;
+  }
+}
+
+/* 光标样式 */
+.word-page {
+  cursor: text;
+}
+
+.word-text-run:hover {
+  cursor: text;
+}
+
+/* 模拟Word的文档状态栏 */
+.word-status-bar {
+  position: sticky;
+  bottom: 0;
+  background: #f8f9fa;
+  border-top: 1px solid #dee2e6;
+  padding: 4px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: #6c757d;
+  z-index: 100;
+}
+
+.word-status-info {
+  display: flex;
+  gap: 16px;
+}
+
+.word-language-selector {
+  background: none;
+  border: none;
+  color: #6c757d;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.word-language-selector:hover {
+  color: #495057;
+  text-decoration: underline;
+} 
+
+/* =============================================
+   ContentEditable编辑器Word风格样式
+   ============================================= */
+
+/* Word编辑器容器 */
+.word-editor {
+  width: 100%;
+  height: auto;
+  min-height: 500px;
+  border: none;
+  font-family: 'Times New Roman', '宋体', serif;
+  font-size: 12pt;
+  line-height: 1.5;
+  color: #000;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  cursor: text;
+  caret-color: #000; /* 确保光标颜色为黑色 */
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+/* 编辑器焦点状态 */
+.word-editor:focus {
+  outline: none;
+  box-shadow: none;
+  caret-color: #000 !important; /* 强制光标为黑色 */
+}
+
+/* 强制显示光标 */
+.word-editor:focus-within {
+  caret-color: #000 !important;
+}
+
+/* 确保在编辑状态下光标可见 */
+.word-editor[contenteditable="true"] {
+  caret-color: #000 !important;
+  cursor: text !important;
+}
+
+/* 编辑器激活状态指示 */
+.word-editor:focus {
+  background: rgba(173, 216, 230, 0.05); /* 非常淡的蓝色背景表示激活 */
+}
+
+/* 编辑器空白状态提示 */
+.word-editor:empty:before {
+  content: attr(placeholder);
+  color: #999;
+  font-style: italic;
+  pointer-events: none;
+}
+
+/* 强制光标显示 - 兼容所有浏览器 */
+.word-editor {
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+/* 确保光标在所有状态下都可见 */
+.word-editor,
+.word-editor:focus,
+.word-editor:active,
+.word-editor:hover {
+  caret-color: #000 !important;
+}
+
+/* 修复某些浏览器的光标问题 */
+@supports (-webkit-appearance: none) {
+  .word-editor {
+    -webkit-appearance: none;
+  }
+}
+
+/* 确保编辑器可以接收焦点 */
+.word-editor {
+  -webkit-user-modify: read-write-plaintext-only;
+}
+
+/* 确保编辑器在Word页面中正确显示 */
+.word-page-content .word-editor {
+  width: 100%;
+  height: auto;
+  min-height: 500px;
+}
+
+/* 编辑模式下的页面内容样式调整 */
+.word-page-content:has(.word-editor) {
+  height: auto;
+  min-height: 500px;
+}
+
+/* 选中文本样式 */
+.word-editor::selection {
+  background: #316AC5;
+  color: white;
+}
+
+.word-editor::-moz-selection {
+  background: #316AC5;
+  color: white;
+}
+
+/* 响应式适配 */
+@media (max-width: 768px) {
+  .word-editor {
+    min-height: 300px;
+    font-size: 11pt;
+  }
+  
+  .word-page-content .word-editor {
+    min-height: 300px;
+  }
+} 

@@ -1,0 +1,348 @@
+.node-properties-panel {
+  width: 350px;
+  height: 100%;
+  background: white;
+  border-left: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e0e0e0;
+  background: #f8f9fa;
+}
+
+.panel-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #666;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.close-button:hover {
+  background: #e9ecef;
+  color: #333;
+}
+
+.panel-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0;
+}
+
+.no-selection {
+  padding: 40px 20px;
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}
+
+.section {
+  padding: 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.section:last-child {
+  border-bottom: none;
+}
+
+.section h4 {
+  margin: 0 0 16px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #555;
+}
+
+.required {
+  color: #e74c3c;
+  margin-left: 2px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 13px;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #1976d2;
+  box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
+}
+
+.form-group input.error,
+.form-group select.error,
+.form-group textarea.error {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.2);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.json-input {
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.error-message {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #e74c3c;
+}
+
+.help-text {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #666;
+  line-height: 1.4;
+}
+
+/* 节点类型显示 */
+.node-type-display {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+}
+
+.node-type-icon {
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+.node-type-name {
+  font-weight: 500;
+  color: #495057;
+}
+
+/* 输入输出标签 */
+.io-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.io-tag {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.input-tag {
+  background: #e3f2fd;
+  color: #1976d2;
+  border: 1px solid #bbdefb;
+}
+
+.output-tag {
+  background: #e8f5e8;
+  color: #388e3c;
+  border: 1px solid #c8e6c9;
+}
+
+.data-field-tag {
+  background: #fff3e0;
+  color: #f57f17;
+  border: 1px solid #ffcc02;
+}
+
+.no-io {
+  color: #999;
+  font-style: italic;
+  font-size: 12px;
+}
+
+/* 复选框样式 */
+.form-group input[type="checkbox"] {
+  width: auto;
+  margin-right: 8px;
+  transform: scale(1.2);
+}
+
+/* 滚动条样式 */
+.panel-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.panel-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.panel-content::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.panel-content::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .node-properties-panel {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    height: 100vh;
+  }
+  
+  .panel-header {
+    padding: 12px 16px;
+  }
+  
+  .section {
+    padding: 16px;
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+}
+
+/* 暗色主题支持 */
+@media (prefers-color-scheme: dark) {
+  .node-properties-panel {
+    background: #2d3748;
+    border-left-color: #4a5568;
+    color: #e2e8f0;
+  }
+  
+  .panel-header {
+    background: #1a202c;
+    border-bottom-color: #4a5568;
+  }
+  
+  .panel-header h3 {
+    color: #e2e8f0;
+  }
+  
+  .close-button {
+    color: #a0aec0;
+  }
+  
+  .close-button:hover {
+    background: #4a5568;
+    color: #e2e8f0;
+  }
+  
+  .section {
+    border-bottom-color: #4a5568;
+  }
+  
+  .section h4 {
+    color: #e2e8f0;
+  }
+  
+  .form-group label {
+    color: #cbd5e0;
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: #4a5568;
+    border-color: #718096;
+    color: #e2e8f0;
+  }
+  
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: #63b3ed;
+    box-shadow: 0 0 0 2px rgba(99, 179, 237, 0.2);
+  }
+  
+  .node-type-display {
+    background: #4a5568;
+    border-color: #718096;
+  }
+  
+  .node-type-name {
+    color: #e2e8f0;
+  }
+  
+  .help-text {
+    color: #a0aec0;
+  }
+  
+  .no-io {
+    color: #718096;
+  }
+  
+  .input-tag {
+    background: #2c5282;
+    color: #90cdf4;
+    border-color: #3182ce;
+  }
+  
+  .output-tag {
+    background: #276749;
+    color: #9ae6b4;
+    border-color: #38a169;
+  }
+  
+  .data-field-tag {
+    background: #744210;
+    color: #fbb040;
+    border-color: #d69e2e;
+  }
+}

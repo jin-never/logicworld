@@ -1,0 +1,3999 @@
+.App {
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* background-color: lightcoral; Removed debugging color */
+}
+
+/* 右键菜单样式 */
+.context-menu {
+  position: fixed;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 10000;
+  min-width: 160px;
+  padding: 4px 0;
+  font-size: 14px;
+}
+
+.context-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.context-menu li {
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  color: #333;
+  white-space: nowrap;
+}
+
+.context-menu li:hover:not(.disabled) {
+  background-color: #f5f5f5;
+}
+
+.context-menu li.disabled {
+  color: #999;
+  cursor: not-allowed;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #F8F8F0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  z-index: 10;
+  color: #333;
+  font-size: 0.9em;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
+/* 统一的页面头部样式 */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding: 24px; /* 统一的padding */
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  min-height: 60px; /* 统一的最小高度 */
+}
+
+.page-header .header-content h1 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0 0 4px 0;
+}
+
+.page-header .header-content p {
+  font-size: 16px;
+  color: #6c757d;
+  margin: 0;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.document-title {
+  font-size: 1.0em;
+  font-weight: bold;
+  color: #333;
+  white-space: nowrap;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+.save-status {
+  font-size: 0.8em;
+  color: #28a745;
+  margin-left: 10px;
+  padding: 2px 6px;
+  background-color: rgba(40, 167, 69, 0.1);
+  border-radius: 3px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+.file-navigation {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.file-nav-item {
+  display: flex;
+  align-items: center;
+  padding: 3px 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border-radius: 4px;
+  white-space: nowrap;
+  font-size: 0.85em;
+}
+
+.file-nav-item:hover {
+  background-color: #f0f0f0;
+}
+
+.file-nav-item .icon {
+  margin-right: 3px;
+}
+
+.header-center {
+  flex: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+.search-bar {
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  padding: 5px 10px;
+  width: 200px;
+  font-size: 0.85em;
+  color: #555;
+  background-color: #ffffff;
+}
+
+.header-right {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  white-space: nowrap;
+  flex-wrap: nowrap;
+}
+
+/* AI工作流按钮样式 */
+.ai-workflow-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ai-workflow-btn:hover {
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+/* 四级模式选择器样式 */
+.header-right select {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: white;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 140px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.header-right select:hover {
+  border-color: #007bff;
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.1);
+}
+
+.header-right select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  color: #555;
+  font-size: 1.0em;
+  cursor: pointer;
+  padding: 3px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.icon-button:hover {
+  background-color: #f0f0f0;
+}
+
+.icon-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #f5f5f5;
+  color: #999;
+}
+
+.icon-button:disabled:hover {
+  background-color: #f5f5f5;
+}
+
+/* 取消按钮样式 */
+.icon-button.cancel-button {
+  background-color: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  font-weight: 500;
+  animation: pulse-red 2s infinite;
+}
+
+.icon-button.cancel-button:hover {
+  background-color: #fecaca;
+  color: #b91c1c;
+  border-color: #f87171;
+}
+
+.icon-button.cancel-button:active {
+  background-color: #dc2626;
+  color: white;
+  transform: scale(0.95);
+}
+
+/* 红色脉冲动画 */
+@keyframes pulse-red {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(220, 38, 38, 0);
+  }
+}
+
+/* 工作流锁定覆盖层 */
+.workflow-lock-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(1px);
+  z-index: 1000;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lock-message {
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid #f59e0b;
+  border-radius: 12px;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #92400e;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  animation: lock-message-appear 0.3s ease-out;
+}
+
+.lock-icon {
+  font-size: 20px;
+  animation: lock-pulse 2s infinite;
+}
+
+/* 锁定消息出现动画 */
+@keyframes lock-message-appear {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* 锁定图标脉冲动画 */
+@keyframes lock-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* 锁定状态下的ReactFlow容器 */
+.react-flow-container.workflow-locked {
+  filter: grayscale(20%);
+  transition: filter 0.3s ease;
+}
+
+.react-flow-container.workflow-locked .react-flow__node {
+  pointer-events: none;
+}
+
+.react-flow-container.workflow-locked .react-flow__edge {
+  pointer-events: none;
+}
+
+/* 回到视图按钮的特殊样式 */
+.icon-button.return-to-mindmap {
+  background-color: #e3f2fd;
+  color: #1976d2;
+  border: 1px solid #bbdefb;
+  font-weight: 500;
+}
+
+.icon-button.return-to-mindmap:hover {
+  background-color: #bbdefb;
+  color: #0d47a1;
+  border-color: #90caf9;
+}
+
+/* 思维导图区域的控制按钮 */
+.mindmap-controls {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 9999;
+  display: flex;
+  gap: 10px;
+}
+
+.mindmap-toggle-button {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  color: white;
+}
+
+.mindmap-toggle-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.mindmap-toggle-button:active {
+  transform: scale(0.95);
+}
+
+/* 侧边栏切换按钮 */
+.mindmap-toggle-button.sidebar-toggle {
+  background: #3b82f6;
+}
+
+.mindmap-toggle-button.sidebar-toggle:hover {
+  background: #2563eb;
+}
+
+/* 聊天框切换按钮 */
+.mindmap-toggle-button.chat-toggle {
+  background: #10b981;
+}
+
+.mindmap-toggle-button.chat-toggle:hover {
+  background: #059669;
+}
+
+.sidebar-toggle-floating:hover {
+  background: #0056b3;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+}
+
+.sidebar-toggle-floating:active {
+  transform: scale(0.95);
+}
+
+.app-body {
+  display: flex;
+  flex-grow: 1;
+  overflow: hidden; /* Prevent overflow issues */
+  transition: all 0.3s ease;
+  height: calc(100vh - 60px); /* 减去顶部导航栏的高度 */
+}
+
+.main-content {
+  display: flex;
+  flex-grow: 1;
+  height: 100%;
+  position: relative;
+}
+
+/* 浮动控制按钮容器 - 当侧边栏收起时显示 */
+.floating-controls {
+  position: absolute;
+  top: 70px; /* 在顶部导航栏下面，留10px间距 */
+  left: 15px; /* 左上角位置 */
+  display: flex;
+  gap: 8px;
+  z-index: 1001;
+}
+
+.floating-control-button {
+  width: 24px; /* 采用聊天框按钮尺寸 */
+  height: 24px; /* 采用聊天框按钮尺寸 */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* 采用聊天框按钮边框 */
+  border-radius: 50%; /* 采用聊天框按钮圆形 */
+  color: white;
+  font-size: 10px; /* 采用聊天框按钮字体大小 */
+  font-weight: 500; /* 采用聊天框按钮字重 */
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(255, 107, 157, 0.25); /* 采用聊天框按钮阴影 */
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); /* 采用聊天框按钮过渡 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none; /* 采用聊天框按钮用户选择 */
+}
+
+.floating-control-button:hover {
+  transform: scale(1.1); /* 采用聊天框按钮悬停缩放 */
+  box-shadow: 0 2px 12px rgba(255, 107, 157, 0.4); /* 采用聊天框按钮悬停阴影 */
+}
+
+.floating-control-button:active {
+  transform: scale(0.9); /* 采用聊天框按钮激活缩放 */
+  box-shadow: 0 2px 6px rgba(255, 107, 157, 0.25); /* 采用聊天框按钮激活阴影 */
+}
+
+/* 侧边栏展开按钮 */
+.floating-control-button.sidebar-expand-btn {
+  background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%); /* 采用聊天框按钮渐变 */
+}
+
+.floating-control-button.sidebar-expand-btn:hover {
+  background: linear-gradient(135deg, #ff8fab 0%, #ffa8c0 100%); /* 采用聊天框按钮悬停渐变 */
+  box-shadow: 0 2px 12px rgba(255, 107, 157, 0.4); /* 采用聊天框按钮悬停阴影 */
+  transform: scale(1.1); /* 采用聊天框按钮悬停缩放 */
+}
+
+/* 聊天框切换按钮 */
+.floating-control-button.chat-toggle-btn {
+  background: #10b981;
+}
+
+.floating-control-button.chat-toggle-btn:hover {
+  background: #059669;
+}
+
+.main-content .react-flow-wrapper {
+  flex-grow: 1;
+  height: 100%;
+}
+
+/* Add a wrapper around ReactFlowProvider to control its flex behavior */
+.main-content > .react-flow-wrapper-container {
+  flex-grow: 1;
+  height: 100%;
+  display: flex;
+}
+
+/* React Flow wrapper needs to take remaining space */
+.react-flow-wrapper {
+  flex-grow: 1;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  /* background-color: lightblue; Removed debugging color */
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* --- Node-specific styles --- */
+.custom-node.failed {
+  border-color: #d32f2f; /* Red border */
+  background-color: #ffebee; /* Light red background */
+  box-shadow: 0 0 10px rgba(211, 47, 47, 0.5);
+}
+
+.node-error-message {
+  padding: 8px;
+  margin-top: 8px;
+  color: #c62828; /* Darker red text */
+  background-color: #ffcdd2; /* Even lighter red */
+  border-top: 1px solid #ef9a9a;
+  font-size: 0.8em;
+  word-wrap: break-word;
+  max-height: 100px;
+  overflow-y: auto;
+}
+
+/* --- Manual Input for Failed Nodes --- */
+.manual-input-container {
+  padding: 8px;
+  margin-top: 5px;
+}
+
+.manual-input-textarea {
+  width: 100%;
+  height: 80px;
+  padding: 6px;
+  border: 1px solid #7c3aed;
+  border-radius: 4px;
+  background-color: #f3e5f5;
+  color: #333;
+  font-family: inherit;
+  font-size: 0.9em;
+  resize: vertical;
+}
+
+.manual-input-textarea:focus {
+  outline: none;
+  border-color: #5e35b1;
+  box-shadow: 0 0 5px rgba(124, 58, 237, 0.5);
+}
+
+/* --- Loading Overlay --- */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  color: white;
+  font-size: 1.2em;
+}
+
+.loading-spinner {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #3498db;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1.5s linear infinite;
+  margin-bottom: 20px;
+}
+
+/* Keyframes for the spinner are already defined above, no need to redefine */
+
+/* --- Approval Node Styles --- */
+.custom-node.approval-node {
+  background-color: #e3f2fd; /* Light blue background */
+  border: 2px solid #42a5f5; /* Blue border */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(66, 165, 245, 0.2);
+  width: 600px; /* Give it a fixed width */
+  padding: 0;
+  overflow: hidden;
+}
+
+.approval-node-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.approval-node-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #42a5f5;
+  color: white;
+  padding: 10px 15px;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.approval-node-body {
+  padding: 15px;
+  font-size: 0.9em;
+  color: #333;
+}
+
+.approval-node-body p {
+  margin: 0 0 12px 0;
+}
+
+.approval-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  max-height: 200px; /* Allow scrolling for long lists */
+  overflow-y: auto;
+  border: 1px solid #bbdefb;
+  border-radius: 4px;
+}
+
+.approval-list-item {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.approval-list-item:last-child {
+  border-bottom: none;
+}
+
+.approval-input {
+  flex-grow: 1;
+  border: none;
+  background: transparent;
+  padding: 5px;
+  font-size: 0.95em;
+  outline: none;
+}
+
+.approval-input:focus {
+  background-color: #f0f8ff;
+}
+
+.approval-remove-btn {
+  background: none;
+  border: none;
+  color: #ef5350;
+  cursor: pointer;
+  font-size: 1.4em;
+  font-weight: bold;
+  padding: 0 8px;
+  opacity: 0.6;
+}
+.approval-remove-btn:hover {
+  opacity: 1;
+  color: #d32f2f;
+}
+
+.approval-node-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.approval-add-btn, .approval-confirm-btn {
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.approval-add-btn {
+  background-color: #e0e0e0;
+  color: #333;
+}
+.approval-add-btn:hover {
+  background-color: #d5d5d5;
+}
+
+.approval-confirm-btn {
+  background-color: #29b6f6;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.approval-confirm-btn:hover {
+  background-color: #03a9f4;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.validation-warnings ul {
+  list-style-type: none;
+  padding-left: 15px;
+  margin: 0;
+}
+
+.validation-warnings li {
+  margin-bottom: 5px;
+  font-size: 0.9em;
+}
+
+
+/* Edit Modal Styles */
+.edit-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.edit-modal {
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 500px;
+  z-index: 1001;
+}
+
+.edit-modal h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.edit-modal .form-group {
+  margin-bottom: 15px;
+}
+
+.edit-modal .form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.edit-modal .form-group input,
+.edit-modal .form-group textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* Important for padding and width */
+}
+
+.edit-modal .form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.edit-modal .modal-actions {
+  text-align: right;
+  margin-top: 20px;
+}
+
+.edit-modal .modal-actions button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.edit-modal .modal-actions button:first-child {
+  background-color: #007bff;
+  color: white;
+}
+
+.edit-modal .modal-actions button:last-child {
+  background-color: #f0f0f0;
+}
+
+.react-flow__node.selected .custom-node:not(.material-node):not(.execution-node):not(.condition-node) {
+    border-color: #007bff;
+    box-shadow: 0 0 10px #007bff;
+}
+
+
+
+/* MCP连接页面弹窗样式 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.modal-header h3 {
+  margin: 0;
+  color: #333;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #999;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn:hover {
+  color: #333;
+}
+
+.config-form .form-group {
+  margin-bottom: 20px;
+}
+
+.config-form .form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
+}
+
+.config-form .form-group input,
+.config-form .form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.config-form .form-group input:focus,
+.config-form .form-group select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.form-actions button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.cancel-btn {
+  background-color: #f8f9fa;
+  color: #6c757d;
+  border: 1px solid #dee2e6;
+}
+
+.cancel-btn:hover {
+  background-color: #e2e6ea;
+}
+
+.submit-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+}
+
+.config-help {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  border-left: 4px solid #007bff;
+}
+
+.config-help h4 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 14px;
+}
+
+.config-help ol {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.config-help li {
+  margin-bottom: 5px;
+  font-size: 13px;
+  color: #666;
+}
+
+.config-help a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.config-help a:hover {
+  text-decoration: underline;
+}
+
+/* 保存对话框特定样式 */
+.modal-content .form-group {
+  margin-bottom: 16px;
+}
+
+.modal-content .form-group label {
+  display: block;
+  margin-bottom: 6px;
+  color: #555;
+  font-weight: 500;
+}
+
+.modal-content .form-group input,
+.modal-content .form-group textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.modal-content .form-group input:focus,
+.modal-content .form-group textarea:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.modal-content .modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+
+.btn-primary {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #45a049;
+}
+
+.btn-primary:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: #f5f5f5;
+  color: #666;
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+  background: #e9e9e9;
+  border-color: #ccc;
+}
+
+/* 聊天框悬浮按钮容器 - 可拖拽，边缘隐藏 */
+.chatbox-floating-container {
+  position: fixed;
+  width: 40px; /* 扩大触发区域 */
+  height: 40px;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* 左对齐，便于右边缘隐藏 */
+  transition: left 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              top 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* 聊天框展开按钮 - 贴边隐藏悬浮按钮 */
+.chatbox-expand-button-floating {
+  position: relative;
+  right: -15px; /* 默认隐藏在边缘外，只露出一小部分 */
+  background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%);
+  border: none;
+  color: white;
+  font-size: 10px;
+  font-weight: 500;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: grab;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: -1px 0 6px rgba(255, 107, 157, 0.25);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  user-select: none;
+}
+
+/* 容器悬停时按钮完全展开 */
+.chatbox-floating-container:hover .chatbox-expand-button-floating {
+  right: 0; /* 悬停时完全展开 */
+  background: linear-gradient(135deg, #ff8fab 0%, #ffa8c0 100%);
+  box-shadow: 0 2px 12px rgba(255, 107, 157, 0.4);
+  transform: scale(1.1);
+}
+
+.chatbox-expand-button-floating.dragging {
+  cursor: grabbing;
+  right: 0; /* 拖拽时也要完全显示 */
+  transform: scale(1.2);
+  box-shadow: 0 3px 15px rgba(255, 107, 157, 0.5);
+  z-index: 1002;
+}
+
+.chatbox-expand-button-floating:active {
+  transform: scale(0.9);
+}
+
+/* 悬浮按钮logo容器 */
+.floating-button-logo {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* logo占位符样式 */
+.logo-placeholder {
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  letter-spacing: 0.5px;
+}
+
+/* 将来logo图片的样式 */
+.floating-button-logo img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  filter: brightness(0) invert(1); /* 将logo变为白色 */
+}
+
+/* 工具库切换按钮 */
+.tool-library-toggle-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 10px; /* 始终保持在边缘位置 */
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background: #4b5563;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+/* 移除聊天框收起时的特殊样式，因为现在工具库按钮位置不受聊天框影响 */
+/* .chatbox-collapsed .tool-library-toggle-btn {
+  right: 10px;
+} */
+
+/* 工具库展开状态 - 蓝色 */
+.tool-library-toggle-btn.expanded {
+  background: #3b82f6;
+}
+
+.tool-library-toggle-btn.expanded:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+}
+
+/* 工具库收起状态 - 米色背景，黑色图标 */
+.tool-library-toggle-btn.collapsed {
+  background: #f5f5dc; /* 米色背景 */
+  color: #333; /* 黑色图标 */
+}
+
+.tool-library-toggle-btn.collapsed:hover {
+  background: #f0f0d0; /* 悬停时稍微深一点的米色 */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(245, 245, 220, 0.4);
+}
+
+
+
+/* 旋转边框动画效果 */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* 响应式设计 - 小屏幕适配 */
+@media (max-width: 768px) {
+  .start-node-container {
+    width: 80px !important;
+    height: 32px !important;
+  }
+
+  .start-node-container div[style*="fontSize"] {
+    font-size: 10px !important;
+  }
+
+  .start-node-container div[style*="position: absolute"][style*="top: 4px"] {
+    width: 12px !important;
+    height: 12px !important;
+    font-size: 8px !important;
+    top: 2px !important;
+    right: 2px !important;
+  }
+}
+
+/* 左侧工具盒子样式 */
+.top-left-boxes {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.box {
+  width: 80px;
+  height: 60px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border: 2px solid #e1e5e9;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  border-color: #d1d5db;
+}
+
+.box.selected {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2), 0 4px 16px rgba(59, 130, 246, 0.3);
+  background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
+}
+
+.box-icon {
+  font-size: 20px;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.box-text {
+  font-size: 11px;
+  font-weight: 600;
+  color: #374151;
+  text-align: center;
+  line-height: 1;
+}
+
+/* 不同盒子的特定样式 */
+.box-1:hover {
+  border-color: #10b981;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.2);
+}
+
+.box-1.selected {
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2), 0 4px 16px rgba(16, 185, 129, 0.3);
+}
+
+.box-2:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.2);
+}
+
+.box-2.selected {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2), 0 4px 16px rgba(59, 130, 246, 0.3);
+}
+
+.box-3:hover {
+  border-color: #f59e0b;
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.2);
+}
+
+.box-3.selected {
+  border-color: #f59e0b;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2), 0 4px 16px rgba(245, 158, 11, 0.3);
+}
+
+.box-4:hover {
+  border-color: #8b5cf6;
+  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.2);
+}
+
+.box-4.selected {
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2), 0 4px 16px rgba(139, 92, 246, 0.3);
+}
+
+/* 执行节点样式 */
+.custom-node.execution-node {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  min-width: 130px;
+  max-width: 330px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* 执行节点快速信息区域 */
+.execution-node .node-quick-info {
+  padding: 8px 12px;
+  margin: 8px 0;
+  min-height: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.execution-node .info-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.execution-node .info-label {
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.execution-node .info-value {
+  color: #374151;
+  font-weight: 400;
+}
+
+/* 配置提示样式 */
+.execution-node .config-prompt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border: 1px solid #f59e0b;
+  border-radius: 8px;
+  margin: 4px 0;
+}
+
+.execution-node .prompt-text {
+  color: #92400e;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.execution-node.config-open {
+  background: white;
+  min-width: 520px;
+  max-width: 620px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 1000;
+  position: relative;
+}
+
+.execution-config {
+  padding: 20px;
+  color: #333;
+  position: relative;
+  z-index: 1001;
+}
+
+.execution-config .config-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #f3f4f6;
+}
+
+.execution-config .config-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.execution-config .close-btn {
+  background: #f3f4f6;
+  border: none;
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  color: #6b7280;
+  transition: all 0.2s;
+}
+
+.execution-config .close-btn:hover {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.execution-config .config-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.execution-config .config-section {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 12px;
+  transition: all 0.2s;
+  animation: fadeInUp 0.3s ease-out;
+}
+
+.execution-config .config-section:hover {
+  border-color: #d1d5db;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.execution-config .config-section:focus-within {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.execution-config .config-row {
+  display: flex;
+  gap: 16px;
+}
+
+.execution-config .config-row .config-section {
+  flex: 1;
+}
+
+.execution-config label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.execution-config select,
+.execution-config input,
+.execution-config textarea {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 13px;
+  transition: all 0.2s;
+  background: white;
+  box-sizing: border-box;
+}
+
+.execution-config select:focus,
+.execution-config input:focus,
+.execution-config textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* 执行节点特殊样式 */
+.execution-config .settings-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.execution-config .settings-grid > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.execution-config .settings-grid label {
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 0;
+}
+
+.execution-config .controls-container {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #f3f4f6;
+}
+
+.execution-config .controls-row {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.execution-config .folder-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.execution-config .folder-input-container {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.execution-config .folder-input-container input {
+  flex: 1;
+  margin: 0;
+}
+
+.execution-config .folder-btn {
+  padding: 8px 12px;
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  color: #374151;
+  transition: all 0.2s;
+  white-space: nowrap;
+  min-width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.execution-config .folder-btn:hover {
+  background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
+  border-color: #9ca3af;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.execution-config .execute-btn {
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.execution-config .execute-btn:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.execution-config .clear-btn {
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  color: #6b7280;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.execution-config .clear-btn:hover {
+  background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
+  color: #374151;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 输入输出区域特殊样式 */
+.execution-config .config-section:has(textarea[readonly]) {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border-color: #bae6fd;
+}
+
+.execution-config .config-section:has(input[readonly]) {
+  background: linear-gradient(135deg, #fefce8 0%, #fef3c7 100%);
+  border-color: #fde68a;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .execution-config .settings-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .execution-config .controls-row {
+    gap: 8px;
+  }
+}
+
+/* 条件节点样式 */
+.custom-node.condition-node {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  min-width: 130px;
+  max-width: 330px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.condition-node.config-open {
+  background: rgb(240, 242, 245);
+  min-width: 520px;
+  max-width: 620px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  position: relative;
+}
+
+.condition-config {
+  padding: 20px;
+  color: #333;
+  position: relative;
+  z-index: 1001;
+}
+
+.condition-config .config-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #f3f4f6;
+}
+
+.condition-config .config-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.condition-config .close-btn {
+  background: #f3f4f6;
+  border: none;
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  color: #6b7280;
+  transition: all 0.2s;
+}
+
+.condition-config .close-btn:hover {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.condition-config .config-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.condition-config .config-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.condition-config .config-row {
+  display: flex;
+  gap: 16px;
+}
+
+.condition-config .config-row .config-section {
+  flex: 1;
+}
+
+.condition-config label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.condition-config select,
+.condition-config input,
+.condition-config textarea {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 13px;
+  transition: all 0.2s;
+  background: white;
+}
+
+.condition-config select:focus,
+.condition-config input:focus,
+.condition-config textarea:focus {
+  outline: none;
+  border-color: #ff8c42;
+  box-shadow: 0 0 0 3px rgba(255, 140, 66, 0.1);
+}
+
+.condition-config .control-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #f3f4f6;
+}
+
+.condition-config .btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.condition-config .btn-primary {
+  background: linear-gradient(135deg, #ff9a56 0%, #ff6b35 100%);
+  color: white;
+}
+
+.condition-config .btn-primary:hover {
+  background: linear-gradient(135deg, #ff8c42 0%, #ff5722 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+.condition-config .btn-secondary {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.condition-config .btn-secondary:hover {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.condition-node .node-content {
+  padding: 8px 12px;
+  text-align: center;
+  color: #374151;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.condition-node .node-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.condition-node .node-icon {
+  font-size: 16px;
+  color: #6b7280;
+}
+
+.condition-node .node-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.condition-node .node-subtitle {
+  font-size: 11px;
+  opacity: 0.7;
+  margin-bottom: 4px;
+  font-weight: 400;
+  color: #6b7280;
+}
+
+.condition-node .node-status-indicator {
+  font-size: 10px;
+  background: #f3f4f6;
+  color: #6b7280;
+  padding: 3px 6px;
+  border-radius: 8px;
+  display: inline-block;
+  font-weight: 500;
+}
+
+/* 结果节点样式 */
+.result-node {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  color: #374151;
+  min-width: 130px;
+  max-width: 330px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.result-node.config-open {
+  background: white;
+  min-width: 500px;
+  max-width: 600px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 1000;
+  position: relative;
+}
+
+.result-node .node-content {
+  padding: 8px 12px;
+  text-align: center;
+  color: #374151;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.result-node .node-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.result-node .node-icon {
+  font-size: 16px;
+  color: #6b7280;
+}
+
+.result-node .node-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.result-node .node-subtitle {
+  font-size: 11px;
+  opacity: 0.7;
+  margin-bottom: 4px;
+  font-weight: 400;
+  color: #6b7280;
+}
+
+.result-node .node-status-indicator {
+  font-size: 10px;
+  background: #f3f4f6;
+  color: #6b7280;
+  padding: 3px 6px;
+  border-radius: 8px;
+  display: inline-block;
+  font-weight: 500;
+}
+
+.result-config {
+  padding: 20px;
+  color: #333;
+  position: relative;
+  z-index: 1001;
+}
+
+.result-config .config-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #f3f4f6;
+}
+
+.result-config .config-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.result-config .close-btn {
+  background: #f3f4f6;
+  border: none;
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  color: #6b7280;
+  transition: all 0.2s;
+}
+
+.result-config .close-btn:hover {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.result-config .config-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.result-config .config-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.result-config .config-row {
+  display: flex;
+  gap: 16px;
+}
+
+.result-config .config-row .config-section {
+  flex: 1;
+}
+
+.result-config label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.result-config select,
+.result-config input,
+.result-config textarea {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 13px;
+  transition: all 0.2s;
+  background: white;
+}
+
+.result-config select:focus,
+.result-config input:focus,
+.result-config textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.result-config .control-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #f3f4f6;
+  justify-content: center;
+}
+
+.result-config .btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.result-config .btn-primary {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: white;
+}
+
+.result-config .btn-primary:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.result-config .btn-secondary {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.result-config .btn-secondary:hover {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+/* 配置界面特殊样式 */
+.condition-config .config-section,
+.result-config .config-section,
+.execution-config .config-section {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 12px;
+  transition: all 0.2s;
+}
+
+.condition-config .config-section:hover,
+.result-config .config-section:hover,
+.execution-config .config-section:hover {
+  border-color: #d1d5db;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.condition-config .config-section:focus-within,
+.result-config .config-section:focus-within,
+.execution-config .config-section:focus-within {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* 条件构建器样式 */
+.condition-config .condition-builder {
+  background: linear-gradient(135deg, #fff5f0 0%, #fef7f0 100%);
+  border: 1px solid #fed7aa;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 12px 0;
+}
+
+.condition-config .condition-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 12px;
+  align-items: end;
+  margin-bottom: 12px;
+}
+
+.condition-config .operator-select {
+  min-width: 120px;
+}
+
+/* 配置状态区域样式 */
+.result-config .config-status-section {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 12px 0;
+}
+
+.result-config .status-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.result-config .status-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 12px;
+  transition: all 0.2s;
+}
+
+.result-config .status-card:hover {
+  border-color: #d1d5db;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.result-config .status-card.full-width {
+  grid-column: 1 / -1;
+}
+
+.result-config .status-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.result-config .status-value {
+  font-size: 13px;
+  font-weight: 500;
+  color: #1f2937;
+  word-break: break-all;
+}
+
+.result-config .help-text {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border: 1px solid #f59e0b;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 12px;
+  color: #92400e;
+  line-height: 1.5;
+}
+
+/* 预览区域样式 */
+.result-config .preview-section {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border: 1px solid #bae6fd;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 12px 0;
+}
+
+.result-config .preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #bae6fd;
+}
+
+.result-config .preview-header label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0c4a6e;
+  margin: 0;
+}
+
+.result-config .preview-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.result-config .preview-action-btn {
+  background: white;
+  border: 1px solid #0ea5e9;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 11px;
+  color: #0ea5e9;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.result-config .preview-action-btn:hover {
+  background: #0ea5e9;
+  color: white;
+}
+
+.result-config .preview-container {
+  background: white;
+  border: 1px solid #bae6fd;
+  border-radius: 8px;
+  max-height: 200px;
+  overflow: hidden;
+}
+
+.result-config .preview-content {
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  color: #0f172a;
+  white-space: pre-wrap;
+  padding: 12px 16px 12px 12px; /* 右边留出更多滚动条空间 */
+  max-height: 200px;
+  overflow-y: scroll !important; /* 强制显示滚动条 */
+  overflow-x: hidden;
+  line-height: 1.4;
+  /* 强制显示滚动条 */
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #94a3b8 #f1f5f9; /* Firefox */
+}
+
+/* 预览内容滚动条样式 - Webkit浏览器 */
+.result-config .preview-content::-webkit-scrollbar {
+  width: 10px; /* 增加滚动条宽度 */
+  background: #f8fafc;
+}
+
+.result-config .preview-content::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 5px;
+  border: 1px solid #e2e8f0;
+}
+
+.result-config .preview-content::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 5px;
+  border: 2px solid #f1f5f9;
+  min-height: 20px; /* 确保滚动条拖拽块有最小高度 */
+}
+
+.result-config .preview-content::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+.result-config .preview-content::-webkit-scrollbar-thumb:active {
+  background: #475569;
+}
+
+/* 测试结果样式 */
+.condition-config .test-result,
+.result-config .test-result {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 12px;
+  font-size: 13px;
+  color: #166534;
+}
+
+.condition-config .test-result.error,
+.result-config .test-result.error {
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  border-color: #fecaca;
+  color: #991b1b;
+}
+
+/* 输入框组样式 */
+.condition-config .input-group,
+.result-config .input-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.condition-config .input-group .input-addon,
+.result-config .input-group .input-addon {
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 6px 0 0 6px;
+  padding: 8px 12px;
+  font-size: 13px;
+  color: #6b7280;
+  white-space: nowrap;
+}
+
+.condition-config .input-group input,
+.result-config .input-group input {
+  border-radius: 0 6px 6px 0;
+  border-left: none;
+}
+
+/* 状态指示器样式 */
+.condition-config .status-indicator,
+.result-config .status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.condition-config .status-indicator.success,
+.result-config .status-indicator.success {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.condition-config .status-indicator.warning,
+.result-config .status-indicator.warning {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.condition-config .status-indicator.error,
+.result-config .status-indicator.error {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* 按钮特殊样式 */
+.condition-config .test-btn {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+}
+
+.condition-config .test-btn:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+/* 文件格式选项样式 */
+.condition-config .file-format-options,
+.result-config .format-options {
+  background: linear-gradient(135deg, #fefce8 0%, #fef3c7 100%);
+  border: 1px solid #fde68a;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+/* 输出配置样式 */
+.condition-config .output-config {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border: 1px solid #bae6fd;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 12px 0;
+}
+
+.condition-config .output-config h4,
+.result-config .output-config h4 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .condition-config .condition-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .condition-config .control-buttons,
+  .result-config .control-buttons {
+    flex-direction: column;
+  }
+
+  .condition-config .btn,
+  .result-config .btn {
+    justify-content: center;
+  }
+
+  /* 结果节点响应式调整 */
+  .result-config .status-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .result-config .status-card.full-width {
+    grid-column: 1;
+  }
+
+  .result-config .preview-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .result-config .preview-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+/* 滚动条样式 */
+.condition-config::-webkit-scrollbar,
+.result-config::-webkit-scrollbar,
+.execution-config::-webkit-scrollbar {
+  width: 6px;
+}
+
+.condition-config::-webkit-scrollbar-track,
+.result-config::-webkit-scrollbar-track,
+.execution-config::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 3px;
+}
+
+.condition-config::-webkit-scrollbar-thumb,
+.result-config::-webkit-scrollbar-thumb,
+.execution-config::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.condition-config::-webkit-scrollbar-thumb:hover,
+.result-config::-webkit-scrollbar-thumb:hover,
+.execution-config::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* 动画效果 */
+.condition-config .config-section,
+.result-config .config-section,
+.execution-config .config-section {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 执行节点选中状态 */
+.react-flow__node.selected .custom-node.execution-node,
+.custom-node.execution-node.selected {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2), 0 4px 20px rgba(59, 130, 246, 0.3);
+  background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
+  transform: translateY(-2px);
+}
+
+/* 执行节点选中状态的顶部指示条 */
+.react-flow__node.selected .custom-node.execution-node::before,
+.custom-node.execution-node.selected::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6 0%, #1d4ed8 100%);
+  border-radius: 16px 16px 0 0;
+  z-index: 1;
+}
+
+/* 执行节点选中状态的脉搏动画 */
+.react-flow__node.selected .custom-node.execution-node::after,
+.custom-node.execution-node.selected::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border: 2px solid #3b82f6;
+  border-radius: 19px;
+  opacity: 0;
+  animation: pulse-border 2s infinite;
+  z-index: 0;
+}
+
+/* 移除所有React Flow节点的默认背景和样式 */
+.react-flow__node {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+/* 材料节点选中状态 - 移除所有选中效果 */
+.react-flow__node.selected .custom-node.material-node,
+.custom-node.material-node.selected,
+div.custom-node.material-node.selected {
+  /* 移除所有选中状态的视觉效果 */
+}
+
+/* 材料节点选中状态的顶部指示条 - 移除 */
+.react-flow__node.selected .custom-node.material-node::before,
+.custom-node.material-node.selected::before,
+div.custom-node.material-node.selected::before {
+  display: none !important;
+}
+
+/* 材料节点选中状态的脉搏动画 - 移除 */
+.react-flow__node.selected .custom-node.material-node::after,
+.custom-node.material-node.selected::after,
+div.custom-node.material-node.selected::after {
+  display: none !important;
+}
+
+/* 条件节点选中状态 */
+.react-flow__node.selected .custom-node.condition-node,
+.custom-node.condition-node.selected {
+  border-color: #f59e0b;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2), 0 4px 20px rgba(245, 158, 11, 0.3);
+  background: linear-gradient(135deg, #ffffff 0%, #fffbf0 100%);
+  transform: translateY(-2px);
+}
+
+/* 条件节点选中状态的顶部指示条 */
+.react-flow__node.selected .custom-node.condition-node::before,
+.custom-node.condition-node.selected::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #f59e0b 0%, #d97706 100%);
+  border-radius: 16px 16px 0 0;
+  z-index: 1;
+}
+
+/* 条件节点选中状态的脉搏动画 */
+.react-flow__node.selected .custom-node.condition-node::after,
+.custom-node.condition-node.selected::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border: 2px solid #f59e0b;
+  border-radius: 19px;
+  opacity: 0;
+  animation: pulse-border 2s infinite;
+  z-index: 0;
+}
+
+/* 结果节点选中状态 */
+.react-flow__node.selected .result-node,
+.result-node.selected {
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2), 0 4px 20px rgba(139, 92, 246, 0.3);
+  background: linear-gradient(135deg, #ffffff 0%, #faf5ff 100%);
+  transform: translateY(-2px);
+}
+
+/* 结果节点选中状态的顶部指示条 */
+.react-flow__node.selected .result-node::before,
+.result-node.selected::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #8b5cf6 0%, #7c3aed 100%);
+  border-radius: 16px 16px 0 0;
+  z-index: 1;
+}
+
+/* 结果节点选中状态的脉搏动画 */
+.react-flow__node.selected .result-node::after,
+.result-node.selected::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border: 2px solid #8b5cf6;
+  border-radius: 19px;
+  opacity: 0;
+  animation: pulse-border 2s infinite;
+  z-index: 0;
+}
+
+
+
+/* 脉搏动画关键帧 */
+@keyframes pulse-border {
+  0% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+}
+
+/* 超平滑虚线流动动画 */
+@keyframes ultra-smooth-dash-flow {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -15;
+  }
+}
+
+/* 自定义边样式 - 超平滑虚线动画 */
+.react-flow__edge.animated .react-flow__edge-path {
+  stroke-dasharray: 5 5;
+  animation: ultra-smooth-dash-flow 1.5s linear infinite;
+  will-change: stroke-dashoffset;
+}
+
+/* 更流畅的虚线动画变体 */
+.react-flow__edge.smooth-animated .react-flow__edge-path {
+  stroke-dasharray: 6 4;
+  animation: ultra-smooth-dash-flow 1.2s linear infinite;
+  will-change: stroke-dashoffset;
+}
+
+/* 慢速平滑虚线动画 */
+.react-flow__edge.slow-animated .react-flow__edge-path {
+  stroke-dasharray: 8 6;
+  animation: ultra-smooth-dash-flow 2.5s linear infinite;
+  will-change: stroke-dashoffset;
+}
+
+/* 超级平滑的快速动画 */
+.react-flow__edge.ultra-smooth .react-flow__edge-path {
+  stroke-dasharray: 3 3;
+  animation: ultra-smooth-dash-flow 2s linear infinite;
+  will-change: stroke-dashoffset;
+  transform: translateZ(0); /* 启用硬件加速 */
+}
+
+/* 极致平滑动画 - 稀疏虚线效果 */
+@keyframes silky-smooth-flow {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -20;
+  }
+}
+
+.react-flow__edge.silky-smooth .react-flow__edge-path {
+  stroke-dasharray: 8 12;
+  animation: silky-smooth-flow 0.5s linear infinite;
+  will-change: stroke-dashoffset;
+  transform: translateZ(0); /* 启用硬件加速 */
+}
+
+/* 默认虚线样式 - 扩大间隔并添加流动动画 */
+.react-flow__edge.default-dashed .react-flow__edge-path {
+  stroke-dasharray: 32 16;
+  animation: dash-flow-gentle 1.5s linear infinite;
+}
+
+/* 运行中实线样式 */
+.react-flow__edge.silky-smooth .react-flow__edge-path {
+  stroke-dasharray: 0 !important;
+  animation: silky-smooth-flow 0.3s linear infinite;
+}
+
+/* 虚线流动动画 - 朝向箭头方向 */
+@keyframes dash-flow-gentle {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -48; /* 32+16=48 */
+  }
+}
+
+/* 材料节点基础样式 - 全新设计 */
+.custom-node.material-node,
+div.custom-node.material-node {
+  background: linear-gradient(145deg, #ffffff 0%, #f7fafc 100%) !important;
+  border: 1px solid rgba(226, 232, 240, 0.8) !important;
+  border-radius: 16px !important;
+  min-width: 260px !important;
+  max-width: 300px !important;
+  height: 200px !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  cursor: pointer !important;
+  position: relative !important;
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.04),
+    0 1px 2px rgba(0, 0, 0, 0.06) !important;
+  overflow: hidden !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+
+/* 强制隐藏材料节点的所有::before伪元素装饰条 - 最高优先级 */
+.custom-node.material-node::before,
+div.custom-node.material-node::before,
+body .custom-node.material-node::before,
+html .custom-node.material-node::before,
+.react-flow__node .custom-node.material-node::before {
+  display: none !important;
+  content: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  background: none !important;
+  height: 0 !important;
+}
+
+/* 强制隐藏执行节点的左右两侧圆点 - 最高优先级 */
+.custom-node.execution-node::before,
+div.custom-node.execution-node::before,
+body .custom-node.execution-node::before,
+html .custom-node.execution-node::before,
+.react-flow__node .custom-node.execution-node::before {
+  display: none !important;
+  content: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  background: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.custom-node.execution-node::after,
+div.custom-node.execution-node::after,
+body .custom-node.execution-node::after,
+html .custom-node.execution-node::after,
+.react-flow__node .custom-node.execution-node::after {
+  display: none !important;
+  content: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  background: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* 强制隐藏条件节点的左右两侧圆点 - 最高优先级 */
+.custom-node.condition-node::before,
+div.custom-node.condition-node::before,
+body .custom-node.condition-node::before,
+html .custom-node.condition-node::before,
+.react-flow__node .custom-node.condition-node::before {
+  display: none !important;
+  content: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  background: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.custom-node.condition-node::after,
+div.custom-node.condition-node::after,
+body .custom-node.condition-node::after,
+html .custom-node.condition-node::after,
+.react-flow__node .custom-node.condition-node::after {
+  display: none !important;
+  content: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  background: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+
+
+/* 悬停效果 */
+.custom-node.material-node:hover,
+div.custom-node.material-node:hover {
+  transform: translateY(-2px) !important;
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.1),
+    0 4px 10px rgba(59, 130, 246, 0.15) !important;
+  border-color: #3b82f6 !important;
+}
+
+/* 材料节点展开配置时的样式 */
+.material-node.config-open {
+  background: white;
+  min-width: 520px;
+  max-width: 620px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 1000;
+  position: relative;
+}
+
+/* 材料节点配置样式 - 使用执行节点配置样式 */
+.material-config {
+  padding: 20px;
+  color: #333;
+  position: relative;
+  z-index: 1001;
+}
+
+.material-config .config-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #f3f4f6;
+}
+
+.material-config .config-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.material-config .close-btn {
+  background: #f3f4f6;
+  border: none;
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  color: #6b7280;
+  transition: all 0.2s;
+}
+
+.material-config .close-btn:hover {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.material-config .config-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.material-config .config-section {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 12px;
+  transition: all 0.2s;
+  animation: fadeInUp 0.3s ease-out;
+}
+
+.material-config .config-section:hover {
+  border-color: #d1d5db;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.material-config .config-section:focus-within {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.material-config .config-row {
+  display: flex;
+  gap: 16px;
+}
+
+.material-config .config-row .config-section {
+  flex: 1;
+}
+
+.material-config label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.material-config select,
+.material-config input,
+.material-config textarea {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 13px;
+  transition: all 0.2s;
+  background: white;
+  box-sizing: border-box;
+}
+
+.material-config select:focus,
+.material-config input:focus,
+.material-config textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* 材料节点特殊样式 */
+.material-config .settings-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.material-config .settings-grid > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.material-config .settings-grid label {
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 0;
+}
+
+.material-config .controls-container {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #f3f4f6;
+}
+
+.material-config .controls-row {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.material-config .folder-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.material-config .folder-input-container {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.material-config .folder-input-container input {
+  flex: 1;
+  margin: 0;
+}
+
+
+
+.material-node .node-content {
+  padding: 16px !important;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  position: relative !important;
+  z-index: 2 !important;
+  text-align: center !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  cursor: pointer;
+}
+
+.material-node .node-header {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin-bottom: 16px !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+  width: 100% !important;
+}
+
+.material-node .node-icon-container {
+  width: 36px !important;
+  height: 36px !important;
+  background: linear-gradient(135deg, #dbeafe 0%, #3b82f6 100%) !important;
+  border-radius: 10px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 2px 6px rgba(59, 130, 246, 0.2) !important;
+  flex-shrink: 0 !important;
+}
+
+.material-node .node-icon {
+  font-size: 18px !important;
+  color: #ffffff !important;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2)) !important;
+}
+
+.material-node .node-text-container {
+  flex: 1 !important;
+  min-width: 0 !important;
+}
+
+.material-node .node-title {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: #1e293b !important;
+  margin: 0 !important;
+  line-height: 1.3 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.material-node .node-subtitle {
+  font-size: 11px !important;
+  color: #64748b !important;
+  margin: 2px 0 0 0 !important;
+  font-weight: 400 !important;
+  opacity: 0.9 !important;
+}
+
+/* 统计区域样式 */
+.material-node .node-stats {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 8px !important;
+  margin-top: 16px !important;
+  padding: 0 !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  width: 100% !important;
+  justify-content: space-between !important;
+}
+
+.material-node .stat-item {
+  background: rgba(248, 250, 252, 0.8) !important;
+  border: 1px solid rgba(226, 232, 240, 0.6) !important;
+  border-radius: 8px !important;
+  padding: 8px 6px !important;
+  text-align: center !important;
+  transition: all 0.2s ease !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex: 1 !important;
+  min-height: 60px !important;
+}
+
+.material-node .stat-item:hover {
+  background: rgba(241, 245, 249, 0.9) !important;
+  border-color: rgba(59, 130, 246, 0.3) !important;
+  transform: translateY(-1px) !important;
+}
+
+.material-node .stat-label {
+  font-size: 9px !important;
+  color: #64748b !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.3px !important;
+  font-weight: 500 !important;
+  margin-bottom: 2px !important;
+  display: block !important;
+}
+
+.material-node .stat-value {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #1e293b !important;
+  line-height: 1 !important;
+  display: block !important;
+}
+
+.material-node .node-status-indicator {
+  font-size: 10px;
+  background: #f3f4f6;
+  color: #6b7280;
+  padding: 3px 6px;
+  border-radius: 8px;
+  display: inline-block;
+  font-weight: 500;
+}
+
+.material-node .node-status-button-inline {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-left: 6px;
+  transition: all 0.2s;
+}
+
+/* 操作按钮样式 */
+.material-node .node-actions {
+  position: absolute !important;
+  bottom: 8px !important;
+  right: 8px !important;
+  display: flex !important;
+  gap: 4px !important;
+  opacity: 0 !important;
+  transition: opacity 0.2s ease !important;
+}
+
+.custom-node.material-node:hover .node-actions,
+div.custom-node.material-node:hover .node-actions {
+  opacity: 1 !important;
+}
+
+.material-node .action-btn {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid rgba(226, 232, 240, 0.8) !important;
+  border-radius: 5px !important;
+  width: 24px !important;
+  height: 24px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  font-size: 11px !important;
+  transition: all 0.2s ease !important;
+  backdrop-filter: blur(4px) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+
+.material-node .action-btn:hover {
+  background: rgba(59, 130, 246, 0.1) !important;
+  border-color: rgba(59, 130, 246, 0.3) !important;
+  transform: scale(1.1) !important;
+}
+
+.material-node .node-status-button-inline.configured {
+  background: #10b981;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+}
+
+.material-node .node-status-button-inline.unconfigured {
+  background: #f59e0b;
+  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
+}
+
+/* 节点展开页面样式 */
+.custom-node.expanded {
+  width: 1200px;
+  height: 620px;
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  position: relative;
+  background: white;
+}
+
+/* 材料节点展开时保持背景板，让文件管理器居中 - 与EnhancedMaterialNode.css保持一致 */
+.custom-node.material-node.expanded,
+.custom-node.expanded.material-node,
+div.custom-node.material-node.expanded {
+  background: white !important;
+  border: 1px solid #e5e7eb !important;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15) !important;
+  border-radius: 16px !important;
+  min-width: 600px !important;
+  max-width: 600px !important;
+  width: 600px !important;
+  height: auto !important;
+  min-height: 750px !important;
+  max-height: 90vh !important;
+  z-index: 1000 !important;
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
+}
+
+/* 材料节点展开时的内容容器 */
+.custom-node.material-node.expanded .expanded-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 文件管理器容器在展开节点中居中 */
+.custom-node.material-node.expanded .file-manager-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+
+
+/* 材料节点配置界面样式 */
+.material-config {
+  padding: 20px;
+  color: #333;
+  position: relative;
+  z-index: 1001;
+}
+
+.material-config .config-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #f3f4f6;
+}
+
+.material-config .config-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.material-config .close-btn {
+  background: #f3f4f6;
+  border: none;
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  color: #6b7280;
+  transition: all 0.2s;
+}
+
+.material-config .close-btn:hover {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.material-config .config-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.material-config .config-section {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 12px;
+  transition: all 0.2s;
+  animation: fadeInUp 0.3s ease-out;
+}
+
+.material-config .config-section:hover {
+  border-color: #d1d5db;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.material-config .config-section:focus-within {
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.material-config .config-row {
+  display: flex;
+  gap: 16px;
+}
+
+.material-config .config-row .config-section {
+  flex: 1;
+}
+
+.material-config label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.material-config select,
+.material-config input,
+.material-config textarea {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 13px;
+  transition: all 0.2s;
+  background: white;
+  box-sizing: border-box;
+}
+
+.material-config select:focus,
+.material-config input:focus,
+.material-config textarea:focus {
+  outline: none;
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+/* 材料节点特殊样式 */
+.material-config .file-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.material-config .file-item {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  padding: 12px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.material-config .file-item:hover {
+  border-color: #10b981;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
+.material-config .file-item.selected {
+  border-color: #10b981;
+  background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+}
+
+.material-config .control-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #f3f4f6;
+}
+
+.material-config .btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.material-config .btn-primary {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+}
+
+.material-config .btn-primary:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.material-config .btn-secondary {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.material-config .btn-secondary:hover {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+/* 文件夹选择器样式 */
+.material-config .folder-selector {
+  background: linear-gradient(135deg, #fefce8 0%, #fef3c7 100%);
+  border: 1px solid #fde68a;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 12px 0;
+}
+
+.material-config .folder-selector h4 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.material-config .folder-input-container {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.material-config .folder-input-container input {
+  flex: 1;
+  margin: 0;
+}
+
+.material-config .folder-btn {
+  padding: 8px 12px;
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  color: #374151;
+  transition: all 0.2s;
+  white-space: nowrap;
+  min-width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.material-config .folder-btn:hover {
+  background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
+  border-color: #9ca3af;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.expanded-content {
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+}
+
+/* 隐藏展开头部背景板，只保留文件管理器 */
+.expanded-header {
+  display: none;
+}
+
+/* 连接点样式 */
+.connection-handle {
+  width: 12px;
+  height: 12px;
+  border: 2px solid #3b82f6;
+  background: white;
+  border-radius: 50%;
+  transform: scale(0.5);
+  opacity: 0.4;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 四个特定节点类型悬停时连接点放大 */
+.custom-node.material-node:hover .connection-handle,
+.custom-node.execution-node:hover .connection-handle,
+.custom-node.condition-node:hover .connection-handle,
+.custom-node.result-node:hover .connection-handle {
+  transform: scale(1.3) !important;
+  width: 12px !important;
+  height: 12px !important;
+  background: linear-gradient(135deg, #7dd3fc 0%, #38bdf8 100%) !important;
+  box-shadow: 0 0 0 4px rgba(125, 211, 252, 0.3), 0 2px 12px rgba(125, 211, 252, 0.4) !important;
+  border: 2px solid white !important;
+  opacity: 1 !important;
+}
+
+/* 其他节点类型的通用悬停效果 */
+.custom-node:hover .connection-handle {
+  transform: scale(1);
+  opacity: 0.8;
+}
+
+/* 四个特定节点类型的连接点直接悬停时的超强效果 */
+.custom-node.material-node .connection-handle:hover,
+.custom-node.execution-node .connection-handle:hover,
+.custom-node.condition-node .connection-handle:hover,
+.custom-node.result-node .connection-handle:hover {
+  transform: scale(1.6) !important;
+  opacity: 1 !important;
+  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%) !important;
+  box-shadow: 0 0 0 5px rgba(96, 165, 250, 0.4), 0 4px 16px rgba(96, 165, 250, 0.5) !important;
+  border: 3px solid white !important;
+  width: 14px !important;
+  height: 14px !important;
+  z-index: 1002 !important;
+}
+
+/* 其他连接点的通用悬停效果 */
+.connection-handle:hover {
+  transform: scale(1.5) !important;
+  opacity: 1 !important;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+}
+
+.connection-handle-top {
+  top: -6px;
+}
+
+.connection-handle-bottom {
+  bottom: -6px;
+}
+
+.connection-handle-left {
+  left: -6px;
+}
+
+.connection-handle-right {
+  right: -6px;
+}
+
+/* 展开状态下的连接点位置调整到文件管理器盒子上 */
+.custom-node.material-node.expanded .connection-handle {
+  position: absolute;
+  z-index: 1001;
+}
+
+.custom-node.material-node.expanded .connection-handle-top {
+  top: 0px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.5);
+}
+
+.custom-node.material-node.expanded .connection-handle-right {
+  top: 50%;
+  right: 0px;
+  transform: translateY(-50%) scale(0.5);
+}
+
+.custom-node.material-node.expanded .connection-handle-bottom {
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.5);
+}
+
+.custom-node.material-node.expanded .connection-handle-left {
+  top: 50%;
+  left: 0px;
+  transform: translateY(-50%) scale(0.5);
+}
+
+/* 展开状态下的悬停效果 */
+.custom-node.material-node.expanded:hover .connection-handle-top {
+  transform: translateX(-50%) scale(1);
+}
+
+.custom-node.material-node.expanded:hover .connection-handle-right {
+  transform: translateY(-50%) scale(1);
+}
+
+.custom-node.material-node.expanded:hover .connection-handle-bottom {
+  transform: translateX(-50%) scale(1);
+}
+
+.custom-node.material-node.expanded:hover .connection-handle-left {
+  transform: translateY(-50%) scale(1);
+}
+
+/* 快捷键帮助按钮 */
+.shortcut-help-btn {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  z-index: 1000;
+  background: #ffffff;
+  border: 2px solid #e0e0e0;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shortcut-help-btn:hover {
+  background: #f5f5f5;
+  border-color: #4CAF50;
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* 自定义控制面板样式 - 定位在ReactFlow控制面板上方 */
+.custom-controls {
+  position: absolute;
+  bottom: 120px; /* 定位在ReactFlow控制面板上方，在放大按钮上面 */
+  left: 12.5px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.control-button {
+  width: 32px;
+  height: 32px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 21px; /* 增大三分之一：16px × 4/3 ≈ 21px */
+  line-height: 1; /* 确保行高不影响垂直居中 */
+  text-align: center; /* 确保文本水平居中 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.control-button:hover {
+  background: #f5f5f5;
+  border-color: #999;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.control-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.keyboard-help-button {
+  margin-top: 8px;
+}
+
+/* 快捷键帮助弹窗 */
+.shortcut-help-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.shortcut-help-modal {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  max-width: 800px;
+  max-height: 80vh;
+  width: 90%;
+  overflow: hidden;
+  animation: slideIn 0.3s ease;
+}
+
+.shortcut-help-header {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.shortcut-help-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.shortcut-help-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.shortcut-help-close:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+.shortcut-help-content {
+  padding: 30px;
+  max-height: 60vh;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.shortcut-section {
+  margin-bottom: 25px;
+}
+
+.shortcut-section h3 {
+  color: #333;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 15px 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.shortcut-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.shortcut-item:last-child {
+  border-bottom: none;
+}
+
+.shortcut-key {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: #495057;
+  min-width: 80px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.shortcut-desc {
+  color: #666;
+  font-size: 14px;
+  flex: 1;
+  margin-left: 15px;
+}
+
+.shortcut-tips {
+  grid-column: 1 / -1;
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+  border-left: 4px solid #4CAF50;
+}
+
+.shortcut-tips p {
+  margin: 8px 0;
+  color: #666;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.shortcut-tips strong {
+  color: #333;
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .shortcut-help-content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .shortcut-help-modal {
+    width: 95%;
+    max-height: 85vh;
+  }
+
+  .shortcut-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .shortcut-desc {
+    margin-left: 0;
+  }
+}
+
+/* 智能工作流生成对话框样式 */
+.modal-description {
+  color: #6c757d;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.generating-indicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  color: #495057;
+  font-size: 14px;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #e9ecef;
+  border-top: 2px solid #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 智能生成按钮特殊样式 */
+.icon-button:has(.icon:contains("🤖")) {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+}
+
+.icon-button:has(.icon:contains("🤖")):hover:not(:disabled) {
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.icon-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* 右侧文档预览面板 */
+.document-preview-panel {
+  position: fixed;
+  top: 60px; /* 在导航栏下方 */
+  right: 20px;
+  width: 400px;
+  height: calc(100vh - 100px);
+  border: 1px solid #e5e7eb; /* 淡灰色边框 */
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.3s ease;
+}
+
+/* 当聊天框展开时，预览面板向左移动 */
+.document-preview-panel.adjust-for-chatbox {
+  right: 390px; /* 聊天框宽度380px + 10px间距，避免重叠并减少绿色空白区域 */
+}
+
+/* 预览面板为空时的占位样式 */
+.document-preview-panel:empty::before {
+  content: "文档预览区域";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #666;
+  font-size: 16px;
+  background-color: #f8f9fa;
+}
+
+/* 工具库按钮响应式定位 */
+.tool-library-toggle-btn.adjust-for-chatbox {
+  right: 390px; /* 聊天框宽度380px + 10px间距，避免重叠并减少绿色空白区域 */
+}
+
+.tool-library-toggle-btn {
+  transition: right 0.3s ease;
+}
+
+/* 节点属性面板容器样式 */
+.node-properties-container {
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  width: 350px;
+  height: calc(100vh - 80px);
+  z-index: 1000;
+  transition: right 0.3s ease;
+}
+
+.node-properties-container.adjust-for-chatbox {
+  right: 400px; /* 为聊天框让出空间 */
+}
+
+.node-properties-panel::-webkit-scrollbar {
+  width: 8px;
+}
+
+.node-properties-panel::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.node-properties-panel::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.node-properties-panel::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+/* 🔧 精确的工作流状态样式 */
+.react-flow__node.status-success {
+  border: 2px solid #4CAF50 !important;
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.3) !important;
+}
+
+.react-flow__node.status-error {
+  border: 2px solid #f44336 !important;
+  box-shadow: 0 0 10px rgba(244, 67, 54, 0.3) !important;
+}
+
+.react-flow__node.status-idle {
+  border: 2px solid #e0e0e0 !important;
+  box-shadow: none !important;
+}
+
+.react-flow__node.status-running {
+  border: 2px solid #2196F3 !important;
+  box-shadow: 0 0 10px rgba(33, 150, 243, 0.3) !important;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* 边的精确状态样式 */
+.react-flow__edge.edge-success path {
+  stroke: #4CAF50 !important;
+  stroke-width: 3px !important;
+}
+
+.react-flow__edge.edge-error path {
+  stroke: #f44336 !important;
+  stroke-width: 3px !important;
+  stroke-dasharray: 8,4 !important;
+}
+
+.react-flow__edge.edge-idle path {
+  stroke: #e0e0e0 !important;
+  stroke-width: 2px !important;
+}
+
+.react-flow__edge.edge-running path {
+  stroke: #2196F3 !important;
+  stroke-width: 3px !important;
+  animation: flow 2s linear infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+@keyframes flow {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 20; }
+}

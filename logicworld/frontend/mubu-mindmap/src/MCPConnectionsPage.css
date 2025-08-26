@@ -1,0 +1,660 @@
+/* MCP 连接页面现代化样式 */
+
+/* 页面容器 */
+.mcp-connections-page {
+  padding: 24px;
+  background: #f8f9fa;
+  min-height: calc(100vh - 60px);
+  width: 100%;
+  overflow-y: auto;
+}
+
+/* 页面头部 */
+.mcp-page-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 32px;
+  padding: 32px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.mcp-page-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+  opacity: 0.3;
+}
+
+.mcp-header-icon {
+  font-size: 56px;
+  width: 88px;
+  height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.mcp-header-content {
+  flex: 1;
+  z-index: 1;
+}
+
+.mcp-header-content h1 {
+  font-size: 36px;
+  font-weight: 800;
+  margin: 0 0 8px 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.mcp-header-content p {
+  font-size: 18px;
+  margin: 0;
+  opacity: 0.9;
+  font-weight: 400;
+}
+
+/* 统计卡片区域 */
+.mcp-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.mcp-stat-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f0f0f0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.mcp-stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+}
+
+.mcp-stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+.mcp-stat-number {
+  font-size: 32px;
+  font-weight: 800;
+  color: #2c3e50;
+  margin: 0 0 8px 0;
+}
+
+.mcp-stat-label {
+  font-size: 14px;
+  color: #6c757d;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* 主要内容区域 - 改为单列布局 */
+.mcp-main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+  max-width: none;
+}
+
+/* 主要内容区域 - 单列布局 */
+.mcp-main-content-single {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* 配置区域 */
+.mcp-config-section {
+  margin-bottom: 40px;
+}
+
+/* 左侧内容区域 */
+.mcp-content-left {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* 空状态设计 */
+.mcp-empty-state {
+  background: white;
+  border-radius: 20px;
+  padding: 60px 40px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 2px dashed #e9ecef;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.mcp-empty-state::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(102, 126, 234, 0.05) 0%, transparent 70%);
+  animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+.mcp-empty-icon {
+  font-size: 64px;
+  margin-bottom: 24px;
+  display: block;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+.mcp-empty-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin: 0 0 12px 0;
+}
+
+.mcp-empty-description {
+  font-size: 16px;
+  color: #6c757d;
+  margin: 0 0 32px 0;
+  line-height: 1.6;
+}
+
+.mcp-add-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 32px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+  position: relative;
+  z-index: 1;
+}
+
+.mcp-add-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(102, 126, 234, 0.4);
+}
+
+.mcp-add-button:active {
+  transform: translateY(0);
+}
+
+/* 工具网格 */
+.mcp-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mcp-tool-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f0f0f0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.mcp-tool-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
+}
+
+.mcp-tool-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+.mcp-tool-card:hover::before {
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+}
+
+.mcp-tool-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.mcp-tool-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.mcp-tool-type {
+  padding: 4px 12px;
+  background: #e3f2fd;
+  color: #1976d2;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.mcp-tool-description {
+  font-size: 14px;
+  color: #6c757d;
+  margin: 0 0 16px 0;
+  line-height: 1.5;
+}
+
+/* 用户描述样式 */
+.mcp-tool-description.user-description {
+  font-size: 14px;
+  color: #495057;
+  margin: 0 0 12px 0;
+  line-height: 1.5;
+  background: #f8f9fa;
+  padding: 12px;
+  border-radius: 6px;
+  border-left: 3px solid #007bff;
+  font-style: italic;
+}
+
+/* 可点击的描述样式 */
+.clickable-description {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.clickable-description:hover {
+  background: #e9ecef !important;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.15);
+}
+
+.clickable-description:active {
+  transform: translateY(0);
+}
+
+/* 技术信息样式 */
+.mcp-tool-tech-info {
+  font-size: 13px;
+  color: #6c757d;
+  margin: 0 0 16px 0;
+  line-height: 1.4;
+  font-family: 'Courier New', monospace;
+  background: #f8f9fa;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid #e9ecef;
+}
+
+.mcp-tool-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.mcp-tool-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mcp-tool-btn-edit {
+  background: #f8f9fa;
+  color: #495057;
+  border: 1px solid #dee2e6;
+}
+
+.mcp-tool-btn-edit:hover {
+  background: #e9ecef;
+}
+
+.mcp-tool-btn-delete {
+  background: #fff5f5;
+  color: #dc3545;
+  border: 1px solid #f5c6cb;
+}
+
+.mcp-tool-btn-delete:hover {
+  background: #f8d7da;
+}
+
+/* 信息面板 - 适应单列布局 */
+.mcp-info-panel {
+  background: white;
+  border-radius: 20px;
+  padding: 32px 32px 40px 32px; /* 增加底部内边距 */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f0f0f0;
+  max-height: 700px; /* 增加最大高度 */
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #e9ecef transparent;
+}
+
+/* 自定义滚动条样式 */
+.mcp-info-panel::-webkit-scrollbar {
+  width: 8px; /* 稍微增加滚动条宽度 */
+}
+
+.mcp-info-panel::-webkit-scrollbar-track {
+  background: #f8f9fa;
+  border-radius: 4px;
+}
+
+.mcp-info-panel::-webkit-scrollbar-thumb {
+  background: #dee2e6;
+  border-radius: 4px;
+  border: 1px solid #f8f9fa;
+}
+
+.mcp-info-panel::-webkit-scrollbar-thumb:hover {
+  background: #ced4da;
+}
+
+/* 滚动渐变效果 */
+.mcp-info-panel {
+  position: relative;
+}
+
+.mcp-info-panel::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background: linear-gradient(transparent, white);
+  pointer-events: none;
+  border-radius: 0 0 20px 20px;
+}
+
+.mcp-info-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin: 0 0 16px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mcp-info-content {
+  color: #6c757d;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.mcp-info-list {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 0 0;
+}
+
+.mcp-info-list li {
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mcp-info-list li:last-child {
+  border-bottom: none;
+}
+
+.mcp-info-list li::before {
+  content: '✓';
+  color: #28a745;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+  .mcp-main-content {
+    gap: 24px;
+  }
+
+  .mcp-main-content-single {
+    padding: 0 16px;
+  }
+
+  .mcp-config-section {
+    margin-bottom: 32px;
+  }
+
+  .mcp-info-panel {
+    max-height: 500px; /* 增加移动端高度 */
+  }
+}
+
+@media (max-width: 768px) {
+  .mcp-connections-page {
+    padding: 16px;
+  }
+  
+  .mcp-page-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+    padding: 24px;
+  }
+  
+  .mcp-header-icon {
+    width: 64px;
+    height: 64px;
+    font-size: 32px;
+  }
+  
+  .mcp-header-content h1 {
+    font-size: 28px;
+  }
+  
+  .mcp-stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+  }
+  
+  .mcp-tools-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .mcp-empty-state {
+    padding: 40px 24px;
+  }
+  
+  .mcp-main-content-single {
+    padding: 0 12px;
+  }
+
+  .mcp-config-section {
+    margin-bottom: 24px;
+  }
+
+  .mcp-info-panel {
+    padding: 24px 24px 32px 24px; /* 增加底部内边距 */
+    max-height: 450px; /* 增加小屏幕高度 */
+  }
+}
+
+/* 描述详情弹窗样式 */
+.description-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.description-modal-content {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow: hidden;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.description-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e9ecef;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.description-modal-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.description-modal-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.description-modal-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.description-modal-body {
+  padding: 24px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.description-modal-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #495057;
+  margin: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.description-modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid #e9ecef;
+  display: flex;
+  justify-content: flex-end;
+  background: #f8f9fa;
+}
+
+.description-modal-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.description-modal-btn:hover {
+  background: #0056b3;
+  transform: translateY(-1px);
+}
+
+.description-modal-btn:active {
+  transform: translateY(0);
+}

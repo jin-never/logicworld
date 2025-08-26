@@ -1,0 +1,337 @@
+.data-mapping-panel {
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e8e8e8;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  max-height: 70vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 面板头部 */
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e8e8e8;
+  background: #fafafa;
+  flex-shrink: 0;
+}
+
+.panel-header h4 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #262626;
+}
+
+.mapping-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.selected-count {
+  font-size: 12px;
+  color: #666;
+  background: #f0f0f0;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.btn-sm {
+  padding: 4px 8px;
+  font-size: 12px;
+  border: 1px solid #d9d9d9;
+  background: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-sm:hover {
+  background: #f5f5f5;
+  border-color: #40a9ff;
+}
+
+/* 内容区域 */
+.mapping-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 20px;
+}
+
+.mapping-description {
+  margin-bottom: 16px;
+}
+
+.mapping-description p {
+  margin: 0;
+  font-size: 13px;
+  color: #666;
+}
+
+/* 没有输入的状态 */
+.no-inputs {
+  text-align: center;
+  padding: 40px 20px;
+  color: #999;
+}
+
+.no-inputs p {
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+/* 源节点区域 */
+.source-node-section {
+  margin-bottom: 20px;
+  border: 1px solid #e8e8e8;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.source-node-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.node-icon {
+  font-size: 16px;
+}
+
+.node-label {
+  font-weight: 500;
+  color: #262626;
+  flex: 1;
+}
+
+.connection-info {
+  font-size: 12px;
+  color: #666;
+}
+
+.handle-info {
+  background: #e6f7ff;
+  padding: 2px 6px;
+  border-radius: 3px;
+  border: 1px solid #91d5ff;
+}
+
+/* 数据字段区域 */
+.node-output-data {
+  padding: 8px 0;
+}
+
+.data-field {
+  display: flex;
+  align-items: center;
+  padding: 4px 16px;
+  min-height: 32px;
+  border-left: 2px solid transparent;
+}
+
+.data-field.level-1 { padding-left: 32px; }
+.data-field.level-2 { padding-left: 48px; }
+.data-field.level-3 { padding-left: 64px; }
+
+.data-field:hover {
+  background-color: #f5f5f5;
+}
+
+.data-field.selected {
+  background-color: #e6f7ff;
+  border-left-color: #1890ff;
+}
+
+/* 字段头部（对象和数组） */
+.field-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.expand-icon {
+  transition: transform 0.2s;
+  font-size: 12px;
+  color: #666;
+  width: 12px;
+  text-align: center;
+}
+
+.expand-icon.expanded {
+  transform: rotate(90deg);
+}
+
+/* 字段内容 */
+.field-checkbox {
+  margin-right: 8px;
+}
+
+.field-name {
+  font-weight: 500;
+  color: #262626;
+  min-width: 0;
+  flex-shrink: 0;
+}
+
+.field-type {
+  font-size: 11px;
+  color: #999;
+  background: #f0f0f0;
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin: 0 8px;
+  flex-shrink: 0;
+}
+
+.field-value {
+  color: #666;
+  font-size: 12px;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 字段子级 */
+.field-children {
+  margin-left: 16px;
+}
+
+/* 对象字段样式 */
+.object-field .field-header {
+  font-weight: 500;
+}
+
+.object-field .field-type {
+  background: #fff2e8;
+  color: #d46b08;
+}
+
+/* 数组字段样式 */
+.array-field .field-header {
+  font-weight: 500;
+}
+
+.array-field .field-type {
+  background: #f6ffed;
+  color: #52c41a;
+}
+
+/* 值字段样式 */
+.value-field {
+  cursor: pointer;
+}
+
+.value-field:hover {
+  background-color: #f5f5f5;
+}
+
+/* 映射摘要 */
+.mapping-summary {
+  border-top: 1px solid #e8e8e8;
+  padding: 16px 20px;
+  background: #fafafa;
+  flex-shrink: 0;
+}
+
+.mapping-summary h5 {
+  margin: 0 0 12px 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #262626;
+}
+
+.selected-mappings {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.selected-mapping {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: white;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.mapping-source {
+  font-weight: 500;
+  color: #1890ff;
+  flex-shrink: 0;
+}
+
+.mapping-arrow {
+  color: #999;
+  flex-shrink: 0;
+}
+
+.mapping-path {
+  font-family: 'Courier New', monospace;
+  color: #666;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.remove-mapping {
+  background: none;
+  border: none;
+  color: #ff4d4f;
+  cursor: pointer;
+  font-size: 14px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: background-color 0.2s;
+}
+
+.remove-mapping:hover {
+  background-color: #fff2f0;
+}
+
+/* 滚动条样式 */
+.mapping-content::-webkit-scrollbar,
+.selected-mappings::-webkit-scrollbar {
+  width: 6px;
+}
+
+.mapping-content::-webkit-scrollbar-track,
+.selected-mappings::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.mapping-content::-webkit-scrollbar-thumb,
+.selected-mappings::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.mapping-content::-webkit-scrollbar-thumb:hover,
+.selected-mappings::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+} 

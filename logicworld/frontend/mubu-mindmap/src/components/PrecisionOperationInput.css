@@ -1,0 +1,135 @@
+.precision-operation {
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 12px;
+  background: #fafbfc;
+  transition: border-color 0.2s ease;
+}
+
+.precision-operation:hover {
+  border-color: #d1d5db;
+}
+
+.operation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.operation-title {
+  font-weight: 600;
+  color: #374151;
+  font-size: 14px;
+}
+
+.delete-operation-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.delete-operation-btn:hover {
+  background: #dc2626;
+}
+
+.operation-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.requirement-input {
+  width: 100%;
+  min-height: 60px;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1.4;
+  resize: vertical;
+  transition: border-color 0.2s ease;
+  font-family: inherit;
+}
+
+.requirement-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.requirement-input::placeholder {
+  color: #9ca3af;
+}
+
+.operation-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.precision-select-btn {
+  align-self: flex-start;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.precision-select-btn:hover:not(:disabled) {
+  background: #0056b3;
+  transform: translateY(-1px);
+}
+
+.precision-select-btn:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.selected-preview {
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.selected-label {
+  font-weight: 600;
+  color: #0369a1;
+}
+
+.selected-text {
+  color: #1e40af;
+  font-style: italic;
+  background: rgba(59, 130, 246, 0.1);
+  padding: 2px 6px;
+  border-radius: 3px;
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.selected-document {
+  color: #6b7280;
+  font-size: 12px;
+} 

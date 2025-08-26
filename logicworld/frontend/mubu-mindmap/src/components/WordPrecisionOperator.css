@@ -1,0 +1,228 @@
+/* Word精确操作组件 */
+.word-precision-operator {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 12px 0;
+}
+
+/* 操作头部 */
+.operator-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.operator-header h4 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.add-operation-btn {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(40, 167, 69, 0.2);
+}
+
+.add-operation-btn:hover {
+  background: linear-gradient(135deg, #218838 0%, #1ca085 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+}
+
+/* 空状态 */
+.empty-state {
+  text-align: center;
+  padding: 32px 16px;
+  color: #6c757d;
+  font-style: italic;
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* 操作列表 */
+.operations-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* 单个操作项 */
+.operation-item {
+  background: white;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.operation-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+/* 操作项头部 */
+.operation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.operation-number {
+  font-weight: 600;
+  color: #495057;
+  font-size: 12px;
+}
+
+.remove-operation-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  font-size: 12px;
+}
+
+.remove-operation-btn:hover {
+  background: rgba(220, 53, 69, 0.1);
+}
+
+/* 操作输入框 - 主要可点击区域 */
+.operation-input-box {
+  padding: 16px;
+  min-height: 60px;
+  cursor: pointer;
+  border: 2px dashed #ced4da;
+  margin: 8px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.operation-input-box:hover {
+  border-color: #007bff;
+  background: rgba(0, 123, 255, 0.05);
+  transform: scale(1.02);
+}
+
+/* 占位符内容 */
+.placeholder-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #6c757d;
+  font-size: 14px;
+}
+
+.placeholder-icon {
+  font-size: 18px;
+  animation: pulse 2s infinite;
+}
+
+.placeholder-text {
+  font-weight: 500;
+}
+
+/* 已选择的内容 */
+.operation-content {
+  width: 100%;
+}
+
+.selected-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.selected-text {
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  color: #1565c0;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 14px;
+  border-left: 3px solid #2196f3;
+}
+
+.selected-action {
+  background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+  color: #7b1fa2;
+  padding: 3px 6px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.selected-value {
+  background: linear-gradient(135deg, #e8f5e8, #c8e6c9);
+  color: #2e7d32;
+  padding: 3px 6px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-block;
+}
+
+/* 脉冲动画 */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .word-precision-operator {
+    padding: 12px;
+    margin: 8px 0;
+  }
+  
+  .operator-header {
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+  
+  .add-operation-btn {
+    width: 100%;
+  }
+  
+  .operation-input-box {
+    min-height: 50px;
+    padding: 12px;
+  }
+  
+  .selected-info {
+    gap: 4px;
+  }
+} 

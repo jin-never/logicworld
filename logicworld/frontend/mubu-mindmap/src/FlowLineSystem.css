@@ -1,0 +1,446 @@
+/* 增强流程线系统样式 */
+
+/* 基础流程线样式 */
+.enhanced-flow-line {
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.enhanced-flow-line:hover {
+  filter: drop-shadow(0 0 8px rgba(124, 58, 237, 0.4));
+}
+
+.enhanced-flow-line.selected {
+  filter: drop-shadow(0 0 12px rgba(124, 58, 237, 0.6));
+}
+
+/* 连接中状态动画 */
+@keyframes flow-connecting {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -12;
+  }
+}
+
+/* 执行中状态动画 */
+@keyframes flow-executing {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -18;
+  }
+}
+
+
+
+/* 连接强度指示器 */
+.connection-strength-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  padding: 4px 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e5e7eb;
+  animation: strength-indicator-fade-in 0.3s ease-out;
+}
+
+.strength-bar {
+  height: 3px;
+  background: linear-gradient(90deg, #ef4444 0%, #f59e0b 50%, #10b981 100%);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+@keyframes strength-indicator-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 状态指示器 */
+.flow-status-indicator {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  animation: status-indicator-pop 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.flow-status-indicator.success {
+  background: #10b981;
+  color: white;
+}
+
+.flow-status-indicator.error {
+  background: #ef4444;
+  color: white;
+  cursor: pointer;
+}
+
+.flow-status-indicator.error:hover {
+  background: #dc2626;
+  transform: scale(1.1);
+}
+
+@keyframes status-indicator-pop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* 错误提示框 */
+.flow-error-tooltip {
+  z-index: 1000;
+  animation: tooltip-fade-in 0.2s ease-out;
+}
+
+.tooltip-content {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  max-width: 300px;
+  min-width: 200px;
+}
+
+.tooltip-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: #fef2f2;
+  border-bottom: 1px solid #fecaca;
+  border-radius: 8px 8px 0 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #dc2626;
+}
+
+.tooltip-header button {
+  background: none;
+  border: none;
+  color: #dc2626;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 0;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  transition: background-color 0.2s;
+}
+
+.tooltip-header button:hover {
+  background: rgba(220, 38, 38, 0.1);
+}
+
+.tooltip-body {
+  padding: 12px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #374151;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+@keyframes tooltip-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 反转方向按钮 */
+.flow-reverse-button {
+  animation: reverse-button-fade-in 0.2s ease-out;
+  z-index: 2000 !important; /* 确保按钮显示在线条之上 */
+}
+
+.flow-reverse-button .reverse-btn {
+  background: rgba(59, 130, 246, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  color: white;
+  transition: all 0.2s;
+  box-shadow: 0 3px 12px rgba(59, 130, 246, 0.4);
+  z-index: 2001 !important; /* 确保按钮本身在最上层 */
+  position: relative;
+}
+
+.flow-reverse-button .reverse-btn:hover {
+  background: #2563eb;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.flow-reverse-button .reverse-btn:active {
+  transform: scale(0.95);
+}
+
+@keyframes reverse-button-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 删除按钮 */
+.flow-delete-button {
+  animation: delete-button-fade-in 0.2s ease-out;
+  z-index: 2000 !important; /* 确保按钮显示在线条之上 */
+}
+
+.flow-delete-button .delete-btn {
+  background: rgba(239, 68, 68, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  color: white;
+  transition: all 0.2s;
+  box-shadow: 0 3px 12px rgba(239, 68, 68, 0.4);
+  z-index: 2001 !important; /* 确保按钮本身在最上层 */
+  position: relative;
+}
+
+.flow-delete-button .delete-btn:hover {
+  background: #dc2626;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+}
+
+.flow-delete-button .delete-btn:active {
+  transform: scale(0.95);
+}
+
+@keyframes delete-button-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 拖拽交互样式 */
+
+/* 可连接节点高亮 */
+.connectable-highlight {
+  animation: connectable-pulse 2s infinite;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5) !important;
+}
+
+@keyframes connectable-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
+  }
+}
+
+/* 连接目标高亮 */
+.connection-target-highlight {
+  animation: target-glow 1s infinite alternate;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.6) !important;
+}
+
+@keyframes target-glow {
+  0% {
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.3);
+  }
+}
+
+/* 连接点目标高亮 */
+.handle-target-highlight {
+  background: #10b981 !important;
+  transform: scale(1.5) !important;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.4) !important;
+  animation: handle-target-pulse 0.8s infinite;
+}
+
+@keyframes handle-target-pulse {
+  0%, 100% {
+    transform: scale(1.5);
+  }
+  50% {
+    transform: scale(1.7);
+  }
+}
+
+/* 预览连线样式 */
+.preview-connection-line {
+  stroke: #60a5fa;
+  stroke-width: 3;
+  stroke-dasharray: 8 4;
+  animation: preview-flow 1s linear infinite;
+  filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.6));
+}
+
+@keyframes preview-flow {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -12;
+  }
+}
+
+/* 方向指示器 */
+.direction-indicator {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: rgba(96, 165, 250, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  pointer-events: none;
+  animation: direction-indicator-pulse 1s infinite;
+}
+
+@keyframes direction-indicator-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .flow-status-indicator {
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+  }
+  
+  .flow-reverse-button .reverse-btn {
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+  }
+
+  .flow-delete-button .delete-btn {
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+  }
+  
+  .tooltip-content {
+    max-width: 250px;
+    min-width: 180px;
+  }
+  
+  .connection-strength-indicator {
+    padding: 2px 6px;
+  }
+  
+  .strength-bar {
+    height: 2px;
+  }
+}
+
+/* 高对比度模式支持 */
+@media (prefers-contrast: high) {
+  .enhanced-flow-line {
+    stroke-width: 3px !important;
+  }
+  
+  .flow-status-indicator {
+    border: 2px solid currentColor;
+  }
+
+  .flow-reverse-button .reverse-btn,
+  .flow-delete-button .delete-btn {
+    border: 2px solid currentColor;
+  }
+  
+  .tooltip-content {
+    border-width: 2px;
+  }
+  
+  .connectable-highlight {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.8) !important;
+  }
+}
+
+/* 减少动画模式支持 */
+@media (prefers-reduced-motion: reduce) {
+  .enhanced-flow-line,
+  .flow-status-indicator,
+  .flow-reverse-button,
+  .flow-delete-button,
+  .connection-strength-indicator,
+  .connectable-highlight,
+  .connection-target-highlight,
+  .handle-target-highlight,
+  .direction-indicator {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .preview-connection-line {
+    animation: none !important;
+    stroke-dasharray: none;
+  }
+}

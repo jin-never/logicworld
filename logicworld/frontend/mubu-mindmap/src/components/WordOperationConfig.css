@@ -1,0 +1,244 @@
+.word-operation-config {
+  padding: 16px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.word-operation-config .config-section {
+  margin-bottom: 20px;
+}
+
+.word-operation-config .config-section:last-child {
+  margin-bottom: 0;
+}
+
+.word-operation-config label {
+  display: block;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.word-operation-config .ai-selection {
+  background: white;
+  border: 1px solid #fbbf24;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.word-operation-config .ai-selection label {
+  color: #92400e;
+  font-weight: 700;
+}
+
+.word-operation-config .input-section {
+  border-radius: 8px;
+  padding: 16px;
+  background: white;
+}
+
+.word-operation-config .input-section label {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+.word-operation-config select,
+.word-operation-config input[type="text"] {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: white;
+  font-size: 14px;
+  transition: border-color 0.2s ease;
+}
+
+.word-operation-config select:focus,
+.word-operation-config input[type="text"]:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.word-operation-config textarea {
+  width: 100%;
+  min-height: 40px;
+  resize: vertical;
+  padding: 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.word-operation-config textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.word-operation-config .match-content-section,
+.word-operation-config .execution-content-section {
+  margin-bottom: 16px;
+}
+
+.word-operation-config .match-content-section label {
+  color: #f59e0b;
+  font-weight: 700;
+}
+
+.word-operation-config .execution-content-section label {
+  color: #10b981;
+  font-weight: 700;
+}
+
+.word-operation-config button {
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+}
+
+.word-operation-config button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.word-operation-config .add-content-btn {
+  background: #f59e0b;
+  color: white;
+}
+
+.word-operation-config .add-content-btn:hover {
+  background: #d97706;
+}
+
+.word-operation-config .add-execution-btn {
+  background: #10b981;
+  color: white;
+}
+
+.word-operation-config .add-execution-btn:hover {
+  background: #059669;
+}
+
+.word-operation-config .delete-btn {
+  background: #ef4444;
+  color: white;
+}
+
+.word-operation-config .delete-btn:hover {
+  background: #dc2626;
+}
+
+.word-operation-config .preview-btn {
+  background: #3b82f6;
+  color: white;
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+.word-operation-config .preview-btn:hover {
+  background: #2563eb;
+}
+
+.word-operation-config .tool-info {
+  margin-top: 8px;
+  padding: 8px;
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.word-operation-config .tool-info .tool-name {
+  font-weight: 500;
+  color: #0369a1;
+}
+
+.word-operation-config .tool-info .tool-description {
+  color: #0284c7;
+}
+
+.word-operation-config .tool-info .tool-details {
+  color: #0891b2;
+  margin-top: 2px;
+}
+
+.word-operation-config .operation-info {
+  margin-top: 8px;
+  padding: 8px;
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.word-operation-config .operation-info .operation-label {
+  font-weight: 500;
+  color: #0369a1;
+}
+
+.word-operation-config .operation-info .operation-value {
+  color: #0284c7;
+}
+
+.word-operation-config .simple-operation-input {
+  margin-top: 16px;
+}
+
+.word-operation-config .simple-operation-input .input-field {
+  margin-bottom: 16px;
+}
+
+.word-operation-config .simple-operation-input .input-field:last-child {
+  margin-bottom: 0;
+}
+
+.word-operation-config .simple-operation-input .input-field label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.word-operation-config .simple-operation-input .input-field input,
+.word-operation-config .simple-operation-input .input-field textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.2s ease;
+}
+
+.word-operation-config .simple-operation-input .input-field input:focus,
+.word-operation-config .simple-operation-input .input-field textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .word-operation-config {
+    padding: 12px;
+  }
+  
+  .word-operation-config .config-section {
+    margin-bottom: 16px;
+  }
+  
+  .word-operation-config button {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+} 

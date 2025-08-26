@@ -1,0 +1,91 @@
+{
+  "templates": [
+    {
+      "id": "template_001",
+      "title": "项目管理工作流",
+      "description": "一个完整的项目管理思维导图模板，包含项目规划、执行、监控和收尾的全流程。适用于各种规模的项目管理需求。",
+      "category": "项目管理",
+      "tags": ["项目管理", "流程图", "团队协作", "进度跟踪"],
+      "author": {
+        "name": "张三",
+        "id": "user_001"
+      },
+      "marketType": "free",
+      "isPublic": true,
+      "metadata": {
+        "nodeCount": 15,
+        "edgeCount": 14,
+        "complexity": "中等",
+        "uploadTime": "2024-01-15T10:30:00Z",
+        "lastModified": "2024-01-15T10:30:00Z"
+      },
+      "stats": {
+        "rating": 4.5,
+        "downloads": 128,
+        "total_ratings": 23,
+        "comments_count": 8,
+        "likes": 45
+      },
+      "nodes": [],
+      "edges": []
+    },
+    {
+      "id": "template_002", 
+      "title": "数据分析思维导图",
+      "description": "专为数据科学家和分析师设计的思维导图模板，涵盖数据收集、清洗、分析、可视化和报告的完整流程。",
+      "category": "数据科学",
+      "tags": ["数据分析", "机器学习", "可视化", "统计学"],
+      "author": {
+        "name": "李四",
+        "id": "user_002"
+      },
+      "marketType": "free",
+      "isPublic": true,
+      "metadata": {
+        "nodeCount": 22,
+        "edgeCount": 21,
+        "complexity": "高",
+        "uploadTime": "2024-01-20T14:20:00Z",
+        "lastModified": "2024-01-20T14:20:00Z"
+      },
+      "stats": {
+        "rating": 4.8,
+        "downloads": 89,
+        "total_ratings": 15,
+        "comments_count": 12,
+        "likes": 67
+      },
+      "nodes": [],
+      "edges": []
+    },
+    {
+      "id": "template_003",
+      "title": "软件开发生命周期",
+      "description": "完整的软件开发生命周期思维导图，从需求分析到部署维护，适合开发团队使用。",
+      "category": "软件开发",
+      "tags": ["软件开发", "SDLC", "敏捷开发", "DevOps"],
+      "author": {
+        "name": "王五",
+        "id": "user_003"
+      },
+      "marketType": "free",
+      "isPublic": true,
+      "metadata": {
+        "nodeCount": 18,
+        "edgeCount": 17,
+        "complexity": "中等",
+        "uploadTime": "2024-01-25T09:15:00Z",
+        "lastModified": "2024-01-25T09:15:00Z"
+      },
+      "stats": {
+        "rating": 4.2,
+        "downloads": 156,
+        "total_ratings": 31,
+        "comments_count": 5,
+        "likes": 38
+      },
+      "nodes": [],
+      "edges": []
+    }
+  ]
+} 

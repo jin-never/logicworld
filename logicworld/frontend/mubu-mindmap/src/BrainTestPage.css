@@ -1,0 +1,410 @@
+.brain-test-page {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.brain-test-header {
+  margin-bottom: 24px;
+}
+
+.brain-test-header h1 {
+  margin: 0 0 16px 0;
+  color: #1f2937;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.status-alert {
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  border: 1px solid;
+}
+
+.status-alert.success {
+  background-color: #f0f9ff;
+  border-color: #0ea5e9;
+  color: #0c4a6e;
+}
+
+.status-alert.warning {
+  background-color: #fffbeb;
+  border-color: #f59e0b;
+  color: #92400e;
+}
+
+.status-content div {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+.brain-test-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+/* 左侧样式 */
+.brain-test-left {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.config-card, .preset-card, .input-card, .response-card, .stats-card, .history-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.config-card h3, .preset-card h3, .input-card h3, .response-card h3, .stats-card h3, .history-card h3 {
+  margin: 0 0 16px 0;
+  color: #1f2937;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.config-section {
+  margin-bottom: 16px;
+}
+
+.config-section label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #374151;
+  font-size: 14px;
+}
+
+.config-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.config-section input, .config-section select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.config-section input:focus, .config-section select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* 预设问题样式 */
+.preset-questions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.preset-question {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 12px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.preset-question:hover {
+  background: #f3f4f6;
+  border-color: #3b82f6;
+}
+
+.question-text {
+  font-size: 14px;
+  color: #1f2937;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.question-tags {
+  display: flex;
+  gap: 6px;
+}
+
+.tag {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.tag.mode {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.tag.complexity {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.tag.confidence.high {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.tag.confidence.medium {
+  background: #fed7aa;
+  color: #9a3412;
+}
+
+.tag.confidence.low {
+  background: #fecaca;
+  color: #991b1b;
+}
+
+/* 输入区域样式 */
+.input-card textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 100px;
+}
+
+.input-card textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.input-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.char-count {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.submit-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: #2563eb;
+}
+
+.submit-btn:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* 右侧样式 */
+.brain-test-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.response-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.response-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.confidence {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.confidence.high {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.confidence.medium {
+  background: #fed7aa;
+  color: #9a3412;
+}
+
+.confidence.low {
+  background: #fecaca;
+  color: #991b1b;
+}
+
+.feedback-buttons {
+  display: flex;
+  gap: 4px;
+}
+
+.feedback-buttons button {
+  background: none;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.feedback-buttons button:hover {
+  background: #f3f4f6;
+}
+
+.output-section {
+  margin-bottom: 16px;
+}
+
+.output-text {
+  background: #f9fafb;
+  padding: 12px;
+  border-radius: 6px;
+  margin-top: 8px;
+  line-height: 1.5;
+  font-size: 14px;
+  color: #1f2937;
+}
+
+.processing-details {
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.processing-details summary {
+  padding: 8px 12px;
+  background: #f9fafb;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.details-content {
+  padding: 12px;
+  font-size: 14px;
+}
+
+.details-content > div {
+  margin-bottom: 12px;
+}
+
+.processing-path {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.path-step {
+  background: #dbeafe;
+  color: #1e40af;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.reasoning-trace {
+  margin-top: 4px;
+}
+
+.trace-item {
+  padding: 4px 0;
+  font-size: 13px;
+}
+
+.trace-item code {
+  background: #f3f4f6;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+
+/* 统计信息样式 */
+.stats-content {
+  font-size: 14px;
+}
+
+.stat-section {
+  margin-bottom: 16px;
+}
+
+.stat-items {
+  margin-left: 16px;
+  margin-top: 4px;
+}
+
+.stat-items div {
+  margin: 2px 0;
+  color: #6b7280;
+}
+
+/* 历史记录样式 */
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.history-item {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 12px;
+  background: #fafafa;
+}
+
+.history-question, .history-answer {
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.history-meta {
+  display: flex;
+  gap: 6px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .brain-test-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .config-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .response-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}

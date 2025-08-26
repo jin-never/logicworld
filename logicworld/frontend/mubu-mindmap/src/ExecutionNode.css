@@ -1,0 +1,294 @@
+/* 执行节点样式 */
+.execution-node {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  min-width: 130px;
+  max-width: 330px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* 防止在文本域拖动影响节点 */
+.nodrag { user-select: text; }
+.nowheel { overscroll-behavior: contain; }
+
+.execution-node.selected {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.execution-node.config-open {
+  background: white;
+  min-width: 520px;
+  max-width: 620px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 1000;
+  position: relative;
+}
+
+/* 节点内容 */
+.execution-node .node-content {
+  padding: 12px;
+  text-align: center;
+  color: #374151;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.execution-node .node-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.execution-node .node-icon-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.execution-node .node-icon {
+  font-size: 20px;
+  color: #f59e0b;
+}
+
+.execution-node .node-text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.execution-node .node-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.execution-node .node-status {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 12px;
+  display: inline-block;
+}
+
+/* 状态样式 */
+.execution-node .node-status.ready {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.execution-node .node-status.pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.execution-node .node-status.success {
+  background: #d1fae5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+.execution-node .node-status.error {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fca5a5;
+}
+
+.execution-node .node-status.running {
+  background: #dbeafe;
+  color: #1e40af;
+  border: 1px solid #93c5fd;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* 快速信息显示 */
+.execution-node .node-quick-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+  width: 100%;
+}
+
+.execution-node .info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  padding: 2px 4px;
+  background: #f9fafb;
+  border-radius: 6px;
+}
+
+.execution-node .info-label {
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.execution-node .info-value {
+  color: #374151;
+  font-weight: 600;
+  max-width: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.execution-node .config-prompt {
+  text-align: center;
+  padding: 4px 8px;
+  background: #fef3c7;
+  border-radius: 6px;
+  border: 1px dashed #f59e0b;
+}
+
+.execution-node .prompt-text {
+  font-size: 11px;
+  color: #92400e;
+  font-weight: 500;
+}
+
+/* 快速操作按钮 */
+.execution-node .node-quick-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+  justify-content: center;
+}
+
+.execution-node .quick-action-btn {
+  padding: 4px 8px;
+  border: none;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.execution-node .execute-quick-btn {
+  background: #10b981;
+  color: white;
+}
+
+.execution-node .execute-quick-btn:hover {
+  background: #059669;
+}
+
+.execution-node .config-quick-btn {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.execution-node .config-quick-btn:hover {
+  background: #e5e7eb;
+}
+
+/* 执行状态指示器 */
+.execution-node .execution-spinner {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #f3f4f6;
+  border-top: 2px solid #10b981;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 连接点样式 */
+.execution-node .react-flow__handle {
+  width: 8px;
+  height: 8px;
+  background: #6b7280;
+  border: 2px solid white;
+  border-radius: 50%;
+}
+
+.execution-node .react-flow__handle.react-flow__handle-top {
+  top: -4px;
+}
+
+.execution-node .react-flow__handle.react-flow__handle-bottom {
+  bottom: -4px;
+}
+
+.execution-node .react-flow__handle.react-flow__handle-left {
+  left: -4px;
+}
+
+.execution-node .react-flow__handle.react-flow__handle-right {
+  right: -4px;
+}
+
+.execution-node .react-flow__handle:hover {
+  background: #3b82f6;
+}
+
+/* 🎨 丝滑下拉框样式 */
+.execution-node select {
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+  transform-origin: center center;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.execution-node select:focus {
+  transform: scale(1.02);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  outline: none;
+  border-color: #3b82f6;
+}
+
+.execution-node select:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 🎨 选项切换动画 */
+.execution-node select option {
+  transition: background-color 0.15s ease;
+}
+
+.execution-node select option:hover,
+.execution-node select option:focus {
+  background-color: #f3f4f6;
+}
+
+/* 🎨 防止选择时的闪烁 */
+.execution-node .config-section {
+  will-change: auto;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* 🎨 整体配置面板动画优化 */
+.execution-node .config-panel {
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}

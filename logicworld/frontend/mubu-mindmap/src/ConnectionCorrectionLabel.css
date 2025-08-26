@@ -1,0 +1,184 @@
+/* 连接纠正标签样式 */
+.connection-correction-label {
+  position: absolute;
+  z-index: 1000;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* 纠正徽章 */
+.correction-badge {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  border: 2px solid white;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  position: relative;
+}
+
+.correction-icon {
+  margin-right: 6px;
+  font-size: 14px;
+}
+
+.correction-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.correction-title {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.correction-detail {
+  font-size: 10px;
+  opacity: 0.9;
+  font-weight: 400;
+}
+
+/* 详细信息工具提示 */
+.correction-tooltip {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1001;
+}
+
+.correction-badge:hover .correction-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(4px);
+}
+
+.tooltip-content {
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 11px;
+  line-height: 1.4;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  min-width: 200px;
+}
+
+.tooltip-title {
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #10b981;
+}
+
+.tooltip-message {
+  margin-bottom: 8px;
+  color: #e5e7eb;
+}
+
+.tooltip-original,
+.tooltip-corrected {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 10px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin: 2px 0;
+}
+
+.tooltip-original {
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+  border-left: 3px solid #ef4444;
+}
+
+.tooltip-corrected {
+  background: rgba(16, 185, 129, 0.2);
+  color: #6ee7b7;
+  border-left: 3px solid #10b981;
+}
+
+/* 动画效果 */
+.connection-correction-label.animate-in {
+  animation: correctionFadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.connection-correction-label.animate-out {
+  animation: correctionFadeOut 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes correctionFadeIn {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8) translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) translateY(0);
+  }
+}
+
+@keyframes correctionFadeOut {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9) translateY(-10px);
+  }
+}
+
+/* 脉冲效果 */
+.correction-badge::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border-radius: 22px;
+  z-index: -1;
+  animation: correctionPulse 2s infinite;
+}
+
+@keyframes correctionPulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .correction-badge {
+    padding: 4px 8px;
+    font-size: 10px;
+  }
+  
+  .correction-icon {
+    font-size: 12px;
+    margin-right: 4px;
+  }
+  
+  .tooltip-content {
+    padding: 8px 12px;
+    font-size: 10px;
+    min-width: 160px;
+  }
+}

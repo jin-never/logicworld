@@ -1,0 +1,249 @@
+/* 侧边栏控制按钮 */
+.sidebar-controls {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+  margin-top: 5px; /* 进一步减少上方空白 */
+  margin-left: -5px; /* 与浮动按钮的left: 15px对齐 (15px - 20px sidebar padding) */
+}
+
+.sidebar-control-btn {
+  width: 24px; /* 按钮变小 */
+  height: 24px; /* 按钮变小 */
+  border: none;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px; /* 图案变大 */
+  font-weight: 500;
+  transition: all 0.2s ease;
+  color: #999; /* 默认浅灰色图案 */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-control-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.sidebar-control-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* 侧边栏切换按钮 */
+.sidebar-toggle-btn {
+  background: #ffffff !important; /* 白色背景 */
+  border: 1px solid #ccc !important; /* 灰色边框 */
+  color: rgb(80, 95, 125) !important; /* 深蓝灰色符号，与文档预览按钮一致 */
+  font-size: 18px !important; /* 更大的字体 */
+  font-weight: 700 !important; /* 更粗的字体 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.1) !important; /* 立体阴影 */
+}
+
+.sidebar-toggle-btn:hover {
+  background: #f0f0f0 !important; /* 悬停时浅灰背景 */
+  border-color: #999 !important; /* 悬停时深一点的边框 */
+  color: rgb(60, 75, 105) !important; /* 悬停时更深的蓝灰色 */
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* 聊天框切换按钮 */
+.chat-toggle-btn {
+  background: #10b981;
+}
+
+.chat-toggle-btn:hover {
+  background: #059669;
+}
+
+.sidebar {
+  width: 200px; /* 从250px减少到200px，节省50px空间 */
+  background-color: #f8fafc; /* 更现代的背景色 */
+  padding: 10px 16px 20px 16px; /* 减少左右padding，优化空间利用 */
+  border-right: 1px solid #e2e8f0; /* 更柔和的边框色 */
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* 减少间距，提高信息密度 */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.08); /* 更柔和的阴影 */
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform: translateX(0);
+  opacity: 1;
+  height: 100%; /* 占满app-body的高度 */
+  overflow-y: auto; /* 允许垂直滚动 */
+  box-sizing: border-box; /* 确保padding包含在高度内 */
+}
+
+/* 侧边栏收起状态 */
+.sidebar.collapsed {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.sidebar-section {
+  padding-bottom: 0; /* 移除底部填充，让内容更紧凑 */
+}
+
+/* Profile Section */
+.profile-section {
+  text-align: center;
+  padding-bottom: 5px;
+}
+
+.avatar-placeholder {
+  width: 70px;
+  height: 70px;
+  background-color: #ccc;
+  border-radius: 50%;
+  margin: 0 auto 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: #666;
+  overflow: hidden;
+}
+
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.user-info h3 {
+  margin: 3px 0;
+  color: #333;
+}
+
+.user-info .motto {
+  color: #777;
+  font-size: 0.85em;
+  margin-bottom: 10px;
+}
+
+.profile-options {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
+.profile-options li {
+  padding: 4px 6px;
+  font-size: 0.85em;
+  cursor: pointer;
+  color: #555;
+  transition: background-color 0.2s;
+  border-radius: 4px;
+  text-align: center;
+  min-width: 60px;
+}
+
+.profile-options li:hover {
+  background-color: #e9e9e9;
+}
+
+/* Section Divider */
+.section-divider {
+  border: none;
+  border-top: 1px solid #e0e0e0;
+  margin: 8px 0;
+}
+
+/* Connection Tools Section */
+.connection-tools-section h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.connection-options {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.connection-options li {
+  padding: 8px 10px;
+  cursor: pointer;
+  color: #555;
+  font-size: 0.9em;
+  transition: background-color 0.2s;
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
+
+.connection-options li:hover {
+  background-color: #e9e9e9;
+}
+
+/* File Management Section */
+.file-management-section h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.file-options {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.file-options li {
+  padding: 8px 10px;
+  cursor: pointer;
+  color: #555;
+  font-size: 0.9em;
+  transition: background-color 0.2s;
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
+
+.file-options li:hover {
+  background-color: #e9e9e9;
+}
+
+
+
+/* LogicWorld Protocol 样式 */
+.logicworld-item {
+  position: relative;
+  background: linear-gradient(135deg, #e8f5e8 0%, #d4edda 100%) !important;
+  border: 1px solid #28a745 !important;
+  border-radius: 6px !important;
+  margin: 4px 0 !important;
+  padding: 8px 12px !important;
+  font-weight: 600 !important;
+  color: #155724 !important;
+}
+
+.logicworld-item:hover {
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%) !important;
+  transform: translateX(2px);
+}
+
+.new-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #28a745;
+  color: white;
+  font-size: 8px;
+  padding: 2px 6px;
+  border-radius: 8px;
+  font-weight: 700;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}

@@ -1,0 +1,291 @@
+.smart-node-recommender {
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(10px);
+  min-width: 320px;
+  max-width: 400px;
+  max-height: 500px;
+  overflow: hidden;
+  animation: slideInUp 0.3s ease-out;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.recommender-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 16px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.recommender-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.title-icon {
+  font-size: 18px;
+}
+
+.title-text {
+  flex: 1;
+}
+
+.confidence-badge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.recommendations-list {
+  max-height: 360px;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.recommendations-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.recommendations-list::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 3px;
+}
+
+.recommendations-list::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.recommendations-list::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.recommendation-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  margin-bottom: 8px;
+}
+
+.recommendation-item:hover {
+  background: #f8fafc;
+  border-color: #667eea;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+
+.recommendation-item:last-child {
+  margin-bottom: 0;
+}
+
+.rec-icon {
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.rec-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.rec-title {
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.rec-description {
+  color: #64748b;
+  font-size: 12px;
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+
+.rec-reason {
+  color: #667eea;
+  font-size: 11px;
+  font-style: italic;
+  line-height: 1.2;
+}
+
+.rec-confidence {
+  font-size: 12px;
+  font-weight: 600;
+  color: #059669;
+  background: #ecfdf5;
+  padding: 4px 6px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+  color: #64748b;
+  gap: 12px;
+}
+
+.loading-spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #e2e8f0;
+  border-top: 2px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.empty-recommendations {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+  color: #94a3b8;
+  gap: 8px;
+}
+
+.empty-icon {
+  font-size: 32px;
+  opacity: 0.5;
+}
+
+.empty-text {
+  font-size: 14px;
+}
+
+.recommender-footer {
+  background: #f8fafc;
+  padding: 12px 16px;
+  border-top: 1px solid #e2e8f0;
+  text-align: center;
+}
+
+.footer-text {
+  font-size: 11px;
+  color: #64748b;
+  font-style: italic;
+}
+
+/* 高置信度推荐的特殊样式 */
+.recommendation-item[data-confidence="high"] {
+  border-color: #10b981;
+  background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%);
+}
+
+.recommendation-item[data-confidence="high"] .rec-icon {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+}
+
+/* 中等置信度推荐的样式 */
+.recommendation-item[data-confidence="medium"] {
+  border-color: #f59e0b;
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+}
+
+.recommendation-item[data-confidence="medium"] .rec-icon {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: white;
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+  .smart-node-recommender {
+    min-width: 280px;
+    max-width: 320px;
+  }
+  
+  .recommendation-item {
+    padding: 10px;
+    gap: 10px;
+  }
+  
+  .rec-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+  }
+  
+  .rec-title {
+    font-size: 13px;
+  }
+  
+  .rec-description {
+    font-size: 11px;
+  }
+  
+  .rec-reason {
+    font-size: 10px;
+  }
+}
+
+/* 深色主题适配 */
+@media (prefers-color-scheme: dark) {
+  .smart-node-recommender {
+    background: rgba(30, 41, 59, 0.98);
+    border-color: #475569;
+  }
+  
+  .recommendation-item:hover {
+    background: #334155;
+  }
+  
+  .rec-title {
+    color: #f1f5f9;
+  }
+  
+  .rec-description {
+    color: #cbd5e1;
+  }
+  
+  .empty-recommendations {
+    color: #64748b;
+  }
+  
+  .recommender-footer {
+    background: #1e293b;
+    border-color: #475569;
+  }
+  
+  .footer-text {
+    color: #94a3b8;
+  }
+} 

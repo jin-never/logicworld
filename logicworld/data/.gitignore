@@ -1,0 +1,56 @@
+# 数据存储目录 .gitignore
+
+# 敏感数据 - 绝对不要提交
+data/security/keys/
+data/security/certificates/
+data/security/audit/
+*.key
+*.pem
+*.p12
+*.pfx
+
+# 数据库文件 - 包含用户数据
+data/databases/*.db
+data/databases/postgres_data/
+data/databases/mongo_data/
+data/databases/redis_data/
+
+# 缓存文件 - 临时数据
+data/cache/
+*.cache
+
+# 日志文件 - 可能包含敏感信息
+data/logs/
+*.log
+
+# 备份文件 - 可能很大
+data/backups/
+*.backup
+*.dump
+
+# 临时文件
+data/storage/temp/
+data/cache/temp_data/
+*.tmp
+*.temp
+
+# 机器学习模型 - 可能很大
+data/learning/models/*.pkl
+data/learning/models/*.h5
+data/learning/models/*.onnx
+data/learning/vectors/
+data/learning/training/
+
+# 用户上传文件
+data/storage/uploads/
+data/storage/exports/
+
+# 分析数据 - 可能包含敏感信息
+data/analytics/reports/
+data/analytics/user_behavior/
+
+# 但保留目录结构和配置文件
+!data/configs/
+!data/README.md
+!data/learning/README.md
+!*/.gitkeep

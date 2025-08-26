@@ -1,0 +1,20 @@
+# 默认工作流规则
+name: "默认规则"
+description: "基本的工作流处理规则"
+version: "1.0.0"
+
+rules:
+  - name: "聊天处理"
+    condition: "intent == 'chat'"
+    action: "direct_chat"
+    priority: 1
+    
+  - name: "思维导图生成"
+    condition: "intent == 'mindmap'"
+    action: "generate_mindmap"
+    priority: 2
+    
+  - name: "默认处理"
+    condition: "true"
+    action: "fallback"
+    priority: 999

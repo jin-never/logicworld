@@ -1,0 +1,376 @@
+/* 增强执行控制台样式 */
+.execution-console {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 400px;
+  max-height: 600px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e5e7eb;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+}
+
+.execution-console.minimized {
+  height: 60px;
+  max-height: 60px;
+}
+
+.execution-console.maximized {
+  width: 80vw;
+  height: 80vh;
+  max-height: 80vh;
+  bottom: 50%;
+  right: 50%;
+  transform: translate(50%, 50%);
+}
+
+/* 控制台头部 */
+.console-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 12px 12px 0 0;
+  cursor: move;
+}
+
+.execution-console.minimized .console-header {
+  border-radius: 12px;
+  border-bottom: none;
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.console-title {
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.execution-info {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.mode-badge,
+.duration-badge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.header-controls {
+  display: flex;
+  gap: 4px;
+}
+
+.control-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 4px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 12px;
+  color: white;
+  transition: all 0.2s;
+}
+
+.control-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.close-btn:hover {
+  background: rgba(239, 68, 68, 0.8);
+}
+
+/* 控制台内容 */
+.console-content {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* 工作流摘要 */
+.workflow-summary h4 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.summary-stats {
+  display: flex;
+  gap: 12px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.summary-stats span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* 节点状态网格 */
+.nodes-status-grid h5 {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.nodes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.execution-console.maximized .nodes-grid {
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  max-height: 300px;
+}
+
+.node-status-card {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 8px;
+  transition: all 0.2s;
+}
+
+.node-status-card.running {
+  border-color: #3b82f6;
+  background: #eff6ff;
+}
+
+.node-status-card.done {
+  border-color: #10b981;
+  background: #ecfdf5;
+}
+
+.node-status-card.error {
+  border-color: #ef4444;
+  background: #fef2f2;
+}
+
+.node-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.status-indicator {
+  font-size: 14px;
+}
+
+.node-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: #374151;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.node-type {
+  font-size: 10px;
+  color: #6b7280;
+  background: #e5e7eb;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+/* 执行日志 */
+.execution-logs h5 {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.logs-container {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  padding: 8px;
+  max-height: 150px;
+  overflow-y: auto;
+  font-family: 'Courier New', monospace;
+}
+
+.execution-console.maximized .logs-container {
+  max-height: 250px;
+}
+
+.log-entry {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 4px;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.log-entry:last-child {
+  margin-bottom: 0;
+}
+
+.log-time {
+  color: #6b7280;
+  min-width: 70px;
+  font-weight: 500;
+}
+
+.log-message {
+  flex: 1;
+  color: #374151;
+}
+
+.log-entry.info .log-message {
+  color: #3b82f6;
+}
+
+.log-entry.success .log-message {
+  color: #10b981;
+}
+
+.log-entry.error .log-message {
+  color: #ef4444;
+}
+
+.log-entry.warning .log-message {
+  color: #f59e0b;
+}
+
+.no-logs {
+  text-align: center;
+  color: #6b7280;
+  font-style: italic;
+  font-family: inherit;
+  padding: 20px;
+}
+
+/* 最小化内容 */
+.minimized-content {
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.mini-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.mini-status {
+  font-size: 12px;
+  font-weight: 500;
+  color: white;
+}
+
+.mini-duration {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-left: auto;
+}
+
+/* 滚动条样式 */
+.console-content::-webkit-scrollbar,
+.logs-container::-webkit-scrollbar,
+.nodes-grid::-webkit-scrollbar {
+  width: 4px;
+}
+
+.console-content::-webkit-scrollbar-track,
+.logs-container::-webkit-scrollbar-track,
+.nodes-grid::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 2px;
+}
+
+.console-content::-webkit-scrollbar-thumb,
+.logs-container::-webkit-scrollbar-thumb,
+.nodes-grid::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 2px;
+}
+
+.console-content::-webkit-scrollbar-thumb:hover,
+.logs-container::-webkit-scrollbar-thumb:hover,
+.nodes-grid::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* 动画效果 */
+@keyframes slideInUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.execution-console {
+  animation: slideInUp 0.3s ease-out;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .execution-console {
+    width: calc(100vw - 40px);
+    right: 20px;
+    left: 20px;
+  }
+  
+  .execution-console.maximized {
+    width: calc(100vw - 20px);
+    height: calc(100vh - 20px);
+    bottom: 10px;
+    right: 10px;
+    left: 10px;
+    transform: none;
+  }
+  
+  .nodes-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+  
+  .summary-stats {
+    flex-direction: column;
+    gap: 4px;
+  }
+}

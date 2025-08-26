@@ -1,0 +1,583 @@
+/* 工具节点样式 - 与流程节点保持一致 */
+.custom-node.tool-node {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  min-width: 160px;
+  max-width: 280px;
+  /* 自适应高度 */
+  min-height: auto;
+  height: auto;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* 悬停效果 */
+.custom-node.tool-node:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  border-color: #3b82f6;
+}
+
+/* 悬停时显示连接点 - 与其他节点保持一致 */
+.tool-node:hover .connection-handle,
+.tool-node:hover .react-flow__handle {
+  transform: scale(1);
+  opacity: 0.8;
+}
+
+/* 选中状态 */
+.custom-node.tool-node.selected {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2), 0 4px 16px rgba(59, 130, 246, 0.3);
+}
+
+/* 工具节点选中状态的脉搏动画 */
+.react-flow__node.selected .custom-node.tool-node::after,
+.custom-node.tool-node.selected::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border: 2px solid #3b82f6;
+  border-radius: 19px;
+  opacity: 0;
+  animation: pulse-border 2s infinite;
+  z-index: 0;
+}
+
+@keyframes pulse-border {
+  0%, 100% {
+    border-color: #3b82f6;
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+  }
+  50% {
+    border-color: #60a5fa;
+    box-shadow: 0 6px 24px rgba(59, 130, 246, 0.5);
+  }
+}
+
+/* 工具节点的渐变背景效果 */
+.custom-node.tool-node::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4);
+  border-radius: 16px 16px 0 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.custom-node.tool-node:hover::before,
+.custom-node.tool-node.selected::before {
+  opacity: 1;
+}
+
+/* 收起状态的工具节点 */
+.custom-node.tool-node.collapsed {
+  min-width: 160px;
+  max-width: 240px;
+  min-height: 60px;
+}
+
+/* 收起状态下隐藏详细信息，但保留状态标签 */
+.tool-node.collapsed .tool-expanded-content {
+  display: none;
+}
+
+/* 收起状态下的状态标签样式调整 */
+.tool-node.collapsed .tool-status-badges {
+  margin-top: 4px;
+}
+
+.tool-node.collapsed .status-badge {
+  padding: 2px 6px;
+  font-size: 9px;
+}
+
+/* 展开状态的工具节点 */
+.custom-node.tool-node.expanded {
+  min-width: 200px;
+  max-width: 320px;
+}
+
+.tool-node.config-open {
+  background: white;
+  min-width: 520px;
+  max-width: 620px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 1000;
+  position: relative;
+}
+
+.tool-node.selected {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.tool-node:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* 展开指示器 */
+.expand-indicator {
+  font-size: 12px;
+  color: #6b7280;
+  margin-left: auto;
+  transition: transform 0.2s ease;
+  user-select: none;
+  align-self: flex-start; /* 顶部对齐 */
+  margin-top: 2px; /* 稍微向下偏移 */
+  flex-shrink: 0; /* 不允许收缩 */
+  padding: 2px 4px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.expand-indicator:hover {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.tool-node.collapsed .expand-indicator {
+  transform: rotate(0deg);
+}
+
+.tool-node.expanded .expand-indicator {
+  transform: rotate(90deg);
+}
+
+/* 收起状态下隐藏描述 */
+.tool-description.collapsed {
+  display: none;
+}
+
+/* 收起状态下的节点头部调整 */
+.tool-node.collapsed .node-header {
+  padding: 8px 12px;
+  align-items: center;
+}
+
+.tool-node.collapsed .node-title {
+  font-size: 13px;
+  font-weight: 500;
+  /* 移除省略号，允许换行 */
+  white-space: normal;
+  overflow: visible;
+  word-wrap: break-word;
+  word-break: break-word;
+  line-height: 1.3;
+  max-width: 100%;
+}
+
+.tool-node.collapsed .node-subtitle {
+  display: none;
+}
+
+/* 节点内容 - 与流程节点保持一致 */
+.tool-node .node-content {
+  padding: 14px;
+  text-align: center;
+  color: #374151;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  /* 自适应高度，移除固定最小高度 */
+  min-height: auto;
+  height: auto;
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden; /* 确保内容不超出节点 */
+}
+
+.tool-node .node-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+.tool-node .node-header .node-main-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  flex: 1;
+  min-width: 0; /* 允许文本容器收缩 */
+}
+
+.tool-node .node-icon-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tool-node .node-icon {
+  font-size: 20px;
+  transition: color 0.3s ease;
+}
+
+.tool-node .loading-spinner {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.tool-node .node-text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+  min-width: 0; /* 允许容器收缩 */
+  overflow: visible; /* 允许文本正常显示和换行 */
+}
+
+.tool-node .node-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.3;
+  word-wrap: break-word; /* 允许长单词换行 */
+  word-break: break-word; /* 强制换行 */
+  hyphens: auto; /* 自动连字符 */
+  max-width: 100%;
+  overflow-wrap: break-word; /* 现代浏览器的换行属性 */
+  margin: 0;
+  white-space: normal; /* 确保允许换行 */
+  overflow: visible; /* 确保文本可见 */
+}
+
+.tool-node .node-subtitle {
+  font-size: 11px;
+  color: #6b7280;
+  opacity: 0.8;
+  margin-top: 2px;
+  word-wrap: break-word;
+  word-break: break-word;
+  line-height: 1.2;
+}
+
+/* 节点统计 - 与流程节点保持一致 */
+.tool-node .node-stats {
+  display: flex;
+  gap: 16px;
+  margin-top: 12px;
+  justify-content: center;
+  width: 100%;
+}
+
+.tool-node .stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.tool-node .stat-label {
+  font-size: 10px;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+.tool-node .stat-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* 工具描述区域 - 自适应内容长度 */
+.tool-node .tool-description {
+  font-size: 13px;
+  color: #374151;
+  line-height: 1.5;
+  text-align: left;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin: 12px 0;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background-color: #F8F8F0;
+  width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  /* 自动调整高度 */
+  min-height: auto;
+  max-height: none;
+  /* 移除固定的flex布局，让内容自然流动 */
+  display: block;
+}
+
+/* 短描述样式 */
+.tool-node .tool-description.short {
+  min-height: 40px;
+  padding: 10px 14px;
+}
+
+/* 中等长度描述样式 */
+.tool-node .tool-description.medium {
+  min-height: 60px;
+  padding: 12px 16px;
+}
+
+/* 长描述样式 */
+.tool-node .tool-description.long {
+  min-height: 80px;
+  padding: 14px 18px;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+
+
+/* 工具类型标识 */
+.tool-node .tool-type-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  opacity: 0.8;
+}
+
+/* 状态标签样式 */
+.tool-node .tool-status-badges {
+  display: flex;
+  gap: 4px;
+  margin-top: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.tool-node .status-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 500;
+  text-align: center;
+  min-width: 32px;
+}
+
+.tool-node .status-badge.tested {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.tool-node .status-badge.enabled {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+/* 展开内容容器 */
+.tool-node .tool-expanded-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden; /* 防止内容超出 */
+}
+
+/* 工具描述样式 */
+.tool-node .tool-description {
+  font-size: 12px;
+  color: #374151;
+  line-height: 1.4;
+  text-align: left;
+  padding: 8px 12px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0; /* 确保没有外边距导致超出 */
+}
+
+/* 工具信息卡片 */
+.tool-node .tool-info-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.tool-node .info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+}
+
+.tool-node .info-label {
+  color: #6b7280;
+  font-weight: 500;
+  min-width: 40px;
+}
+
+.tool-node .info-value {
+  color: #374151;
+  font-weight: 400;
+  text-align: right;
+}
+
+/* 状态标签组 */
+.tool-node .status-tags {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.tool-node .status-tag {
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.tool-node .status-tag.tested {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.tool-node .status-tag.enabled {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.tool-node .status-tag.inactive {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+
+
+/* 连接点样式完全依赖全局MindMap.css，确保连接功能正常 */
+
+/* 确保工具节点的连接点可见且可交互 */
+.tool-node .react-flow__handle {
+  pointer-events: all !important;
+  cursor: crosshair !important;
+}
+
+/* 调试：让连接点更明显 */
+.tool-node:hover .react-flow__handle {
+  opacity: 1 !important;
+  transform: scale(1) !important;
+}
+
+/* 动画效果 */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* 工具节点状态样式 */
+.tool-node.processing .node-icon {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.tool-node.error {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+}
+
+.tool-node.success {
+  border-color: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+}
+
+/* 连接状态 */
+.tool-node.connecting .tool-handle {
+  animation: pulse-handle 1s infinite;
+}
+
+@keyframes pulse-handle {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+}
+
+/* 错误连接状态 */
+.tool-node.connection-error {
+  border-color: #ef4444 !important;
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+/* 成功连接状态 */
+.tool-node.connection-success {
+  border-color: #10b981 !important;
+  animation: success-pulse 0.6s ease-out;
+}
+
+@keyframes success-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .tool-node {
+    min-width: 160px;
+    max-width: 220px;
+  }
+  
+  .tool-content {
+    padding: 12px;
+  }
+  
+  .tool-name {
+    font-size: 14px;
+  }
+  
+  .tool-description {
+    font-size: 11px;
+  }
+}

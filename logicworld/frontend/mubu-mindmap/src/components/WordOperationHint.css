@@ -1,0 +1,253 @@
+.word-operation-hint {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: 2px solid #007bff;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 12px 0;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.15);
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hint-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.hint-icon {
+  font-size: 20px;
+}
+
+.hint-title {
+  font-weight: 600;
+  color: #495057;
+  font-size: 16px;
+  flex: 1;
+}
+
+.confidence-badge {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.hint-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.operation-info {
+  background: white;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.operation-type {
+  margin-bottom: 8px;
+}
+
+.label {
+  font-weight: 600;
+  color: #6c757d;
+  margin-right: 8px;
+}
+
+.value {
+  color: #495057;
+  font-weight: 500;
+}
+
+.detected-keywords {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.keyword-tag {
+  background: #007bff;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.target-texts {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.target-tag {
+  background: #fd7e14;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.suggestion-box {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.suggestion-text {
+  color: #6c757d;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.preview-button {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  align-self: flex-start;
+}
+
+.preview-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+}
+
+.preview-button:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.selected-operation {
+  background: #d4edda;
+  border: 1px solid #c3e6cb;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.operation-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.summary-header {
+  font-weight: 600;
+  color: #155724;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.summary-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: white;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #c3e6cb;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: #6c757d;
+  min-width: 80px;
+}
+
+.detail-value {
+  color: #495057;
+  background: #f8f9fa;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 13px;
+}
+
+.reselect-button {
+  background: #ffc107;
+  color: #212529;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  align-self: flex-start;
+  font-size: 12px;
+}
+
+.reselect-button:hover {
+  background: #e0a800;
+  transform: translateY(-1px);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .word-operation-hint {
+    padding: 12px;
+    margin: 8px 0;
+  }
+  
+  .hint-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .detected-keywords,
+  .target-texts {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .suggestion-box {
+    padding: 10px;
+  }
+  
+  .detail-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  
+  .detail-label {
+    min-width: auto;
+  }
+} 

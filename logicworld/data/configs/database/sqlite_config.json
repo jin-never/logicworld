@@ -1,0 +1,14 @@
+{
+  "databases": {
+    "adaptive_learning": "data/databases/adaptive_learning.db",
+    "brain_memory": "data/databases/brain_memory.db",
+    "intent_feedback": "data/databases/intent_feedback.db",
+    "user_behavior": "data/databases/user_behavior.db",
+    "learning_data": "data/databases/learning_data.db"
+  },
+  "settings": {
+    "timeout": 30,
+    "journal_mode": "WAL",
+    "synchronous": "NORMAL"
+  }
+}

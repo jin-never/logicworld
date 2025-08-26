@@ -1,0 +1,412 @@
+/* 工作流执行面板样式 */
+.execution-panel-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  backdrop-filter: blur(4px);
+}
+
+.execution-panel {
+  background: white;
+  border-radius: 16px;
+  width: 90vw;
+  max-width: 900px;
+  height: 85vh;
+  max-height: 700px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+/* 头部 */
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.panel-header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f2937;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  color: #6b7280;
+  transition: all 0.2s;
+}
+
+.close-btn:hover {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+/* 内容区域 */
+.panel-content {
+  flex: 1;
+  padding: 20px 24px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 工作流信息 */
+.workflow-info h3 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.workflow-info p {
+  margin: 0 0 12px 0;
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.workflow-stats {
+  display: flex;
+  gap: 16px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.workflow-stats span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* 执行控制 */
+.execution-controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.start-btn,
+.pause-btn,
+.resume-btn,
+.reset-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.start-btn:hover,
+.resume-btn:hover,
+.reset-btn:hover {
+  background: #2563eb;
+}
+
+.start-btn:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+.pause-btn {
+  background: #f59e0b;
+}
+
+.pause-btn:hover {
+  background: #d97706;
+}
+
+.reset-btn {
+  background: #10b981;
+}
+
+.reset-btn:hover {
+  background: #059669;
+}
+
+/* 工作流状态 */
+.workflow-status h4,
+.nodes-status h4,
+.execution-logs h4 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.status-icon {
+  font-size: 18px;
+}
+
+.status-text {
+  font-weight: 500;
+  color: #374151;
+  text-transform: capitalize;
+}
+
+.current-node {
+  font-size: 13px;
+  color: #6b7280;
+  margin-left: auto;
+}
+
+/* 节点状态网格 */
+.nodes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 12px;
+}
+
+.node-status-item {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 12px;
+  transition: all 0.2s;
+}
+
+.node-status-item:hover {
+  border-color: #d1d5db;
+}
+
+.node-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.node-icon {
+  font-size: 16px;
+}
+
+.node-name {
+  font-weight: 500;
+  color: #374151;
+  font-size: 14px;
+}
+
+.node-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.node-type {
+  background: #e5e7eb;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+}
+
+.node-duration {
+  font-weight: 500;
+}
+
+.node-error {
+  margin-top: 6px;
+  font-size: 11px;
+  color: #ef4444;
+  background: #fee2e2;
+  padding: 4px 6px;
+  border-radius: 4px;
+  border: 1px solid #fecaca;
+}
+
+/* 执行日志 */
+.logs-container {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 12px;
+  max-height: 200px;
+  overflow-y: auto;
+  font-family: 'Courier New', monospace;
+}
+
+.log-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 6px;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.log-item:last-child {
+  margin-bottom: 0;
+}
+
+.log-time {
+  color: #6b7280;
+  min-width: 80px;
+  font-weight: 500;
+}
+
+.log-message {
+  flex: 1;
+  color: #374151;
+}
+
+.log-item.info .log-message {
+  color: #3b82f6;
+}
+
+.log-item.success .log-message {
+  color: #10b981;
+}
+
+.log-item.error .log-message {
+  color: #ef4444;
+}
+
+.log-item.warning .log-message {
+  color: #f59e0b;
+}
+
+.no-logs {
+  text-align: center;
+  color: #6b7280;
+  font-style: italic;
+  font-family: inherit;
+}
+
+/* 错误显示 */
+.error-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  color: #991b1b;
+}
+
+.error-icon {
+  font-size: 18px;
+}
+
+.error-message {
+  font-size: 14px;
+}
+
+/* 底部 */
+.panel-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-top: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.secondary-btn {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.secondary-btn:hover {
+  background: #e5e7eb;
+}
+
+/* 滚动条样式 */
+.panel-content::-webkit-scrollbar,
+.logs-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.panel-content::-webkit-scrollbar-track,
+.logs-container::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 3px;
+}
+
+.panel-content::-webkit-scrollbar-thumb,
+.logs-container::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.panel-content::-webkit-scrollbar-thumb:hover,
+.logs-container::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .execution-panel {
+    width: 95vw;
+    height: 90vh;
+  }
+  
+  .panel-content {
+    padding: 16px;
+    gap: 16px;
+  }
+  
+  .nodes-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .workflow-stats {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .execution-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .panel-footer {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+}

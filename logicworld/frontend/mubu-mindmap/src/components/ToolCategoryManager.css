@@ -1,0 +1,496 @@
+/* 工具分类管理组件样式 */
+
+.tool-category-manager {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 管理器标题区域 */
+.manager-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.manager-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 搜索框 */
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  padding: 8px 32px 8px 12px;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 200px;
+  transition: border-color 0.2s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.search-icon {
+  position: absolute;
+  right: 8px;
+  color: #6c757d;
+  pointer-events: none;
+}
+
+/* 排序选择器 */
+.sort-select {
+  padding: 8px 12px;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  font-size: 14px;
+  background: white;
+  cursor: pointer;
+}
+
+.sort-select:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+/* 视图模式切换 */
+.view-mode-toggle {
+  display: flex;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.view-btn {
+  padding: 8px 12px;
+  background: white;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.view-btn:hover {
+  background: #f8f9fa;
+}
+
+.view-btn.active {
+  background: #007bff;
+  color: white;
+}
+
+.view-btn:not(:last-child) {
+  border-right: 1px solid #dee2e6;
+}
+
+/* 统计概览 */
+.statistics-overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 6px;
+}
+
+.stat-card {
+  text-align: center;
+  padding: 12px;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.stat-number {
+  font-size: 24px;
+  font-weight: 700;
+  color: #007bff;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #6c757d;
+  font-weight: 500;
+}
+
+/* 分类容器 */
+.categories-container {
+  margin-bottom: 24px;
+}
+
+.categories-container.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.categories-container.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* 分类卡片 */
+.category-card {
+  background: #ffffff;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.category-card:hover {
+  border-color: #007bff;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.category-card.selected {
+  border-color: #007bff;
+  background: #f8f9ff;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+}
+
+.category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.category-icon-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.category-icon {
+  font-size: 20px;
+}
+
+.category-name {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 16px;
+}
+
+.category-stats {
+  display: flex;
+  align-items: center;
+}
+
+.available-count {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 2px 8px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+}
+
+.category-description {
+  font-size: 14px;
+  color: #6c757d;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+
+/* 关键词标签 */
+.category-keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.keyword-tag {
+  font-size: 11px;
+  padding: 2px 6px;
+  background: #e9ecef;
+  color: #495057;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.keyword-more {
+  font-size: 11px;
+  padding: 2px 6px;
+  background: #6c757d;
+  color: white;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+/* 进度条 */
+.category-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 4px;
+  background: #e9ecef;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 11px;
+  color: #6c757d;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* 分类工具区域 */
+.category-tools-section {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #e9ecef;
+}
+
+.section-header {
+  margin-bottom: 16px;
+}
+
+.section-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #2c3e50;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tools-count {
+  font-size: 14px;
+  color: #6c757d;
+  font-weight: normal;
+}
+
+/* 工具网格 */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.tool-card {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  padding: 16px;
+  transition: all 0.2s ease;
+}
+
+.tool-card:hover {
+  background: #ffffff;
+  border-color: #007bff;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.1);
+}
+
+.tool-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.tool-name {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 14px;
+}
+
+.tool-status {
+  font-size: 12px;
+}
+
+.tool-status.available {
+  color: #28a745;
+}
+
+.tool-status.unavailable {
+  color: #dc3545;
+}
+
+.tool-description {
+  font-size: 13px;
+  color: #6c757d;
+  line-height: 1.4;
+  margin-bottom: 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* 工具能力标签 */
+.tool-capabilities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.capability-tag {
+  font-size: 10px;
+  padding: 2px 6px;
+  background: #e3f2fd;
+  color: #1976d2;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.capability-more {
+  font-size: 10px;
+  padding: 2px 6px;
+  background: #6c757d;
+  color: white;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.tool-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.select-tool-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.select-tool-btn:hover:not(:disabled) {
+  background: #0056b3;
+  transform: translateY(-1px);
+}
+
+.select-tool-btn:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* 空状态 */
+.empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  color: #6c757d;
+}
+
+.empty-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.empty-text {
+  font-size: 16px;
+}
+
+/* 列表视图特殊样式 */
+.categories-container.list .category-card {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+}
+
+.categories-container.list .category-header {
+  margin-bottom: 0;
+  margin-right: 16px;
+}
+
+.categories-container.list .category-description {
+  flex: 1;
+  margin-bottom: 0;
+  margin-right: 16px;
+}
+
+.categories-container.list .category-keywords {
+  margin-bottom: 0;
+  margin-right: 16px;
+}
+
+.categories-container.list .category-progress {
+  min-width: 120px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .manager-header {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+  
+  .header-controls {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .search-input {
+    width: 100%;
+  }
+  
+  .statistics-overview {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .categories-container.grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tools-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .categories-container.list .category-card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  
+  .categories-container.list .category-header,
+  .categories-container.list .category-description,
+  .categories-container.list .category-keywords {
+    margin-right: 0;
+  }
+}
