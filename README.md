@@ -169,7 +169,7 @@ npm start
 4. 推送到分支 (`git push origin feature/AmazingFeature`)
 5. 开启 Pull Request
 
-#📊 技术栈
+📊 技术栈
 
  前端
 - React 18: 现代化的UI框架
@@ -204,10 +204,7 @@ npm start
 📞 联系方式
 
 - 项目主页: [https://github.com/jin-never/logicworld.git]
-- 问题反馈: [Issues页面]
-- 讨论交流: [Discussions页面]
-
----
+- 问题反馈: [https://github.com/jin-never/logicworld/issues]
 
 > "每一行代码都承载着梦想，每一次提交都见证着成长。
 > 这个项目或许不是最完美的，但它是真诚的。"
